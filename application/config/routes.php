@@ -65,7 +65,10 @@ $route['contact']                    = 'UserController/contact';
 // ========================ADMIN SIDE=======================
 
 $route['login_dashboard']               = 'AdminController/index';
+$route['login_act']                     = 'AdminController/login_act';
+$route['log_out']                       = 'AdminController/log_out';
 $route['register_dashboard']            = 'AdminController/register';
+$route['register_act']                  = 'AdminController/register_act';
 $route['dashboard']                     = 'AdminController/dashboard';
 
 

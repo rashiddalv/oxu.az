@@ -140,27 +140,6 @@
               </div>
               <button type="submit" class="btn btn-primary d-grid w-100">Qeydiyyatdan keçmək</button>
             </form>
-            <?php if ($this->session->flashdata('err')) { ?>
-              <div class="alert alert-danger d-flex align-items-center" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
-                  <use xlink:href="#exclamation-triangle-fill" />
-                </svg>
-                <div>
-                  <?php echo $this->session->flashdata('err'); ?>
-                </div>
-              </div>
-            <?php } ?>
-            <?php if ($this->session->flashdata('success')) { ?>
-              <div class="alert alert-success d-flex align-items-center" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
-                  <use xlink:href="#exclamation-triangle-fill" />
-                </svg>
-                <div>
-                  <?php echo $this->session->flashdata('success'); ?>
-                </div>
-              </div>
-            <?php } ?>
-
             <p class="text-center">
               <span>Artıq hesabınız var?</span>
               <a href="<?php echo base_url('login_dashboard'); ?>">
@@ -169,6 +148,31 @@
             </p>
           </div>
         </div>
+        <!-- ===========================FLASHDATA=========================== -->
+        <?php if ($this->session->flashdata('err')) { ?>
+          <div class="bs-toast toast toast-placement-ex m-2 fade bg-danger bottom-0 end-0 show" role="alert"
+            aria-live="assertive" aria-atomic="true" data-delay="2000">
+            <div class="toast-header">
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body"><i class="bx bx-bell me-2"></i>
+              <?php echo $this->session->flashdata('err'); ?>
+            </div>
+          </div>
+        <?php } ?>
+        <?php if ($this->session->flashdata('success')) { ?>
+          <div class="bs-toast toast toast-placement-ex m-2 fade bg-success bottom-0 end-0 show" role="alert"
+            aria-live="assertive" aria-atomic="true" data-delay="2000">
+            <div class="toast-header">
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body"><i class="bx bx-bell me-2"></i>
+              <?php echo $this->session->flashdata('success'); ?>
+            </div>
+          </div>
+        <?php } ?>
+        <!-- ===========================FLASHDATA=========================== -->
+
         <!-- Register Card -->
       </div>
     </div>

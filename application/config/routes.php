@@ -72,6 +72,14 @@ $route['register_act']                  = 'AdminController/register_act';
 $route['dashboard']                     = 'AdminController/dashboard';
 
 
+$route['reset_password']                = 'ResetPassword/index';
+$route['reset_password/send']           = 'ResetPassword/send';
+$route['reset_password/token/(:any)']   = 'ResetPassword/token/$1';
+$route['reset_password/update']         = 'ResetPassword/update';
+
+
+
+
 // ========================ADMIN SIDE=======================
 
 

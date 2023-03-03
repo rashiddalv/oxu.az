@@ -81,7 +81,7 @@ class ResetPassword extends CI_Controller
         if (!$password_reset) {
             show_404();
         } else {
-            $this->load->view('reset_password_token_form', ['token' => $token]);
+            $this->load->view('admin/reset_password_token_form', ['token' => $token]);
         }
     }
 
@@ -93,23 +93,27 @@ class ResetPassword extends CI_Controller
         $this->form_validation->set_rules('password_confirm', 'Confirm Password', 'required|matches[password]');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('reset_password_token_form', ['token' => $this->input->post('token')]);
+            $this->load->view('admin/reset_password_token_form', ['token' => $this->input->post('token')]);
         } else {
             $password_reset = $this->db->get_where('reset-pass', ['token' => $this->input->post('token')])->row();
 
             if (!$password_reset) {
                 show_404();
             } else {
-                $user = $this->db->get_where('users', ['email' => $password_reset->email])->row();
+                $user = $this->db->get_where('admin', ['a_mail' => $password_reset->email])->row();
 
-                $this->db->where('id', $user->id);
-                $this->db->update('users', ['password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)]);
+                $this->db->where('a_id', $user->id);
+                $this->db->update('admin', ['a_password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)]);
 
-                $this->db->where('id', $password_reset->id);
-                $this->db->delete('password_resets');
+                die();
+                $this->db->where('a_id', $password_reset->id);
+                $this->db->delete('reset-pass');
                 $this->session->set_flashdata('success', 'Your password has been updated.');
-                redirect('login');
+                redirect('login_dashboard');
             }
         }
+    }
+    public function reset_password_token_form(){
+        $this->load->view('admin/reset_password_token_form');
     }
 }

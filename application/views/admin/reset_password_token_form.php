@@ -126,7 +126,8 @@
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
-                            <!-- <div class="mb-3 form-password-toggle">
+                            <input type="hidden" name="token" value="<?php echo $this->uri->segment(3);?> ">
+                            <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
                                     <label class="form-label" for="password_confirm">Parolu təsdiq edin</label>
                                 </div>
@@ -136,7 +137,7 @@
                                         aria-describedby="password" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <div class="mb-3">
                                 <button class="btn btn-primary d-grid w-100" type="submit">Parolu dəyiş</button>

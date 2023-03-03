@@ -115,6 +115,7 @@ class AdminController extends CI_Controller
 
     public function dashboard()
     {
-        $this->load->view('admin/dashboard');
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $this->load->view('admin/dashboard', $data);
     }
 }

@@ -117,7 +117,7 @@ class ResetPassword extends CI_Controller
                 $this->db->where('id', $password_reset->id);
                 $this->db->delete('reset-pass');
 
-                $this->session->set_flashdata('success', 'Your password has been updated.');
+                $this->session->set_flashdata('success', 'Parolunuz yeniləndi.');
                 redirect('login_dashboard');
             }
         }
@@ -128,3 +128,5 @@ class ResetPassword extends CI_Controller
 
     }
 }
+
+

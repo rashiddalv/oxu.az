@@ -141,29 +141,51 @@ class AdminController extends CI_Controller
         $price = $_POST['price'];
 
         if (!empty($title) && !empty($description) && !empty($trainer) && !empty($category) && !empty($price)) {
-            if (preg_match('~^\p{Lu}~u', $title) && preg_match('~^\p{Lu}~u', $description)) {
-                if (is_numeric($price)) {
-                    $data = [
-                        'c_title' => $title,
-                        'c_description' => $description,
-                        'c_category' => $category,
-                        'c_trainer' => $trainer,
-                        'c_price' => $price,
-                        // 'c_img'      => ,
-                        'c_creator_id' => $_SESSION['admin_login_id'],
-                        'c_created_date' => date("Y-m-d H:i:s"),
-                    ];
-                    $this->db->insert('courses', $data);
-                    $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
-                    redirect(base_url('dashboard_courses'));
+            $config['upload_path'] = './uploads/courses/';
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('course_img')) {
+                $file_name = $this->upload->data('file_name');
+                $file_ext = $this->upload->data('file_ext');
+                if (preg_match('~^\p{Lu}~u', $title) && preg_match('~^\p{Lu}~u', $description)) {
+                    if (is_numeric($price)) {
+                        $data = [
+                            'c_title' => $title,
+                            'c_description' => $description,
+                            'c_category' => $category,
+                            'c_trainer' => $trainer,
+                            'c_price' => $price,
+                            'c_img' => $file_name,
+                            'c_file_ext' => $file_ext,
+                            'c_creator_id' => $_SESSION['admin_login_id'],
+                            'c_created_date' => date("Y-m-d H:i:s"),
+                        ];
+                        $this->db->insert('courses', $data);
+                        $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
+                        redirect(base_url('dashboard_courses'));
+                    } else {
+                        $this->session->set_flashdata('err', 'Qiymət sahəsində hərflər və ya xüsusi simvollar olmamalıdır.');
+                        redirect($_SERVER['HTTP_REFERER']);
+                    }
                 } else {
-                    $this->session->set_flashdata('err', 'Qiymət sahəsində hərflər və ya xüsusi simvollar olmamalıdır.');
+                    $this->session->set_flashdata('err', 'Kursun adı və təsviri böyük hərflə başlamalıdır.');
                     redirect($_SERVER['HTTP_REFERER']);
                 }
             } else {
-                $this->session->set_flashdata('err', 'Kursun adı və təsviri böyük hərflə başlamalıdır.');
-                redirect($_SERVER['HTTP_REFERER']);
-
+                $data = [
+                    'c_title' => $title,
+                    'c_description' => $description,
+                    'c_category' => $category,
+                    'c_trainer' => $trainer,
+                    'c_price' => $price,
+                    'c_creator_id' => $_SESSION['admin_login_id'],
+                    'c_created_date' => date("Y-m-d H:i:s"),
+                ];
+                $this->db->insert('courses', $data);
+                $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
+                redirect(base_url('dashboard_courses'));
             }
         } else {
             $this->session->set_flashdata('err', 'Bütün sahələri doldurun.');
@@ -177,4 +199,53 @@ class AdminController extends CI_Controller
         $this->session->set_flashdata('success', 'Kurs uğurla silindi.');
         redirect($_SERVER['HTTP_REFERER']);
     }
+
+
+
+
+
+
+
+
+    public function dashboard_account_settings()
+    {
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $this->load->view('admin/pages-account-settings-account', $data);
+    }
+    public function account_settings_act()
+    {
+        $config['upload_path'] = './uploads/admin/';
+        $config['allowed_types'] = 'jpg|png|jpeg';
+        $config['encrypt_name'] = TRUE;
+        // $config['max_size']          = 100;
+        // $config['max_width']         = 1024;
+        // $config['max_height']        = 768;
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('profile_pic')) {
+            $file_name = $this->upload->data('file_name');
+            $new_name = $_POST['new_name'];
+            $new_mail = $_POST['new_mail'];
+            $data = [
+                'a_img' => $file_name,
+                'a_name' => $new_name,
+                'a_mail' => $new_mail,
+            ];
+            $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
+            $this->session->set_flashdata('success', 'Profile settings saved successfully.');
+            redirect($_SERVER['HTTP_REFERER']);
+        } else {
+            $new_name = $_POST['new_name'];
+            $new_mail = $_POST['new_mail'];
+            $data = [
+                'a_name' => $new_name,
+                'a_mail' => $new_mail,
+            ];
+            $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
+            $this->session->set_flashdata('success', 'Profile settings saved successfully.');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+    }
+
 }

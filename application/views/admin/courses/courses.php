@@ -33,10 +33,10 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                 <th>Course name</th>
                                 <th>Description</th>
                                 <th>Category</th>
-                                <th>Trainer</th>
+                                <th>Trainers name</th>
                                 <th>Price</th>
                                 <th>Image</th>
-                                <th>Creators name</th>
+                                <th>Creator</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -59,18 +59,33 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                     <td>
                                         <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                                             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                                class="avatar avatar-xs pull-up" title="<?php echo $item['c_trainer']; ?>">
-                                                <img src="<?php echo base_url('assets/admin');?>/assets/img/avatars/5.png" alt="<?php echo $item['c_trainer']; ?>"
+                                                class="avatar avatar-s pull-up" title="<?php echo $item['c_trainer']; ?>">
+                                                <img src="<?php echo base_url('assets/admin');?>/assets/img/avatars/RzaMüəllim.jpg" alt="<?php echo $item['c_trainer']; ?>"
                                                     class="rounded-circle" />
-                                                <p style="display: inline;"><?php echo $item['c_trainer']; ?></p>
+                                                <p style="display: inline;"><?php 
+                                                $trainer = mb_strimwidth($item['c_trainer'], 0, 15, '...');
+                                                echo $trainer; ?></p>
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><span class="badge bg-label-success me-1"><?php echo "$". $item['c_price']; ?></span></td>
-                                    <td>
-                                        <img src="" alt="">
+                                    <td><?php echo "$". $item['c_price']; ?></td>
+                                    <td>    
+                                        <?php if($item['c_img']){ ?>
+                                        <img width="120px" height="70px" style="object-fit: cover;" src="<?php echo base_url('uploads/courses/'. $item['c_img']); ?>" alt="">
+                                        <?php }else{ ?>
+                                        <img width="120px" height="70px" style="object-fit: cover;" src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" alt="">
+                                        <?php } ?>
                                     </td>
-                                    <td><?php echo $item['a_name']; ?></td>
+                                    <td>
+                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                                                class="avatar avatar-s pull-up" title="<?php echo $item['a_name']; ?>">
+                                                <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/'. $item['a_img']) ?>" alt="<?php echo $item['c_trainer']; ?>"
+                                                    class="rounded-circle" />
+                                                <!-- <p style="display: inline;"><?php echo $item['a_name']; ?></p> -->
+                                            </li>
+                                        </ul>
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -78,14 +93,17 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"><i
+                                                <a style="color: #03C3EC;" class="dropdown-item" href="javascript:void(0);"><i
                                                         class="bx bx-detail me-1"></i> Details</a>
-                                                <a class="dropdown-item" href="javascript:void(0);"><i
+                                                <a style="color: #FFAB00;" class="dropdown-item" href="javascript:void(0);"><i
                                                         class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                <a onclick="return confirm('Are you sure you want to delete the course?')" id="delete-confirm" class="dropdown-item" href="<?php echo base_url('course_delete/'.$item['c_id']);?>"><i
+                                                <a style="color: red;" onclick="return confirm('Are you sure?')" class="dropdown-item button_remove" href="<?php echo base_url('course_delete/'.$item['c_id']);?>"><i
                                                         class="bx bx-trash me-1"></i> Delete</a>
 
                                             </div>
+
+
+
                                         </div>
                                     </td>
                                 </tr>
@@ -95,7 +113,37 @@ $this->load->view('admin/includes/headerStyle'); ?>
                     </table>
                 </div>
             </div>
-        </div>
+        <!-- ======================SWEERALERT====================== -->
+        <!-- <script src="<?php echo base_url('assets/admin'); ?>/assets/js/sweet_alert_2.js"></script>
+        <script>
+            $(document).ready(function(){
+                $(".button_remove").click(function(e){
+                e.preventDefault(); 
+                $url = $(this).data("url");
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = $url;
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+                })
+            })
+        </script> -->
+        <!-- ======================SWEERALERT====================== -->
+
         <!-- ===========================FLASHDATA=========================== -->
         <?php if ($this->session->flashdata('err')) { ?>
             <div class="bs-toast toast toast-placement-ex m-2 fade bg-danger bottom-0 end-0 show" role="alert"

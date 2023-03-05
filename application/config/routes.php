@@ -70,6 +70,8 @@ $route['log_out']                       = 'AdminController/log_out';
 $route['register_dashboard']            = 'AdminController/register';
 $route['register_act']                  = 'AdminController/register_act';
 $route['dashboard']                     = 'AdminController/dashboard';
+$route['dashboard_account_settings']    = 'AdminController/dashboard_account_settings';
+$route['account_settings_act']          = 'AdminController/account_settings_act';
 
 
 $route['reset_password']                                   = 'ResetPassword/index';

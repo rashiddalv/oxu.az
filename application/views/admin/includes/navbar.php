@@ -1,5 +1,3 @@
-
-
 <!-- Layout container -->
 <div class="layout-page">
   <!-- Navbar -->
@@ -27,8 +25,11 @@
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
           <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
             <div class="avatar avatar-online">
-              <img src="<?php echo base_url('assets/admin'); ?>/assets/img/avatars/1.png" alt
-                class="w-px-40 h-auto rounded-circle" />
+            <?php if($admin['a_img']){ ?>
+                <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/' . $admin['a_img']) ?>" alt="user-avatar" class="d-block rounded-circle" height="100" width="100" id="uploadedAvatar" />
+                <?php } else { ?>
+                <img style="object-fit:cover;" src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg" class="d-block rounded-circle" height="100" width="100" id="uploadedAvatar" />
+                <?php } ?>
             </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
@@ -37,8 +38,14 @@
                 <div class="d-flex">
                   <div class="flex-shrink-0 me-3">
                     <div class="avatar avatar-online">
-                      <img src="<?php echo base_url('assets/admin'); ?>/assets/img/avatars/1.png" alt
-                        class="w-px-40 h-auto rounded-circle" />
+                      <?php if ($admin['a_img']) { ?>
+                        <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/' . $admin['a_img']) ?>"
+                          alt="user-avatar" class="d-block rounded-circle" height="100" width="100" id="uploadedAvatar" />
+                      <?php } else { ?>
+                        <img style="object-fit:cover;"
+                          src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg"
+                          class="d-block rounded-circle" height="100" width="100" id="uploadedAvatar" />
+                      <?php } ?>
                     </div>
                   </div>
                   <div class="flex-grow-1">
@@ -56,7 +63,7 @@
               <div class="dropdown-divider"></div>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="<?php echo base_url('dashboard_account_settings') ?>">
                 <i class="bx bx-cog me-2"></i>
                 <span class="align-middle">Settings</span>
               </a>

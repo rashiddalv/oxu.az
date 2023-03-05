@@ -51,19 +51,19 @@
                             <label for="status">Trainer</label>
                             <select name="trainer" id="status" class="form-control">
                                 <option value="">-SELECT-</option>
-                                <option value="Rza">Rza</option>
-                                <option value="Rashid">Rashid</option>
-                                <option value="Huseyn">Huseyn</option>
-                                <option value="Raul">Raul</option>
-                                <option value="Vusal">Vusal</option>
-                                <option value="Isindex">Isindex</option>
+                                <option value="Rza Talibov">Rza Talibov</option>
+                                <option value="Əmiraslan Məmmədov">Əmiraslan Məmmədov</option>
+                                <option value="Elşad Ağazadə">Elşad Ağazadə</option>
+                                <option value="Jeyhun Xəlilov">Jeyhun Xəlilov</option>
+                                <option value="Sənan Abdullayev">Sənan Abdullayev</option>
+                                <option value="Kərim Kərimov">Kərim Kərimov</option>
                             </select>
                         </div>
 
 
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
                             <label for="img">Image</label>
-                            <input type="file" id="img" class="form-control" name="img">
+                            <input type="file" id="img" class="form-control" name="course_img">
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="float: left;">

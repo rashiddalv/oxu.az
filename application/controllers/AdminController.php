@@ -118,4 +118,63 @@ class AdminController extends CI_Controller
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $this->load->view('admin/dashboard', $data);
     }
+    public function dashboard_courses()
+    {
+        $data['get_all_courses'] = $this->db
+            ->order_by('c_id', 'DESC')
+            ->join('admin', 'admin.a_id = courses.c_creator_id')
+            ->get('courses')->result_array();
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $this->load->view('admin/courses/courses', $data);
+    }
+    public function course_create()
+    {
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $this->load->view('admin/courses/create', $data);
+    }
+    public function course_create_act()
+    {
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $category = $_POST['category'];
+        $trainer = $_POST['trainer'];
+        $price = $_POST['price'];
+
+        if (!empty($title) && !empty($description) && !empty($trainer) && !empty($category) && !empty($price)) {
+            if (preg_match('~^\p{Lu}~u', $title) && preg_match('~^\p{Lu}~u', $description)) {
+                if (is_numeric($price)) {
+                    $data = [
+                        'c_title' => $title,
+                        'c_description' => $description,
+                        'c_category' => $category,
+                        'c_trainer' => $trainer,
+                        'c_price' => $price,
+                        // 'c_img'      => ,
+                        'c_creator_id' => $_SESSION['admin_login_id'],
+                        'c_created_date' => date("Y-m-d H:i:s"),
+                    ];
+                    $this->db->insert('courses', $data);
+                    $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
+                    redirect(base_url('dashboard_courses'));
+                } else {
+                    $this->session->set_flashdata('err', 'Qiymət sahəsində hərflər və ya xüsusi simvollar olmamalıdır.');
+                    redirect($_SERVER['HTTP_REFERER']);
+                }
+            } else {
+                $this->session->set_flashdata('err', 'Kursun adı və təsviri böyük hərflə başlamalıdır.');
+                redirect($_SERVER['HTTP_REFERER']);
+
+            }
+        } else {
+            $this->session->set_flashdata('err', 'Bütün sahələri doldurun.');
+            redirect($_SERVER['HTTP_REFERER']);
+
+        }
+    }
+    public function course_delete($id)
+    {
+        $this->db->where('c_id', $id)->delete('courses');
+        $this->session->set_flashdata('success', 'Kurs uğurla silindi.');
+        redirect($_SERVER['HTTP_REFERER']);
+    }
 }

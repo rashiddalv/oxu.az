@@ -18,7 +18,7 @@ class ResetPassword extends CI_Controller
             'smtp_user' => 'rashiddvalorant@gmail.com',
             'smtp_pass' => 'drbijagzswauwzyi',
             'smtp_crypto' => 'tls',
-            'mailtype' => 'text',
+            'mailtype' => 'html',
             //plaintext 'text' mails or 'html'
             'smtp_timeout' => '4',
             //in seconds
@@ -51,6 +51,7 @@ class ResetPassword extends CI_Controller
                     'token' => $token,
                     'created_at' => date('Y-m-d H:i:s'),
                 ]);
+                $data = $this->db->get_where('reset-pass', ['token' => $token])->row();
 
                 $this->load->library('email', $config);
                 $this->email->initialize($config);
@@ -59,7 +60,9 @@ class ResetPassword extends CI_Controller
                 $this->email->to($email);
 
                 $this->email->subject('Reset Password');
-                $this->email->message('Click the following link to reset your password: ' . base_url('reset_password/token/' . $token));
+                $message = $this->load->view('admin/mail', $data, TRUE);
+                $this->email->message($message);
+                // $this->email->message('Click the following link to reset your password: ' . base_url('reset_password/token/' . $token));
 
                 $this->email->send();
                 // show_error($this->email->print_debugger());
@@ -101,8 +104,6 @@ class ResetPassword extends CI_Controller
             $password_reset = $this->db->get_where('reset-pass', ['token' => $this->input->post('token')])->row();
 
             if (!$password_reset) {
-
-
                 show_404();
 
             } else {
@@ -128,5 +129,3 @@ class ResetPassword extends CI_Controller
 
     }
 }
-
-

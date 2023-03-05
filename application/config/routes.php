@@ -81,6 +81,14 @@ $route['reset_password/reset_password_token_form']         = 'ResetPassword/rese
 
 
 
+$route['dashboard_courses']             = 'AdminController/dashboard_courses';
+$route['course_create']                 = 'AdminController/course_create';
+$route['course_create_act']             = 'AdminController/course_create_act';
+$route['course_delete/(.*)']            = 'AdminController/course_delete/$1';
+    
+
+
+
 // ========================ADMIN SIDE=======================
 
 

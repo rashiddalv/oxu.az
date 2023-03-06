@@ -20,9 +20,19 @@ $this->load->view('admin/includes/headerStyle'); ?>
         <div class="card">
 
             <h5 class="card-header spaceB">Trainers
-                <a href="<?php echo base_url('trainer_create') ?>">
+                <!-- <a href="<?php echo base_url('trainer_create') ?>">
                     <button type="button" class="btn  btn-sm btn-success">Add</button>
-                </a>
+                </a> -->
+                <?php if($admin['a_status'] == "Verified user"){ ?>
+                    <a href="<?php echo base_url('trainer_create') ?>">
+                    <button type="button" class="btn btn-sm btn-success">Add</button>
+                    </a>
+                <?php }else{ ?>
+                    <a href="" style="cursor: not-allowed;"> 
+                    <button type="button" class="btn btn-sm btn-danger" disabled>Add</button>
+                    </a>
+                <?php } ?>
+                
             </h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
@@ -72,10 +82,28 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                             <div class="dropdown-menu">
                                                 <a style="color: #03C3EC;" class="dropdown-item" href=""><i
                                                         class="bx bx-detail me-1"></i> Details</a>
-                                                <a style="color: #FFAB00;" class="dropdown-item" href="<?php echo base_url('trainer_edit/'.$item['t_id']);?>"><i
+                                                <!-- <a style="color: #FFAB00;" class="dropdown-item" href="<?php echo base_url('trainer_edit/'.$item['t_id']);?>"><i
+                                                        class="bx bx-edit-alt me-1"></i> Edit</a> -->
+                                                        <?php if($admin['a_status'] == "Verified user"){ ?>
+                                                            <a style="color: #FFAB00;" class="dropdown-item button_remove" href="<?php echo base_url('trainer_edit/'.$item['t_id']);?>"><i
                                                         class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                <a style="color: red;" onclick="return confirm('Are you sure?')" class="dropdown-item button_remove" href="<?php echo base_url('trainer_delete/'.$item['t_id']);?>"><i
+                                                        <?php }else{ ?>
+                                                            <a style="color: #8592A3; cursor:not-allowed;" class="dropdown-item button_remove"><i
+                                                        class="bx bx-edit-alt me-1" disabled></i> Edit</a>
+                                                        <?php } ?>
+
+
+
+
+                                                <!-- <a style="color: red;" onclick="return confirm('Are you sure?')" class="dropdown-item button_remove" href="<?php echo base_url('trainer_delete/'.$item['t_id']);?>"><i
+                                                        class="bx bx-trash me-1"></i> Delete</a> -->
+                                                        <?php if($admin['a_status'] == "Verified user"){ ?>
+                                                            <a style="color: red;" onclick="return confirm('Are you sure?')" class="dropdown-item button_remove" href="<?php echo base_url('trainer_delete/'.$item['t_id']);?>"><i
                                                         class="bx bx-trash me-1"></i> Delete</a>
+                                                        <?php }else{ ?>
+                                                            <a style="color: #8592A3; cursor:not-allowed;" class="dropdown-item button_remove"><i
+                                                        class="bx bx-trash me-1" disabled></i> Delete</a>
+                                                        <?php } ?>
 
                                             </div>
 

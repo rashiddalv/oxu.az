@@ -87,21 +87,42 @@ $this->load->view('admin/includes/headerStyle'); ?>
                             src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" alt="">
                     <?php } ?>
                 </div>
-                <?php if ($course_detail['c_img']) { ?>
-                <a href="<?php echo base_url('course_edit/'.$course_detail['c_id']);?>"
+                <!-- <a href="<?php echo base_url('course_edit/'.$course_detail['c_id']);?>"
+                    style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-warning">
+                    <s style="text-decoration:none;" class="tf-icons bx bx-edit"></s>&nbsp; Edit
+                </a> -->
+
+
+                <?php if($admin['a_status'] == "Verified user"){ ?>
+                    <a href="<?php echo base_url('course_edit/'.$course_detail['c_id']);?>"
                     style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-warning">
                     <s style="text-decoration:none;" class="tf-icons bx bx-edit"></s>&nbsp; Edit
                 </a>
+                <?php }else{ ?>
+                <?php } ?>
+
+
+
+                <?php if ($course_detail['c_img']) { ?>
                 <a href="<?php echo base_url('uploads/courses/' . $course_detail['c_img']); ?>"
                     download="<?php echo $course_detail['c_img'] ?>"
                     style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-primary">
                     <s style="text-decoration:none;" class="tf-icons bx bx-download"></s>&nbsp; Download Image
                 </a>
                 <?php } ?>
-                <a onclick="return confirm('Are you sure?')" href="<?php echo base_url('delete_course_detail/'.$course_detail['c_id']);?>"
+                <!-- <a onclick="return confirm('Are you sure?')" href="<?php echo base_url('delete_course_detail/'.$course_detail['c_id']);?>"
+                    style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-danger">
+                    <s style="text-decoration:none;" class="tf-icons bx bx-trash"></s>&nbsp; Delete
+                </a> -->
+
+                <?php if($admin['a_status'] == "Verified user"){ ?>
+                    <a onclick="return confirm('Are you sure?')" href="<?php echo base_url('delete_course_detail/'.$course_detail['c_id']);?>"
                     style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-danger">
                     <s style="text-decoration:none;" class="tf-icons bx bx-trash"></s>&nbsp; Delete
                 </a>
+                <?php }else{ ?>
+                <?php } ?>
+
 
                 <script>
                     $('img[data-enlargable]').addClass('img-enlargable').click(function () {

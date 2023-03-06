@@ -180,7 +180,7 @@ class AdminController extends CI_Controller
     // }
     // =================ACCOUNT VERIFICATION=================
 
-    
+
     public function dashboard()
     {
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
@@ -389,6 +389,7 @@ class AdminController extends CI_Controller
     }
     public function dashboard_trainers()
     {
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $data['get_all_trainers'] = $this->CoursesModel->get_all_trainers();
         $this->load->view('admin/trainers/trainers', $data);
     }

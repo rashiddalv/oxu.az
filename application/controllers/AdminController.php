@@ -2,7 +2,11 @@
 
 class AdminController extends CI_Controller
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('CoursesModel');
+    }
     public function index()
     {
         $this->load->view('admin/auth-login-basic');
@@ -79,7 +83,7 @@ class AdminController extends CI_Controller
                                 'a_mail' => $email,
                                 'a_password' => md5($pass)
                             ];
-                            $this->db->insert('admin', $data);
+                            $this->CoursesModel->register_insert($data);
                             $this->session->set_flashdata('success', 'Hesab uğurla yaradıldı.');
                             redirect($_SERVER['HTTP_REFERER']);
                         }
@@ -120,11 +124,8 @@ class AdminController extends CI_Controller
     }
     public function dashboard_courses()
     {
-        $data['get_all_courses'] = $this->db
-            ->order_by('c_id', 'DESC')
-            ->join('admin', 'admin.a_id = courses.c_creator_id')
-            ->get('courses')->result_array();
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $data['get_all_courses'] = $this->CoursesModel->get_all_courses();
         $this->load->view('admin/courses/courses', $data);
     }
     public function course_create()
@@ -162,7 +163,8 @@ class AdminController extends CI_Controller
                             'c_creator_id' => $_SESSION['admin_login_id'],
                             'c_created_date' => date("Y-m-d H:i:s"),
                         ];
-                        $this->db->insert('courses', $data);
+
+                        $this->CoursesModel->insert($data);
                         $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
                         redirect(base_url('dashboard_courses'));
                     } else {
@@ -183,7 +185,7 @@ class AdminController extends CI_Controller
                     'c_creator_id' => $_SESSION['admin_login_id'],
                     'c_created_date' => date("Y-m-d H:i:s"),
                 ];
-                $this->db->insert('courses', $data);
+                $this->CoursesModel->insert($data);
                 $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
                 redirect(base_url('dashboard_courses'));
             }
@@ -195,7 +197,7 @@ class AdminController extends CI_Controller
     }
     public function course_delete($id)
     {
-        $this->db->where('c_id', $id)->delete('courses');
+        $this->CoursesModel->delete_course($id);
         $this->session->set_flashdata('success', 'Kurs uğurla silindi.');
         redirect($_SERVER['HTTP_REFERER']);
     }
@@ -247,5 +249,85 @@ class AdminController extends CI_Controller
             redirect($_SERVER['HTTP_REFERER']);
         }
     }
+    public function course_detail($id)
+    {
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $data['course_detail'] = $this->CoursesModel->get_single_course($id);
+        // print_r('<pre>');
+        // print_r($data['course_detail']);
+        // die();
+        $this->load->view('admin/courses/detail', $data);
+    }
+    public function delete_course_detail($id)
+    {
+        $this->CoursesModel->delete_course($id);
+        $this->session->set_flashdata('success', 'Kurs uğurla silindi.');
+        redirect(base_url('dashboard_courses'));
+    }
+    public function course_edit($id)
+    {
+        $data['get_single_data'] = $this->db->where('c_id', $id)->get('courses')->row_array();
+        $this->load->view('admin/courses/edit', $data);
+    }
+    public function course_edit_act($id)
+    {
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $category = $_POST['category'];
+        $trainer = $_POST['trainer'];
+        $price = $_POST['price'];
+        if (!empty($title) && !empty($description) && !empty($trainer) && !empty($category) && !empty($price)) {
+            $config['upload_path'] = './uploads/courses/';
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('course_img')) {
+                $file_name = $this->upload->data('file_name');
+                $file_ext = $this->upload->data('file_ext');
+                if (preg_match('~^\p{Lu}~u', $title) && preg_match('~^\p{Lu}~u', $description)) {
+                    if (is_numeric($price)) {
+                        $data = [
+                            'c_title' => $title,
+                            'c_description' => $description,
+                            'c_category' => $category,
+                            'c_trainer' => $trainer,
+                            'c_price' => $price,
+                            'c_img' => $file_name,
+                            'c_file_ext' => $file_ext,
+                            'c_updater_id' => $_SESSION['admin_login_id'],
+                            'c_update_date' => date("Y-m-d H:i:s"),
+                        ];
 
+                        $this->CoursesModel->update_course($id, $data);
+                        $this->session->set_flashdata('success', 'Kurs uğurla yeniləndi.');
+                        redirect(base_url('dashboard_courses'));
+                    } else {
+                        $this->session->set_flashdata('err', 'Qiymət sahəsində hərflər və ya xüsusi simvollar olmamalıdır.');
+                        redirect($_SERVER['HTTP_REFERER']);
+                    }
+                } else {
+                    $this->session->set_flashdata('err', 'Kursun adı və təsviri böyük hərflə başlamalıdır.');
+                    redirect($_SERVER['HTTP_REFERER']);
+                }
+            } else {
+                $data = [
+                    'c_title' => $title,
+                    'c_description' => $description,
+                    'c_category' => $category,
+                    'c_trainer' => $trainer,
+                    'c_price' => $price,
+                    'c_updater_id' => $_SESSION['admin_login_id'],
+                    'c_update_date' => date("Y-m-d H:i:s"),
+                ];
+                $this->CoursesModel->update_course($id, $data);
+                $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
+                redirect(base_url('dashboard_courses'));
+            }
+        } else {
+            $this->session->set_flashdata('err', 'Bütün sahələri doldurun.');
+            redirect($_SERVER['HTTP_REFERER']);
+
+        }
+    }
 }

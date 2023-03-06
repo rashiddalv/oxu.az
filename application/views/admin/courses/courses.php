@@ -59,7 +59,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                     <td>
                                         <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                                             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                                class="avatar avatar-s pull-up" title="<?php echo $item['c_trainer']; ?>">
+                                                class="avatar avatar-lg pull-up" title="<?php echo $item['c_trainer']; ?>">
                                                 <img src="<?php echo base_url('assets/admin');?>/assets/img/avatars/RzaMüəllim.jpg" alt="<?php echo $item['c_trainer']; ?>"
                                                     class="rounded-circle" />
                                                 <p style="display: inline;"><?php 
@@ -71,7 +71,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                     <td><?php echo "$". $item['c_price']; ?></td>
                                     <td>    
                                         <?php if($item['c_img']){ ?>
-                                        <img width="120px" height="70px" style="object-fit: cover;" src="<?php echo base_url('uploads/courses/'. $item['c_img']); ?>" alt="">
+                                        <img data-enlargable width="120px" height="70px" style="cursor: pointer; object-fit: cover;" src="<?php echo base_url('uploads/courses/'. $item['c_img']); ?>" alt="">
                                         <?php }else{ ?>
                                         <img width="120px" height="70px" style="object-fit: cover;" src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" alt="">
                                         <?php } ?>
@@ -79,7 +79,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                     <td>
                                         <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                                             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                                class="avatar avatar-s pull-up" title="<?php echo $item['a_name']; ?>">
+                                                class="avatar avatar-lg pull-up" title="<?php echo $item['a_name']; ?>">
                                                 <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/'. $item['a_img']) ?>" alt="<?php echo $item['c_trainer']; ?>"
                                                     class="rounded-circle" />
                                                 <!-- <p style="display: inline;"><?php echo $item['a_name']; ?></p> -->
@@ -93,9 +93,9 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a style="color: #03C3EC;" class="dropdown-item" href="javascript:void(0);"><i
+                                                <a style="color: #03C3EC;" class="dropdown-item" href="<?php echo base_url('course_detail/'.$item['c_id']);?>"><i
                                                         class="bx bx-detail me-1"></i> Details</a>
-                                                <a style="color: #FFAB00;" class="dropdown-item" href="javascript:void(0);"><i
+                                                <a style="color: #FFAB00;" class="dropdown-item" href="<?php echo base_url('course_edit/'.$item['c_id']);?>"><i
                                                         class="bx bx-edit-alt me-1"></i> Edit</a>
                                                 <a style="color: red;" onclick="return confirm('Are you sure?')" class="dropdown-item button_remove" href="<?php echo base_url('course_delete/'.$item['c_id']);?>"><i
                                                         class="bx bx-trash me-1"></i> Delete</a>
@@ -104,11 +104,27 @@ $this->load->view('admin/includes/headerStyle'); ?>
 
 
 
+
                                         </div>
                                     </td>
                                 </tr>
                             <?php } ?>
-
+                            <script>
+                    $('img[data-enlargable]').addClass('img-enlargable').click(function () {
+                        var src = $(this).attr('src');
+                        $('<div>').css({
+                            background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+                            backgroundSize: 'contain',
+                            width: '100%', height: '100%',
+                            position: 'fixed',
+                            zIndex: '10000',
+                            top: '0', left: '0',
+                            cursor: 'zoom-out'
+                        }).click(function () {
+                            $(this).remove();
+                        }).appendTo('body');
+                    });
+                </script>
                         </tbody>
                     </table>
                 </div>

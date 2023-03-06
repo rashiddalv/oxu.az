@@ -64,7 +64,7 @@ $primary-color: #696cff;
     }
   }
   // menu item active
-  .menu-inner > .menu-item.active > .menu-link {
+  .menu-inner > .menu-item > .menu-link.active {
     color: $primary-color;
     background-color: rgba($primary-color, 0.16) !important;
   }

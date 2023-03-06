@@ -18,6 +18,8 @@
 <!-- Page JS -->
 <script src="<?php echo base_url('assets/admin'); ?>/assets/js/dashboards-analytics.js"></script>
 
+<script src="<?php echo base_url('assets/admin'); ?>/assets/js/ckeditor.js"></script>
+
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 

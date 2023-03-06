@@ -15,15 +15,12 @@
           <div class="d-flex align-items-end row">
             <div class="col-sm-7">
               <div class="card-body">
-                <h5 class="card-title text-primary">Welcome back
+                <h5 class="card-title text-primary">Xoş gəldiniz
                   <?php echo $admin['a_name']; ?>! 🎉
                 </h5>
                 <p class="mb-4">
-                  You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                  your profile.
+                Bu gün <span class="fw-bold">72%</span> daha çox satış etdiniz.
                 </p>
-
-                <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
               </div>
             </div>
             <div class="col-sm-5 text-center text-sm-left">
@@ -44,8 +41,8 @@
         <div class="card h-100">
           <div class="card-header d-flex align-items-center justify-content-between pb-0">
             <div class="card-title mb-0">
-              <h5 class="m-0 me-2">Order Statistics</h5>
-              <small class="text-muted">42.82k Total Sales</small>
+              <h5 class="m-0 me-2">Sifariş Statistikası</h5>
+              <small class="text-muted">42.82k Ümumi Satış</small>
             </div>
             <div class="dropdown">
               <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -53,9 +50,9 @@
                 <i class="bx bx-dots-vertical-rounded"></i>
               </button>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
-                <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                <a class="dropdown-item" href="javascript:void(0);">Hamısını seç</a>
+                <a class="dropdown-item" href="javascript:void(0);">Təzələmək</a>
+                <a class="dropdown-item" href="javascript:void(0);">Paylaş</a>
               </div>
             </div>
           </div>
@@ -63,7 +60,7 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
               <div class="d-flex flex-column align-items-center gap-1">
                 <h2 class="mb-2">8,258</h2>
-                <span>Total Orders</span>
+                <span>Ümumi Sifarişlər</span>
               </div>
               <div id="orderStatisticsChart"></div>
             </div>
@@ -74,8 +71,8 @@
                 </div>
                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                   <div class="me-2">
-                    <h6 class="mb-0">Electronic</h6>
-                    <small class="text-muted">Mobile, Earbuds, TV</small>
+                    <h6 class="mb-0">Elektronika</h6>
+                    <small class="text-muted">Mobil, Qulaqcıqlar, TV</small>
                   </div>
                   <div class="user-progress">
                     <small class="fw-semibold">82.5k</small>
@@ -88,8 +85,8 @@
                 </div>
                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                   <div class="me-2">
-                    <h6 class="mb-0">Fashion</h6>
-                    <small class="text-muted">T-shirt, Jeans, Shoes</small>
+                    <h6 class="mb-0">Moda</h6>
+                    <small class="text-muted">Mayka, Cins şalvar, Ayaqqabı</small>
                   </div>
                   <div class="user-progress">
                     <small class="fw-semibold">23.8k</small>
@@ -102,8 +99,8 @@
                 </div>
                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                   <div class="me-2">
-                    <h6 class="mb-0">Decor</h6>
-                    <small class="text-muted">Fine Art, Dining</small>
+                    <h6 class="mb-0">Dekor</h6>
+                    <small class="text-muted">İncəsənət, Yemək</small>
                   </div>
                   <div class="user-progress">
                     <small class="fw-semibold">849k</small>
@@ -116,8 +113,8 @@
                 </div>
                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                   <div class="me-2">
-                    <h6 class="mb-0">Sports</h6>
-                    <small class="text-muted">Football, Cricket Kit</small>
+                    <h6 class="mb-0">İdman</h6>
+                    <small class="text-muted">Futbol, Kriket Dəsti</small>
                   </div>
                   <div class="user-progress">
                     <small class="fw-semibold">99</small>
@@ -139,14 +136,14 @@
                 <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
                   data-bs-target="#navs-tabs-line-card-income" aria-controls="navs-tabs-line-card-income"
                   aria-selected="true">
-                  Income
+                  Gəlir
                 </button>
               </li>
               <li class="nav-item">
-                <button type="button" class="nav-link" role="tab">Expenses</button>
+                <button type="button" class="nav-link" role="tab">Xərc</button>
               </li>
               <li class="nav-item">
-                <button type="button" class="nav-link" role="tab">Profit</button>
+                <button type="button" class="nav-link" role="tab">Mənfəət</button>
               </li>
             </ul>
           </div>
@@ -158,7 +155,7 @@
                     <img src="<?php echo base_url('assets/admin'); ?>/assets/img/icons/unicons/wallet.png" alt="User" />
                   </div>
                   <div>
-                    <small class="text-muted d-block">Total Balance</small>
+                    <small class="text-muted d-block">Ümumi Balans</small>
                     <div class="d-flex align-items-center">
                       <h6 class="mb-0 me-1">$459.10</h6>
                       <small class="text-success fw-semibold">
@@ -174,8 +171,8 @@
                     <div id="expensesOfWeek"></div>
                   </div>
                   <div>
-                    <p class="mb-n1 mt-1">Expenses This Week</p>
-                    <small class="text-muted">$39 less than last week</small>
+                    <p class="mb-n1 mt-1">Bu Həftənin Xərcləri</p>
+                    <small class="text-muted">Ötən həftə ilə müqayisədə $39 azdır</small>
                   </div>
                 </div>
               </div>
@@ -189,16 +186,16 @@
       <div class="col-md-6 col-lg-4 order-2 mb-4">
         <div class="card h-100">
           <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="card-title m-0 me-2">Transactions</h5>
+            <h5 class="card-title m-0 me-2">Əməliyyatlar</h5>
             <div class="dropdown">
               <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 <i class="bx bx-dots-vertical-rounded"></i>
               </button>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+                <a class="dropdown-item" href="javascript:void(0);">Son 28 Gün</a>
+                <a class="dropdown-item" href="javascript:void(0);">Keçən ay</a>
+                <a class="dropdown-item" href="javascript:void(0);">Keçən il</a>
               </div>
             </div>
           </div>
@@ -212,7 +209,7 @@
                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                   <div class="me-2">
                     <small class="text-muted d-block mb-1">Paypal</small>
-                    <h6 class="mb-0">Send money</h6>
+                    <h6 class="mb-0">Pul göndərilib</h6>
                   </div>
                   <div class="user-progress d-flex align-items-center gap-1">
                     <h6 class="mb-0">+82.6</h6>
@@ -227,7 +224,7 @@
                 </div>
                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                   <div class="me-2">
-                    <small class="text-muted d-block mb-1">Wallet</small>
+                    <small class="text-muted d-block mb-1">Pul kisəsi</small>
                     <h6 class="mb-0">Mac'D</h6>
                   </div>
                   <div class="user-progress d-flex align-items-center gap-1">
@@ -244,7 +241,7 @@
                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                   <div class="me-2">
                     <small class="text-muted d-block mb-1">Transfer</small>
-                    <h6 class="mb-0">Refund</h6>
+                    <h6 class="mb-0">Geri qaytarma</h6>
                   </div>
                   <div class="user-progress d-flex align-items-center gap-1">
                     <h6 class="mb-0">+637.91</h6>
@@ -259,8 +256,8 @@
                 </div>
                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                   <div class="me-2">
-                    <small class="text-muted d-block mb-1">Credit Card</small>
-                    <h6 class="mb-0">Ordered Food</h6>
+                    <small class="text-muted d-block mb-1">Kredit kartı</small>
+                    <h6 class="mb-0">Sifariş edilən yemək</h6>
                   </div>
                   <div class="user-progress d-flex align-items-center gap-1">
                     <h6 class="mb-0">-838.71</h6>
@@ -275,7 +272,7 @@
                 </div>
                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                   <div class="me-2">
-                    <small class="text-muted d-block mb-1">Wallet</small>
+                    <small class="text-muted d-block mb-1">Pul kisəsi</small>
                     <h6 class="mb-0">Starbucks</h6>
                   </div>
                   <div class="user-progress d-flex align-items-center gap-1">
@@ -292,7 +289,7 @@
                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                   <div class="me-2">
                     <small class="text-muted d-block mb-1">Mastercard</small>
-                    <h6 class="mb-0">Ordered Food</h6>
+                    <h6 class="mb-0">Sifariş edilən yemək</h6>
                   </div>
                   <div class="user-progress d-flex align-items-center gap-1">
                     <h6 class="mb-0">-92.45</h6>

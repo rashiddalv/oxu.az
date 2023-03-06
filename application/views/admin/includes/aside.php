@@ -55,7 +55,7 @@
           <li class="menu-item">
             <a href="<?php echo base_url('dashboard') ?>" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
-              <div data-i18n="Analytics">Dashboard</div>
+              <div data-i18n="Analytics">İdarə paneli</div>
             </a>
           </li>
 
@@ -100,7 +100,14 @@
             <a href="<?php echo base_url('dashboard_courses') ?>" class="menu-link">
               <i class="menu-icon tf-icons bx bx-book-open"></i>
               
-              <div data-i18n="Basic">Courses</div>
+              <div data-i18n="Basic">Kurslar</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="<?php echo base_url('dashboard_trainers') ?>" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-user"></i>
+              
+              <div data-i18n="Basic">Təlimçilər</div>
             </a>
           </li>
 

@@ -16,7 +16,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
       <div class="col-md-12">
 
         <div class="card mb-4">
-          <h5 class="card-header">Profile Details</h5>
+          <h5 class="card-header">Profil parametrləri</h5>
           <!-- Account -->
           <form action="<?php echo base_url('account_settings_act'); ?>" id="formAccountSettings" method="POST" enctype="multipart/form-data">
             <div class="card-body">
@@ -28,7 +28,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
                 <?php } ?>
                 <div class="button-wrapper">
                   <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                    <span class="d-none d-sm-block">Upload new photo</span>
+                    <span class="d-none d-sm-block">Yeni şəkil yükləyin</span>
                     <i class="bx bx-upload d-block d-sm-none"></i>
                     <input value="<?php echo base_url('uploads/admin/'. $admin['a_img']) ?>" name="profile_pic" type="file" id="upload" class="account-file-input" hidden
                       accept="image/png, image/jpeg" />
@@ -38,7 +38,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
                   <span class="d-none d-sm-block">Reset</span>
                 </button> -->
 
-                  <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                  <p class="text-muted mb-0">İcazə verilir JPG, GIF və ya PNG. Maksimum ölçü 800K</p>
                 </div>
               </div>
             </div>
@@ -46,18 +46,22 @@ $this->load->view('admin/includes/headerStyle'); ?>
             <div class="card-body">
               <div class="row">
                 <div class="mb-3 col-md-6">
-                  <label for="firstName" class="form-label">Your name</label>
+                  <label for="firstName" class="form-label">Adınız və soyadınız</label>
                   <input class="form-control" type="text" id="firstName" name="new_name"
                     placeholder="<?php echo $admin['a_name'];?>" value="<?php echo $admin['a_name'] ?>" autofocus />
                 </div>
                 <div class="mb-3 col-md-6">
-                  <label for="email" class="form-label">E-mail</label>
+                  <label for="email" class="form-label">E-poçt</label>
                   <input class="form-control" type="text" id="email" name="new_mail"
                     placeholder="<?php echo $admin['a_mail']; ?>" value="<?php echo $admin['a_mail'] ?>"/>
+
                 </div>
                 <div class="mt-2">
-                  <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                  <button type="submit" class="btn btn-primary me-2">Yadda saxla</button>
                 </div>
+                <!-- <div class="mt-2">
+                  <a href="<?php echo base_url('verify_account/token/'. $admin['a_token']); ?>" type="submit" class="btn btn-success me-2">Verify</a>
+                </div> -->
           </form>
         </div>
         <!-- /Account -->

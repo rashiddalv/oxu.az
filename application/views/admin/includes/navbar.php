@@ -59,7 +59,7 @@ $admin = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->ro
                       <?php echo $admin['a_name']; ?>
                     </span>
                     <small class="text-muted">
-                      <?php echo $admin['a_category']; ?>
+                      <?php echo $admin['a_status']; ?>
                     </small>
                   </div>
                 </div>
@@ -71,7 +71,7 @@ $admin = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->ro
             <li>
               <a class="dropdown-item" href="<?php echo base_url('dashboard_account_settings') ?>">
                 <i class="bx bx-cog me-2"></i>
-                <span class="align-middle">Settings</span>
+                <span class="align-middle">Parametrlər</span>
               </a>
             </li>
             <li>
@@ -80,7 +80,7 @@ $admin = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->ro
             <li>
               <a class="dropdown-item" href="<?php echo base_url('log_out'); ?>">
                 <i class="bx bx-power-off me-2"></i>
-                <span class="align-middle">Log Out</span>
+                <span class="align-middle">Çıxış</span>
               </a>
             </li>
           </ul>

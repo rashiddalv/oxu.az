@@ -51,12 +51,9 @@
                             <label for="status">Trainer</label>
                             <select name="trainer" id="status" class="form-control">
                                 <option value="">-SELECT-</option>
-                                <option value="Rza Talibov">Rza Talibov</option>
-                                <option value="Əmiraslan Məmmədov">Əmiraslan Məmmədov</option>
-                                <option value="Elşad Ağazadə">Elşad Ağazadə</option>
-                                <option value="Jeyhun Xəlilov">Jeyhun Xəlilov</option>
-                                <option value="Sənan Abdullayev">Sənan Abdullayev</option>
-                                <option value="Kərim Kərimov">Kərim Kərimov</option>
+                                <?php foreach ($get_all_trainers as $item) { ?>
+                                    <option value="<?php echo $item['t_name']; ?>"><?php echo $item['t_name']; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
 

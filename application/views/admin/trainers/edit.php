@@ -19,22 +19,22 @@
         <!-- Basic Bootstrap Table -->
         <div class="card">
 
-            <h5 class="card-header spaceB">Edit Course
-                <a href="<?php echo base_url('dashboard_courses') ?>">
+            <h5 class="card-header spaceB">Edit Trainer
+                <a href="<?php echo base_url('dashboard_trainers') ?>">
                     <button type="button" class="btn  btn-sm btn-danger">Back</button>
                 </a>
             </h5>
 
             <div class="table-responsive text-nowrap">
                 <div class="card-body">
-                    <form action="<?php echo base_url('course_edit_act/' . $get_single_data['c_id']); ?>" method="post"
+                    <form action="<?php echo base_url('trainer_edit_act/' . $get_single_data_trainers['t_id']); ?>" method="post"
                         enctype="multipart/form-data">
-                        <label for="title">Course name</label>
+                        <label for="title">Trainers name and surname</label>
                         <input type="text" id="title" name="title" class="form-control"
-                            value="<?php echo $get_single_data['c_title']; ?>">
+                            value="<?php echo $get_single_data_trainers['t_name']; ?>">
                         <br>
 
-                        <label for="description">Description</label>
+                        <label for="description">BIO</label>
                         <!-- <div id="textarea-edit"></div>
                         <script>
                             CKEDITOR.config.contentsCss = 'contents_b.css'; 
@@ -47,77 +47,27 @@
                         </script>
     -->
                         <textarea name="description" class="form-control" id="description" cols="30"
-                            rows="10"><?php echo $get_single_data['c_description']; ?></textarea>
+                            rows="10"><?php echo $get_single_data_trainers['t_about']; ?></textarea>
                         <br>
 
 
-
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
-                            <label for="category">Category</label>
-                            <select name="category" id="category" class="form-control">
-                                <option <?php if ($get_single_data['c_category'] = "") {
-                                    echo "SELECTED";
-                                } ?> value="">
-                                    -SELECT-</option>
-                                <option <?php if ($get_single_data['c_category'] = "Programming") {
-                                    echo "SELECTED";
-                                } ?>
-                                    value="Programming">Programming</option>
-                                <option <?php if ($get_single_data['c_category'] = "Languages") {
-                                    echo "SELECTED";
-                                } ?>
-                                    value="Languages">Languages</option>
-                                <option <?php if ($get_single_data['c_category'] = "Office programs") {
-                                    echo "SELECTED";
-                                } ?> value="Office programs">Office programs</option>
-                            </select>
-                        </div>
-
-
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
-                            <label for="status">Trainer</label>
-                            <select name="trainer" id="status" class="form-control">
-                                <?php foreach ($get_all_trainers as $item) { ?>
-                                    <option <?php if ($item['t_name'] == $get_single_data['c_trainer']) {
-                                        echo "SELECTED";
-                                    } ?>
-                                        value="<?php echo $item['t_name']; ?>"><?php echo $item['t_name']; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-
-                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="float: left; margin-right: 10px;">
-                            <label for="price">Price</label>
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text">$</span>
-                                <input id="price" name="price" type="text" class="form-control" placeholder="100"
-                                    aria-label="Amount (to the nearest dollar)"
-                                    value="<?php echo $get_single_data['c_price']; ?>">
-                                <span class="input-group-text">.00</span>
-                            </div>
-                        </div>
-
-                        <br>
-                        <br>
-                        <br>
                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="float: left; margin:0px">
                             <label for="img">Image</label>
                             <br>
-                            <?php if ($get_single_data['c_img']) { ?>
-                                <img data-enlargable width="586px" height="330px"
+                            <?php if ($get_single_data_trainers['t_img']) { ?>
+                                <img class="rounded" data-enlargable width="auto" height="300px"
                                     style="object-fit: cover; margin-bottom: 20px;"
-                                    src="<?php echo base_url('uploads/courses/' . $get_single_data['c_img']); ?>" alt="">
+                                    src="<?php echo base_url('uploads/trainers/' . $get_single_data_trainers['t_img']); ?>" alt="">
                             <?php } else { ?>
                                 <img width="120px" height="70px" style="object-fit: cover; margin-bottom: 20px;"
-                                    src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" alt="">
+                                    src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg" alt="">
                             <?php } ?>
                         </div>
                         <br>
                         <br>
                         <br>
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
-                            <input type="file" id="img" class="form-control" name="course_img">
+                            <input type="file" id="img" class="form-control" name="trainer_img">
                         </div>
 
 

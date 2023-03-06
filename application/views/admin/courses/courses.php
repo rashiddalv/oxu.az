@@ -19,9 +19,9 @@ $this->load->view('admin/includes/headerStyle'); ?>
         <!-- Basic Bootstrap Table -->
         <div class="card">
 
-            <h5 class="card-header spaceB">Courses
+            <h5 class="card-header spaceB">Kurslar
                 <a href="<?php echo base_url('course_create') ?>">
-                    <button type="button" class="btn  btn-sm btn-success">Create</button>
+                    <button type="button" class="btn  btn-sm btn-success">Yarat</button>
                 </a>
             </h5>
             <div class="card-body">
@@ -30,14 +30,14 @@ $this->load->view('admin/includes/headerStyle'); ?>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Course name</th>
-                                <th>Description</th>
-                                <th>Category</th>
-                                <th>Trainers name</th>
-                                <th>Price</th>
-                                <th>Image</th>
-                                <th>Creator</th>
-                                <th>Actions</th>
+                                <th>Kursun adı</th>
+                                <th>Təsvir</th>
+                                <th>Kateqoriya</th>
+                                <th>Təlimçilərin adı və soyadı</th>
+                                <th>Qiymət</th>
+                                <th>Şəkil</th>
+                                <th>Yaradan</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -59,11 +59,11 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                     <td>
                                         <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                                             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                                class="avatar avatar-lg pull-up" title="<?php echo $item['c_trainer']; ?>">
-                                                <img src="<?php echo base_url('assets/admin');?>/assets/img/avatars/RzaMüəllim.jpg" alt="<?php echo $item['c_trainer']; ?>"
+                                                class="avatar avatar-lg pull-up" title="<?php echo $item['t_name']; ?>">
+                                                <img src="<?php echo base_url('uploads/trainers/'. $item['t_img']) ?>" alt="<?php echo $item['c_trainer']; ?>"
                                                     class="rounded-circle" />
                                                 <p style="display: inline;"><?php 
-                                                $trainer = mb_strimwidth($item['c_trainer'], 0, 15, '...');
+                                                $trainer = mb_strimwidth($item['c_trainer'], 0, 20, '...');
                                                 echo $trainer; ?></p>
                                             </li>
                                         </ul>
@@ -163,7 +163,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
         <!-- ===========================FLASHDATA=========================== -->
         <?php if ($this->session->flashdata('err')) { ?>
             <div class="bs-toast toast toast-placement-ex m-2 fade bg-danger bottom-0 end-0 show" role="alert"
-                aria-live="assertive" aria-atomic="true" data-delay="2000">
+                aria-live="assertive" aria-atomic="true" data-delay="20">
                 <div class="toast-header">
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
@@ -174,7 +174,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
         <?php } ?>
         <?php if ($this->session->flashdata('success')) { ?>
             <div class="bs-toast toast toast-placement-ex m-2 fade bg-success bottom-0 end-0 show" role="alert"
-                aria-live="assertive" aria-atomic="true" data-delay="2000">
+                aria-live="assertive" aria-atomic="true" data-delay="20">
                 <div class="toast-header">
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>

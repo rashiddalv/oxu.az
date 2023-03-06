@@ -11,7 +11,6 @@ class AdminController extends CI_Controller
     {
         $this->load->view('admin/auth-login-basic');
     }
-
     public function login_act()
     {
         $email = $_POST['email'];
@@ -38,19 +37,16 @@ class AdminController extends CI_Controller
             redirect($_SERVER['HTTP_REFERER']);
         }
     }
-
     public function log_out()
     {
         $this->session->set_flashdata('success', 'Tezliklə qayıdın!');
         unset($_SESSION['admin_login_id']);
         redirect(base_url('login_dashboard'));
     }
-
     public function register()
     {
         $this->load->view('admin/auth-register-basic');
     }
-
     public function register_act()
     {
         $this->load->helper(array('form', 'url'));
@@ -59,6 +55,7 @@ class AdminController extends CI_Controller
         $email = $_POST['reg-email'];
         $pass = $_POST['reg-password'];
         $terms = $_POST['reg-terms'];
+        $verification_token = md5(uniqid());
 
         if (!empty($name) && !empty($email) && !empty($pass) && isset($terms) && $terms == 'Yes') {
             if (preg_match('~^\p{Lu}~u', $name)) {
@@ -81,7 +78,10 @@ class AdminController extends CI_Controller
                             $data = [
                                 'a_name' => $name,
                                 'a_mail' => $email,
-                                'a_password' => md5($pass)
+                                'a_password' => md5($pass),
+                                'a_status' => 'Unverified user',
+                                'a_token' => $verification_token,
+                                
                             ];
                             $this->CoursesModel->register_insert($data);
                             $this->session->set_flashdata('success', 'Hesab uğurla yaradıldı.');
@@ -117,6 +117,70 @@ class AdminController extends CI_Controller
     }
 
 
+    // =================ACCOUNT VERIFICATION=================
+    // public function verify_account($token, $id)
+    // {
+    //     $config = array(
+    //         'protocol' => 'smtp',
+    //         // 'mail', 'sendmail', or 'smtp'
+    //         'smtp_host' => 'smtp.gmail.com',
+    //         'smtp_port' => 587,
+    //         'smtp_user' => 'rashiddvalorant@gmail.com',
+    //         'smtp_pass' => 'drbijagzswauwzyi',
+    //         'smtp_crypto' => 'tls',
+    //         'mailtype' => 'html',
+    //         //plaintext 'text' mails or 'html'
+    //         'smtp_timeout' => '4',
+    //         //in seconds
+    //         'charset' => 'iso-8859-1',
+    //         'wordwrap' => TRUE,
+    //         'newline' => "\r\n"
+    //     );
+    //     $this->load->library('email', $config);
+    //     $this->email->initialize($config);
+
+    //         $data = $this->db->get_where('admin', ['a_token' => $token])->row();
+    //         $email = $this->db->query("SELECT `a_mail` FROM `admin` WHERE `a_id` = $id");
+            
+
+
+    //         $this->load->library('email', $config);
+    //         $this->email->initialize($config);
+
+    //         $this->email->from('rashiddalv@gmail.com', 'OXU.AZ');
+    //         $this->email->to('$email');
+
+    //         $this->email->subject('Verify Account');
+    //         // $message = $this->load->view('admin/mail', $data, TRUE);
+    //         $this->email->message('Verify your account: ' . base_url('verify_account/token/' . $token));
+
+    //         $this->email->send();
+
+    //         // show_error($this->email->print_debugger());
+
+    //         // if (!$this->email->send()) {
+    //         //     echo '123';
+    //         // }
+
+
+    //         $this->session->set_flashdata('success', 'Account verification email has been sent.');
+    //         redirect($_SERVER['HTTP_REFERER']);
+        
+
+    // }
+    // public function token($token)
+    // {
+    //     $verify_account = $this->db->get_where('admin', ['a_token' => $token])->row();
+
+    //     if (!$verify_account) {
+    //         show_404();
+    //     } else {
+    //         $this->load->view('admin/reset_password_token_form', ['a_token' => $token]);
+    //     }
+    // }
+    // =================ACCOUNT VERIFICATION=================
+
+    
     public function dashboard()
     {
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
@@ -130,7 +194,7 @@ class AdminController extends CI_Controller
     }
     public function course_create()
     {
-        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $data['get_all_trainers'] = $this->CoursesModel->get_all_trainers();
         $this->load->view('admin/courses/create', $data);
     }
     public function course_create_act()
@@ -201,14 +265,6 @@ class AdminController extends CI_Controller
         $this->session->set_flashdata('success', 'Kurs uğurla silindi.');
         redirect($_SERVER['HTTP_REFERER']);
     }
-
-
-
-
-
-
-
-
     public function dashboard_account_settings()
     {
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
@@ -266,7 +322,8 @@ class AdminController extends CI_Controller
     }
     public function course_edit($id)
     {
-        $data['get_single_data'] = $this->db->where('c_id', $id)->get('courses')->row_array();
+        $data['get_all_trainers'] = $this->CoursesModel->get_all_trainers();
+        $data['get_single_data'] = $this->CoursesModel->get_single_data($id);
         $this->load->view('admin/courses/edit', $data);
     }
     public function course_edit_act($id)
@@ -323,6 +380,120 @@ class AdminController extends CI_Controller
                 $this->CoursesModel->update_course($id, $data);
                 $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
                 redirect(base_url('dashboard_courses'));
+            }
+        } else {
+            $this->session->set_flashdata('err', 'Bütün sahələri doldurun.');
+            redirect($_SERVER['HTTP_REFERER']);
+
+        }
+    }
+    public function dashboard_trainers()
+    {
+        $data['get_all_trainers'] = $this->CoursesModel->get_all_trainers();
+        $this->load->view('admin/trainers/trainers', $data);
+    }
+    public function trainer_create()
+    {
+        $this->load->view('admin/trainers/create');
+    }
+    public function trainer_create_act()
+    {
+        $name = $_POST['name-surname'];
+        $bio = $_POST['bio'];
+
+        if (!empty($name) && !empty($bio)) {
+            $config['upload_path'] = './uploads/trainers/';
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            if (preg_match('~^\p{Lu}~u', $name)) {
+                if ($this->upload->do_upload('trainer_img')) {
+                    $file_name = $this->upload->data('file_name');
+                    $file_ext = $this->upload->data('file_ext');
+                    $data = [
+                        't_name' => $name,
+                        't_about' => $bio,
+                        't_img' => $file_name,
+                        't_img_ext' => $file_ext,
+                        't_creator_id' => $_SESSION['admin_login_id'],
+                        't_created_date' => date("Y-m-d H:i:s"),
+                    ];
+
+                    $this->CoursesModel->insert_trainer($data);
+                    $this->session->set_flashdata('success', 'Müəllim uğurla əlavə edildi.');
+                    redirect(base_url('dashboard_trainers'));
+                } else {
+                    $data = [
+                        't_name' => $name,
+                        't_about' => $bio,
+                        't_creator_id' => $_SESSION['admin_login_id'],
+                        't_created_date' => date("Y-m-d H:i:s"),
+                    ];
+
+                    $this->CoursesModel->insert_trainer($data);
+                    $this->session->set_flashdata('success', 'Müəllim uğurla əlavə edildi.');
+                    redirect(base_url('dashboard_trainers'));
+                }
+            } else {
+                $this->session->set_flashdata('err', 'Müəllimin adı böyük hərflə başlamalıdır.');
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+
+        } else {
+            $this->session->set_flashdata('err', 'Bütün sahələri doldurun.');
+            redirect($_SERVER['HTTP_REFERER']);
+
+        }
+    }
+    public function trainer_delete($id)
+    {
+        $this->CoursesModel->delete_trainer($id);
+        $this->session->set_flashdata('success', 'Təlimçi uğurla silindi.');
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+    public function trainer_edit($id)
+    {
+        $data['get_single_data_trainers'] = $this->CoursesModel->get_single_data_trainers($id);
+        $this->load->view('admin/trainers/edit', $data);
+    }
+    public function trainer_edit_act($id)
+    {
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        if (!empty($title) && !empty($description)) {
+            $config['upload_path'] = './uploads/trainers/';
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            if (preg_match('~^\p{Lu}~u', $title)) {
+                if ($this->upload->do_upload('trainer_img')) {
+                    $file_name = $this->upload->data('file_name');
+                    $file_ext = $this->upload->data('file_ext');
+                    $data = [
+                        't_name' => $title,
+                        't_about' => $description,
+                        't_img' => $file_name,
+                        't_img_ext' => $file_ext,
+                    ];
+
+                    $this->CoursesModel->update_trainer($id, $data);
+                    $this->session->set_flashdata('success', 'Təlimçi uğurla yeniləndi.');
+                    redirect(base_url('dashboard_trainers'));
+
+                } else {
+                    $data = [
+                        't_name' => $title,
+                        't_about' => $description,
+                    ];
+                    $this->CoursesModel->update_trainer($id, $data);
+                    $this->session->set_flashdata('success', 'Təlimçi uğurla yeniləndi.');
+                    redirect(base_url('dashboard_trainers'));
+                }
+            } else {
+                $this->session->set_flashdata('err', 'Kursun adı və təsviri böyük hərflə başlamalıdır.');
+                redirect($_SERVER['HTTP_REFERER']);
             }
         } else {
             $this->session->set_flashdata('err', 'Bütün sahələri doldurun.');

@@ -19,9 +19,9 @@
         <!-- Basic Bootstrap Table -->
         <div class="card">
 
-            <h5 class="card-header spaceB">Edit Course
+            <h5 class="card-header spaceB">Kursu redaktə edin
                 <a href="<?php echo base_url('dashboard_courses') ?>">
-                    <button type="button" class="btn  btn-sm btn-danger">Back</button>
+                    <button type="button" class="btn  btn-sm btn-danger">Geri</button>
                 </a>
             </h5>
 
@@ -29,12 +29,12 @@
                 <div class="card-body">
                     <form action="<?php echo base_url('course_edit_act/' . $get_single_data['c_id']); ?>" method="post"
                         enctype="multipart/form-data">
-                        <label for="title">Course name</label>
+                        <label for="title">Kursun adı</label>
                         <input type="text" id="title" name="title" class="form-control"
                             value="<?php echo $get_single_data['c_title']; ?>">
                         <br>
 
-                        <label for="description">Description</label>
+                        <label for="description">Təsvir</label>
                         <!-- <div id="textarea-edit"></div>
                         <script>
                             CKEDITOR.config.contentsCss = 'contents_b.css'; 
@@ -53,7 +53,7 @@
 
 
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
-                            <label for="category">Category</label>
+                            <label for="category">Kateqoriya</label>
                             <select name="category" id="category" class="form-control">
                                 <option <?php if ($get_single_data['c_category'] = "") {
                                     echo "SELECTED";
@@ -75,20 +75,19 @@
 
 
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
-                            <label for="status">Trainer</label>
+                            <label for="status">Təlimçi</label>
                             <select name="trainer" id="status" class="form-control">
                                 <?php foreach ($get_all_trainers as $item) { ?>
                                     <option <?php if ($item['t_name'] == $get_single_data['c_trainer']) {
                                         echo "SELECTED";
-                                    } ?>
-                                        value="<?php echo $item['t_name']; ?>"><?php echo $item['t_name']; ?></option>
+                                    } ?> value="<?php echo $item['t_name']; ?>"><?php echo $item['t_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
 
 
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="float: left; margin-right: 10px;">
-                            <label for="price">Price</label>
+                            <label for="price">Qiymət</label>
                             <div class="input-group input-group-merge">
                                 <span class="input-group-text">$</span>
                                 <input id="price" name="price" type="text" class="form-control" placeholder="100"
@@ -102,7 +101,7 @@
                         <br>
                         <br>
                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="float: left; margin:0px">
-                            <label for="img">Image</label>
+                            <label for="img">Şəkil</label>
                             <br>
                             <?php if ($get_single_data['c_img']) { ?>
                                 <img data-enlargable width="586px" height="330px"
@@ -125,7 +124,12 @@
                             <br>
                             <button type="submit" class="btn btn-success" style="float: right; margin-bottom: 20px;"><s
                                     style="text-decoration: none; color: white;" class="tf-icons bx bx-edit"></s>&nbsp;
-                                Save</button>
+                                Yadda saxla</button>
+                                <?php if ($get_single_data['c_img']) { ?>
+                            <a href="<?php echo base_url('course_img_delete/'. $get_single_data['c_id']); ?>" type="submit" class="btn btn-danger" style="color: white;float: right; margin-bottom: 20px; margin-right: 10px"><s
+                                    style="text-decoration: none; color: white;" class="tf-icons bx bx-trash"></s>&nbsp;
+                                Şəkli sil</a>
+                                <?php } ?>
                         </div>
 
 

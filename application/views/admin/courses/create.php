@@ -15,9 +15,9 @@
         <!-- Basic Bootstrap Table -->
         <div class="card">
 
-            <h5 class="card-header spaceB">Create Course
+            <h5 class="card-header spaceB">Kurs yaradın
                 <a href="<?php echo base_url('dashboard_courses') ?>">
-                    <button type="button" class="btn  btn-sm btn-danger">Back</button>
+                    <button type="button" class="btn  btn-sm btn-danger">Geri</button>
                 </a>
             </h5>
 
@@ -25,11 +25,11 @@
                 <div class="card-body">
                     <form action="<?php echo base_url('course_create_act'); ?>" method="post"
                         enctype="multipart/form-data">
-                        <label for="title">Course name</label>
+                        <label for="title">Kursun adı</label>
                         <input type="text" id="title" name="title" class="form-control">
                         <br>
 
-                        <label for="description">Description</label>
+                        <label for="description">Təsvir</label>
                         <textarea name="description" class="form-control" id="description" cols="30"
                             rows="10"></textarea>
                         <br>
@@ -37,18 +37,18 @@
 
 
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
-                            <label for="category">Category</label>
+                            <label for="category">Kateqoriya</label>
                             <select name="category" id="category" class="form-control">
                                 <option value="">-SELECT-</option>
-                                <option value="Programming">Programming</option>
-                                <option value="Languages">Languages</option>
-                                <option value="Office programs">Office programs</option>
+                                <?php foreach ($get_all_categories as $item) { ?>
+                                    <option value="<?php echo $item['category_name']; ?>"><?php echo $item['category_name']; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
 
 
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
-                            <label for="status">Trainer</label>
+                            <label for="status">Təlimçi</label>
                             <select name="trainer" id="status" class="form-control">
                                 <option value="">-SELECT-</option>
                                 <?php foreach ($get_all_trainers as $item) { ?>
@@ -59,12 +59,12 @@
 
 
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
-                            <label for="img">Image</label>
+                            <label for="img">Şəkil</label>
                             <input type="file" id="img" class="form-control" name="course_img">
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="float: left;">
-                            <label for="price">Price</label>
+                            <label for="price">Qiymət</label>
                             <div class="input-group input-group-merge">
                                 <span class="input-group-text">$</span>
                                 <input id="price" name="price" type="text" class="form-control" placeholder="100"
@@ -77,7 +77,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float: left;">
                             <br>
                             <button type="submit" class="btn btn-success"
-                                style="float: right; margin-bottom: 20px;">Create</button>
+                                style="float: right; margin-bottom: 20px;">Yarad</button>
                         </div>
 
 

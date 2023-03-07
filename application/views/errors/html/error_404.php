@@ -15,7 +15,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Error - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Error 404</title>
 
     <meta name="description" content="" />
 
@@ -47,8 +47,6 @@
     <!-- Helpers -->
     <script src="<?php echo base_url('assets/admin'); ?>/assets/vendor/js/helpers.js"></script>
 
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="<?php echo base_url('assets/admin'); ?>/assets/js/config.js"></script>
   </head>
 

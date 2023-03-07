@@ -18,25 +18,29 @@ $this->load->view('admin/includes/headerStyle'); ?>
         <div class="card mb-4">
           <h5 class="card-header">Profil parametrləri</h5>
           <!-- Account -->
-          <form action="<?php echo base_url('account_settings_act'); ?>" id="formAccountSettings" method="POST" enctype="multipart/form-data">
+          <form action="<?php echo base_url('account_settings_act'); ?>" id="formAccountSettings" method="POST"
+            enctype="multipart/form-data">
             <div class="card-body">
               <div class="d-flex align-items-start align-items-sm-center gap-4">
-                <?php if($admin['a_img']){ ?>
-                <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/' . $admin['a_img']) ?>" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                <?php if ($admin['a_img']) { ?>
+                  <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/' . $admin['a_img']) ?>"
+                    alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                 <?php } else { ?>
-                <img style="object-fit:cover;" src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                  <img style="object-fit:cover;"
+                    src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg"
+                    class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                 <?php } ?>
                 <div class="button-wrapper">
                   <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                     <span class="d-none d-sm-block">Yeni şəkil yükləyin</span>
                     <i class="bx bx-upload d-block d-sm-none"></i>
-                    <input value="<?php echo base_url('uploads/admin/'. $admin['a_img']) ?>" name="profile_pic" type="file" id="upload" class="account-file-input" hidden
-                      accept="image/png, image/jpeg" />
+                    <input value="<?php echo base_url('uploads/admin/' . $admin['a_img']) ?>" name="profile_pic"
+                      type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
                   </label>
-                  <!-- <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                  <a href="<?php echo base_url('account_img_delete/'. $admin['a_id']) ?>" type="button" class="btn btn-outline-secondary account-image-reset mb-4">
                   <i class="bx bx-reset d-block d-sm-none"></i>
-                  <span class="d-none d-sm-block">Reset</span>
-                </button> -->
+                  <span class="d-none d-sm-block">Şəkli sil</span>
+                </a>
 
                   <p class="text-muted mb-0">İcazə verilir JPG, GIF və ya PNG. Maksimum ölçü 800K</p>
                 </div>
@@ -48,20 +52,29 @@ $this->load->view('admin/includes/headerStyle'); ?>
                 <div class="mb-3 col-md-6">
                   <label for="firstName" class="form-label">Adınız və soyadınız</label>
                   <input class="form-control" type="text" id="firstName" name="new_name"
-                    placeholder="<?php echo $admin['a_name'];?>" value="<?php echo $admin['a_name'] ?>" autofocus />
+                    placeholder="<?php echo $admin['a_name']; ?>" value="<?php echo $admin['a_name'] ?>" autofocus />
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="email" class="form-label">E-poçt</label>
                   <input class="form-control" type="text" id="email" name="new_mail"
-                    placeholder="<?php echo $admin['a_mail']; ?>" value="<?php echo $admin['a_mail'] ?>"/>
+                    placeholder="<?php echo $admin['a_mail']; ?>" value="<?php echo $admin['a_mail'] ?>" />
 
                 </div>
                 <div class="mt-2">
                   <button type="submit" class="btn btn-primary me-2">Yadda saxla</button>
                 </div>
-                <!-- <div class="mt-2">
-                  <a href="<?php echo base_url('verify_account/token/'. $admin['a_token']); ?>" type="submit" class="btn btn-success me-2">Verify</a>
-                </div> -->
+                <div class="mt-2">
+
+                  <?php if ($admin['a_status'] == "Verified user") { ?>
+                    <button disabled class="btn btn-success" ><s
+                        style="text-decoration: none; color: white;"
+                        class="tf-icons bx bx-check-double"></s>&nbsp;Verified</button>
+                  <?php } else { ?>
+                    <a href="<?php echo base_url('verify_account/'); ?>" type="submit"
+                      class="btn btn-warning me-2">Verify</a>
+                  <?php } ?>
+
+                </div>
           </form>
         </div>
         <!-- /Account -->

@@ -106,26 +106,26 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a style="color: #03C3EC;" class="dropdown-item" href="<?php echo base_url('course_detail/'.$item['c_id']);?>"><i
-                                                        class="bx bx-detail me-1"></i> Details</a>
+                                                        class="bx bx-detail me-1"></i> Təfərrüatlar</a>
                                                 <!-- <a style="color: #FFAB00;" class="dropdown-item" href="<?php echo base_url('course_edit/'.$item['c_id']);?>"><i
                                                         class="bx bx-edit-alt me-1"></i> Edit</a> -->
 
                                                         <?php if($admin['a_status'] == "Verified user"){ ?>
                                                         <a style="color: #FFAB00;" class="dropdown-item" href="<?php echo base_url('course_edit/'.$item['c_id']);?>"><i
-                                                        class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                        class="bx bx-edit-alt me-1"></i> Redaktə et</a>
                                                         <?php }else{ ?>
                                                         <a style="color: #8592A3;cursor: not-allowed;" class="dropdown-item"><i
-                                                        class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                        class="bx bx-edit-alt me-1"></i> Redaktə et</a>
                                                         <?php } ?>
                                                 <!-- <a style="color: red;" onclick="return confirm('Are you sure?')" class="dropdown-item button_remove" href="<?php echo base_url('course_delete/'.$item['c_id']);?>"><i
                                                         class="bx bx-trash me-1"></i> Delete</a> -->
 
                                                         <?php if($admin['a_status'] == "Verified user"){ ?>
                                                         <a style="color: red;" onclick="return confirm('Are you sure?')" class="dropdown-item button_remove" href="<?php echo base_url('course_delete/'.$item['c_id']);?>"><i
-                                                        class="bx bx-trash me-1"></i> Delete</a>
+                                                        class="bx bx-trash me-1"></i> Sil</a>
                                                         <?php }else{ ?>
                                                             <a style="color: #8592A3; cursor: not-allowed;" class="dropdown-item button_remove"><i
-                                                        class="bx bx-trash me-1"></i> Delete</a>
+                                                        class="bx bx-trash me-1"></i> Sil</a>
                                                         <?php } ?>
 
                                             </div>

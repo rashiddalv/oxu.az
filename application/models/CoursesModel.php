@@ -45,6 +45,12 @@ class CoursesModel extends CI_Model
             ->join('admin', 'admin.a_id = courses.c_creator_id', 'left')
             ->get('courses')->row_array();
     }
+    public function get_single_trainer($id){
+        return $this->db
+        ->where('t_id', $id)
+        ->join('admin', 'admin.a_id = trainers.t_creator_id', 'left')
+        ->get('trainers')->row_array();
+    }
     public function update_course($id, $data){
         $this->db->where('c_id', $id)
         ->update('courses', $data);
@@ -61,6 +67,11 @@ class CoursesModel extends CI_Model
         return $this->db
         ->order_by('t_id', 'DESC')
         ->get('trainers')->result_array();
+    }
+    public function get_all_categories(){
+        return $this->db
+        ->order_by('category_id', 'DESC')
+        ->get('category')->result_array();
     }
     public function delete_trainer($id){
         $this->db->where('t_id', $id)->delete('trainers');

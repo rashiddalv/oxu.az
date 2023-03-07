@@ -72,6 +72,7 @@ $route['register_act']                                     = 'AdminController/re
 $route['dashboard']                                        = 'AdminController/dashboard';
 $route['dashboard_account_settings']                       = 'AdminController/dashboard_account_settings';
 $route['account_settings_act']                             = 'AdminController/account_settings_act';
+$route['account_img_delete/(.*)']                          = 'AdminController/account_img_delete/$1';
 
 
 $route['reset_password']                                   = 'ResetPassword/index';
@@ -80,7 +81,9 @@ $route['reset_password/token/(:any)']                      = 'ResetPassword/toke
 $route['reset_password/update']                            = 'ResetPassword/update';
 $route['reset_password/reset_password_token_form']         = 'ResetPassword/reset_password_token_form';
 
-// $route['verify_account/token/(.*)']                        = 'AdminController/verify_account/token/$1';
+
+$route['verify_account']                                   = 'AdminController/verify_account';
+$route['verify_acc_token/(.*)']                            = 'AdminController/verify_acc_token/$1';
 
 
 
@@ -90,6 +93,7 @@ $route['course_create']                                    = 'AdminController/co
 $route['course_create_act']                                = 'AdminController/course_create_act';
 $route['course_delete/(.*)']                               = 'AdminController/course_delete/$1';
 $route['course_detail/(.*)']                               = 'AdminController/course_detail/$1';
+$route['course_img_delete/(.*)']                           = 'AdminController/course_img_delete/$1';
 $route['delete_course_detail/(.*)']                        = 'AdminController/delete_course_detail/$1';
 $route['course_edit/(.*)']                                 = 'AdminController/course_edit/$1';
 $route['course_edit_act/(.*)']                             = 'AdminController/course_edit_act/$1';
@@ -100,8 +104,13 @@ $route['dashboard_trainers']                               = 'AdminController/da
 $route['trainer_create']                                   = 'AdminController/trainer_create';
 $route['trainer_create_act']                               = 'AdminController/trainer_create_act';
 $route['trainer_delete/(.*)']                              = 'AdminController/trainer_delete/$1';
+$route['trainer_detail/(.*)']                              = 'AdminController/trainer_detail/$1';
+$route['delete_trainers_detail/(.*)']                      = 'AdminController/delete_trainers_detail/$1';
 $route['trainer_edit/(.*)']                                = 'AdminController/trainer_edit/$1';
 $route['trainer_edit_act/(.*)']                            = 'AdminController/trainer_edit_act/$1';
+
+
+
     
 
 

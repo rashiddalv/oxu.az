@@ -15,9 +15,9 @@
         <!-- Basic Bootstrap Table -->
         <div class="card">
 
-            <h5 class="card-header spaceB">Add Trainer
+            <h5 class="card-header spaceB">Təlimçi əlavə edin
                 <a href="<?php echo base_url('dashboard_trainers') ?>">
-                    <button type="button" class="btn  btn-sm btn-danger">Back</button>
+                    <button type="button" class="btn  btn-sm btn-danger">Geri</button>
                 </a>
             </h5>
 
@@ -25,17 +25,17 @@
                 <div class="card-body">
                     <form action="<?php echo base_url('trainer_create_act'); ?>" method="post"
                         enctype="multipart/form-data">
-                        <label for="title">Name, Surname</label>
+                        <label for="title">Ad, Soyad</label>
                         <input type="text" id="title" name="name-surname" class="form-control">
                         <br>
 
-                        <label for="description">BIO</label>
+                        <label for="description">BİO</label>
                         <textarea name="bio" class="form-control" id="description" cols="30" rows="10"></textarea>
                         <br>
 
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
-                            <label for="img">Image</label> <br>
-                            <small class="text-muted"> Only JPG, JPEG and PNG formats.
+                            <label for="img">Şəkil</label> <br>
+                            <small class="text-muted"> Yalnız JPG, JPEG və PNG formatları.
                             </small>
                             <br>
                             <br>
@@ -47,7 +47,7 @@
                             <br>
                             <button type="submit" class="btn btn-success" style="float: right; margin-bottom: 20px;"><s
                                     style="text-decoration: none; color: white;" class="tf-icons bx bx-edit"></s>&nbsp;
-                                Add</button>
+                                    Əlavə et</button>
                         </div>
 
 

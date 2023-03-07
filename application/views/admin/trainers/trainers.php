@@ -19,17 +19,17 @@ $this->load->view('admin/includes/headerStyle'); ?>
         <!-- Basic Bootstrap Table -->
         <div class="card">
 
-            <h5 class="card-header spaceB">Trainers
+            <h5 class="card-header spaceB">Təlimçilər
                 <!-- <a href="<?php echo base_url('trainer_create') ?>">
                     <button type="button" class="btn  btn-sm btn-success">Add</button>
                 </a> -->
                 <?php if($admin['a_status'] == "Verified user"){ ?>
                     <a href="<?php echo base_url('trainer_create') ?>">
-                    <button type="button" class="btn btn-sm btn-success">Add</button>
+                    <button type="button" class="btn btn-sm btn-success">Əlavə et</button>
                     </a>
                 <?php }else{ ?>
                     <a href="" style="cursor: not-allowed;"> 
-                    <button type="button" class="btn btn-sm btn-danger" disabled>Add</button>
+                    <button type="button" class="btn btn-sm btn-danger" disabled>Əlavə et</button>
                     </a>
                 <?php } ?>
                 
@@ -40,9 +40,9 @@ $this->load->view('admin/includes/headerStyle'); ?>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name, surname</th>
-                                <th>BIO</th>
-                                <th>Image</th>
+                                <th>Ad, Soyad</th>
+                                <th>BİO</th>
+                                <th>Şəkil</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -80,16 +80,18 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a style="color: #03C3EC;" class="dropdown-item" href=""><i
-                                                        class="bx bx-detail me-1"></i> Details</a>
+                                                <a style="color: #03C3EC;" class="dropdown-item" href="<?php echo base_url('trainer_detail/'.$item['t_id']) ?>"><i
+                                                        class="bx bx-detail me-1"></i> Təfərrüatlar</a>
+
+
                                                 <!-- <a style="color: #FFAB00;" class="dropdown-item" href="<?php echo base_url('trainer_edit/'.$item['t_id']);?>"><i
                                                         class="bx bx-edit-alt me-1"></i> Edit</a> -->
                                                         <?php if($admin['a_status'] == "Verified user"){ ?>
                                                             <a style="color: #FFAB00;" class="dropdown-item button_remove" href="<?php echo base_url('trainer_edit/'.$item['t_id']);?>"><i
-                                                        class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                        class="bx bx-edit-alt me-1"></i> Redaktə et</a>
                                                         <?php }else{ ?>
                                                             <a style="color: #8592A3; cursor:not-allowed;" class="dropdown-item button_remove"><i
-                                                        class="bx bx-edit-alt me-1" disabled></i> Edit</a>
+                                                        class="bx bx-edit-alt me-1" disabled></i> Redaktə et</a>
                                                         <?php } ?>
 
 
@@ -99,10 +101,10 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                                         class="bx bx-trash me-1"></i> Delete</a> -->
                                                         <?php if($admin['a_status'] == "Verified user"){ ?>
                                                             <a style="color: red;" onclick="return confirm('Are you sure?')" class="dropdown-item button_remove" href="<?php echo base_url('trainer_delete/'.$item['t_id']);?>"><i
-                                                        class="bx bx-trash me-1"></i> Delete</a>
+                                                        class="bx bx-trash me-1"></i> Sil</a>
                                                         <?php }else{ ?>
                                                             <a style="color: #8592A3; cursor:not-allowed;" class="dropdown-item button_remove"><i
-                                                        class="bx bx-trash me-1" disabled></i> Delete</a>
+                                                        class="bx bx-trash me-1" disabled></i> Sil</a>
                                                         <?php } ?>
 
                                             </div>

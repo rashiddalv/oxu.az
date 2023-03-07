@@ -81,11 +81,11 @@ class AdminController extends CI_Controller
                                 'a_password' => md5($pass),
                                 'a_status' => 'Unverified user',
                                 'a_token' => $verification_token,
-                                
+
                             ];
                             $this->CoursesModel->register_insert($data);
                             $this->session->set_flashdata('success', 'Hesab uğurla yaradıldı.');
-                            redirect($_SERVER['HTTP_REFERER']);
+                            redirect('login_dashboard');
                         }
 
                         //==========================================================CHECK EMAIL REPEAT (WORK)====================================================
@@ -118,66 +118,70 @@ class AdminController extends CI_Controller
 
 
     // =================ACCOUNT VERIFICATION=================
-    // public function verify_account($token, $id)
-    // {
-    //     $config = array(
-    //         'protocol' => 'smtp',
-    //         // 'mail', 'sendmail', or 'smtp'
-    //         'smtp_host' => 'smtp.gmail.com',
-    //         'smtp_port' => 587,
-    //         'smtp_user' => 'rashiddvalorant@gmail.com',
-    //         'smtp_pass' => 'drbijagzswauwzyi',
-    //         'smtp_crypto' => 'tls',
-    //         'mailtype' => 'html',
-    //         //plaintext 'text' mails or 'html'
-    //         'smtp_timeout' => '4',
-    //         //in seconds
-    //         'charset' => 'iso-8859-1',
-    //         'wordwrap' => TRUE,
-    //         'newline' => "\r\n"
-    //     );
-    //     $this->load->library('email', $config);
-    //     $this->email->initialize($config);
+    public function verify_acc_token($id)
+    {
+        $data = [
+            'a_token' => md5(uniqid()),
+            'a_status' => 'Verified user',
+        ];
+        $this->db->where('a_token', $id);
+        $this->db->update('admin', $data);
+        if ($this->db->affected_rows() == 1) {
+            $this->load->view('admin/account-verified');
+        } else {
+            show_404();
+        }
+    }
+    public function verify_account()
+    {
+        $config = array(
+            'protocol' => 'smtp',
+            // 'mail', 'sendmail', or 'smtp'
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_port' => 587,
+            'smtp_user' => 'rashiddvalorant@gmail.com',
+            'smtp_pass' => 'drbijagzswauwzyi',
+            'smtp_crypto' => 'tls',
+            'mailtype' => 'html',
+            //plaintext 'text' mails or 'html'
+            'smtp_timeout' => '4',
+            //in seconds
+            'charset' => 'iso-8859-1',
+            'wordwrap' => TRUE,
+            'newline' => "\r\n"
+        );
+        $this->load->library('email', $config);
+        $this->email->initialize($config);
 
-    //         $data = $this->db->get_where('admin', ['a_token' => $token])->row();
-    //         $email = $this->db->query("SELECT `a_mail` FROM `admin` WHERE `a_id` = $id");
-            
-
-
-    //         $this->load->library('email', $config);
-    //         $this->email->initialize($config);
-
-    //         $this->email->from('rashiddalv@gmail.com', 'OXU.AZ');
-    //         $this->email->to('$email');
-
-    //         $this->email->subject('Verify Account');
-    //         // $message = $this->load->view('admin/mail', $data, TRUE);
-    //         $this->email->message('Verify your account: ' . base_url('verify_account/token/' . $token));
-
-    //         $this->email->send();
-
-    //         // show_error($this->email->print_debugger());
-
-    //         // if (!$this->email->send()) {
-    //         //     echo '123';
-    //         // }
+        // $data = $this->db->get_where('admin', ['a_token' => $token])->row_array();
+        // show_error($token);
+        $admin = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
 
 
-    //         $this->session->set_flashdata('success', 'Account verification email has been sent.');
-    //         redirect($_SERVER['HTTP_REFERER']);
-        
 
-    // }
-    // public function token($token)
-    // {
-    //     $verify_account = $this->db->get_where('admin', ['a_token' => $token])->row();
 
-    //     if (!$verify_account) {
-    //         show_404();
-    //     } else {
-    //         $this->load->view('admin/reset_password_token_form', ['a_token' => $token]);
-    //     }
-    // }
+
+        $this->load->library('email', $config);
+        $this->email->initialize($config);
+        $this->email->from('rashiddalv@gmail.com', 'OXU.AZ');
+        $this->email->to($admin['a_mail']);
+        $this->email->subject('Account Verification');
+        $message = $this->load->view('admin/verify', $admin, TRUE);
+        $this->email->message($message);
+        $this->email->send();
+
+        // show_error($this->email->print_debugger());
+
+        // if (!$this->email->send()) {
+        //     echo '123';
+        // }
+
+
+        $this->session->set_flashdata('success', 'Account verification email has been sent.');
+        redirect($_SERVER['HTTP_REFERER']);
+
+
+    }
     // =================ACCOUNT VERIFICATION=================
 
 
@@ -194,6 +198,7 @@ class AdminController extends CI_Controller
     }
     public function course_create()
     {
+        $data['get_all_categories'] = $this->CoursesModel->get_all_categories();
         $data['get_all_trainers'] = $this->CoursesModel->get_all_trainers();
         $this->load->view('admin/courses/create', $data);
     }
@@ -280,28 +285,33 @@ class AdminController extends CI_Controller
         // $config['max_height']        = 768;
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
+        $new_name = $_POST['new_name'];
+        $new_mail = $_POST['new_mail'];
 
-        if ($this->upload->do_upload('profile_pic')) {
-            $file_name = $this->upload->data('file_name');
-            $new_name = $_POST['new_name'];
-            $new_mail = $_POST['new_mail'];
-            $data = [
-                'a_img' => $file_name,
-                'a_name' => $new_name,
-                'a_mail' => $new_mail,
-            ];
-            $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
-            $this->session->set_flashdata('success', 'Profile settings saved successfully.');
-            redirect($_SERVER['HTTP_REFERER']);
+        if (!empty($new_name && !empty($new_mail))) {
+            if ($this->upload->do_upload('profile_pic')) {
+                $file_name = $this->upload->data('file_name');
+                $data = [
+                    'a_img' => $file_name,
+                    'a_name' => trim($new_name),
+                    'a_mail' => trim($new_mail),
+                ];
+                $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
+                $this->session->set_flashdata('success', 'Profile settings saved successfully.');
+                redirect($_SERVER['HTTP_REFERER']);
+            } else {
+                $new_name = $_POST['new_name'];
+                $new_mail = $_POST['new_mail'];
+                $data = [
+                    'a_name' => trim($new_name),
+                    'a_mail' => trim($new_mail),
+                ];
+                $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
+                $this->session->set_flashdata('success', 'Profile settings saved successfully.');
+                redirect($_SERVER['HTTP_REFERER']);
+            }
         } else {
-            $new_name = $_POST['new_name'];
-            $new_mail = $_POST['new_mail'];
-            $data = [
-                'a_name' => $new_name,
-                'a_mail' => $new_mail,
-            ];
-            $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
-            $this->session->set_flashdata('success', 'Profile settings saved successfully.');
+            $this->session->set_flashdata('err', 'Bütün sahələri doldurun.');
             redirect($_SERVER['HTTP_REFERER']);
         }
     }
@@ -319,6 +329,12 @@ class AdminController extends CI_Controller
         $this->CoursesModel->delete_course($id);
         $this->session->set_flashdata('success', 'Kurs uğurla silindi.');
         redirect(base_url('dashboard_courses'));
+    }
+    public function delete_trainers_detail($id)
+    {
+        $this->CoursesModel->delete_trainer($id);
+        $this->session->set_flashdata('success', 'Təlimçi uğurla silindi.');
+        redirect(base_url('dashboard_trainers'));
     }
     public function course_edit($id)
     {
@@ -386,6 +402,25 @@ class AdminController extends CI_Controller
             redirect($_SERVER['HTTP_REFERER']);
 
         }
+    }
+    public function course_img_delete($id)
+    {
+        $data = [
+            'c_img' => '',
+            'c_file_ext' => '',
+        ];
+        $this->CoursesModel->update_course($id, $data);
+        $this->session->set_flashdata('success', 'Şəkil uğurla silindi.');
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+    public function account_img_delete($id)
+    {
+        $data = [
+            'a_img' => '',
+        ];
+        $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
+        $this->session->set_flashdata('success', 'Şəkil uğurla silindi.');
+        redirect($_SERVER['HTTP_REFERER']);
     }
     public function dashboard_trainers()
     {
@@ -501,5 +536,14 @@ class AdminController extends CI_Controller
             redirect($_SERVER['HTTP_REFERER']);
 
         }
+    }
+    public function trainer_detail($id)
+    {
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $data['trainer_detail'] = $this->CoursesModel->get_single_trainer($id);
+        // print_r('<pre>');
+        // print_r($data['course_detail']);
+        // die();
+        $this->load->view('admin/trainers/detail', $data);
     }
 }

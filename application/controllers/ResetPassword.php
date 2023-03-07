@@ -69,7 +69,7 @@ class ResetPassword extends CI_Controller
 
                 // if (!$this->email->send()) {
                 //     echo '123';
-                // }
+                // }    
 
 
                 $this->session->set_flashdata('success', 'Parolunuzu sıfırlamaq üçün təlimatlarla bir e-poçt göndərildi.');
@@ -126,6 +126,5 @@ class ResetPassword extends CI_Controller
     public function reset_password_token_form()
     {
         $this->load->view('admin/reset_password_token_form');
-
     }
 }

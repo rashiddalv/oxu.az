@@ -110,6 +110,13 @@
               <div data-i18n="Basic">Təlimçilər</div>
             </a>
           </li>
+          <li class="menu-item">
+            <a href="<?php echo base_url('dashboard_about') ?>" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-info-circle"></i>
+              
+              <div data-i18n="Basic">Haqqımızda</div>
+            </a>
+          </li>
 
         </ul>
       </aside>

@@ -111,6 +111,14 @@ $route['trainer_edit_act/(.*)']                            = 'AdminController/tr
 
 
 
+
+$route['dashboard_about']                                  = 'AdminController/dashboard_about';
+$route['about_edit/(.*)']                                  = 'AdminController/about_edit/$1';
+$route['about_edit_act/(.*)']                              = 'AdminController/about_edit_act/$1';
+$route['about_detail/(.*)']                                = 'AdminController/about_detail/$1';
+
+
+
     
 
 

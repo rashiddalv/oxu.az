@@ -37,11 +37,12 @@ $this->load->view('admin/includes/headerStyle'); ?>
                     <input value="<?php echo base_url('uploads/admin/' . $admin['a_img']) ?>" name="profile_pic"
                       type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
                   </label>
-                  <a href="<?php echo base_url('account_img_delete/'. $admin['a_id']) ?>" type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                  <?php if($admin['a_img']){?>
+                  <a href="<?php echo base_url('account_img_delete/'. $admin['a_id']) ?>" type="button" class="btn btn-danger account-image-reset mb-4">
                   <i class="bx bx-reset d-block d-sm-none"></i>
-                  <span class="d-none d-sm-block">Şəkli sil</span>
-                </a>
-
+                  <span class="d-none d-sm-block">Şəkli sil</span></a>
+                  <?php } else{ ?>
+                  <?php }?>
                   <p class="text-muted mb-0">İcazə verilir JPG, GIF və ya PNG. Maksimum ölçü 800K</p>
                 </div>
               </div>

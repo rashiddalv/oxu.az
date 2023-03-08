@@ -15,12 +15,10 @@
           <div class="d-flex align-items-end row">
             <div class="col-sm-7">
               <div class="card-body">
-                <h5 class="card-title text-primary">Xoş gəldiniz
+                <h2 class="mb-4">
+                  Xoş gəldiniz
                   <?php echo $admin['a_name']; ?>! 🎉
-                </h5>
-                <p class="mb-4">
-                Bu gün <span class="fw-bold">72%</span> daha çox satış etdiniz.
-                </p>
+                </h2>
               </div>
             </div>
             <div class="col-sm-5 text-center text-sm-left">
@@ -34,8 +32,44 @@
         </div>
       </div>
 
+      <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+        <div class="card">
+
+          <div class="card-body">
+            <h5 class="card-title">Kurslar</h5>
+            <p class="card-text">Yeni kurslar yaradın, köhnə kursları redaktə edin və silin.</p>
+            <a href="<?php echo base_url('dashboard_courses'); ?>" class="btn btn-primary">Kurslar</a>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+        <div class="card text-center">
+
+          <div class="card-body">
+            <h5 class="card-title">Təlimçilər</h5>
+            <p class="card-text">Təlimçiləri əlavə edin, redaktə edin və silin.</p>
+            <a href="<?php echo base_url('dashboard_trainers'); ?>" class="btn btn-primary">Təlimçilər</a>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+        <div class="card text-end">
+
+          <div class="card-body">
+            <h5 class="card-title">Haqqımızda</h5>
+            <p class="card-text">Saytdakı "Haqqımızda" hissəsini redaktə edin.</p>
+            <a href="<?php echo base_url('dashboard_about'); ?>" class="btn btn-primary">Haqqımızda</a>
+          </div>
+
+        </div>
+      </div>
+
+
+
       <!-- Total Revenue -->
-  
+
       <!-- Order Statistics -->
       <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
         <div class="card h-100">

@@ -15,7 +15,6 @@ class AdminController extends CI_Controller
     {
         $email = $_POST['email'];
         $pass = $_POST['password'];
-
         if (!empty($email) && !empty($pass)) {
             $data = [
                 'a_mail' => $email,
@@ -115,8 +114,6 @@ class AdminController extends CI_Controller
             redirect($_SERVER['HTTP_REFERER']);
         }
     }
-
-
     // =================ACCOUNT VERIFICATION=================
     public function verify_acc_token($id)
     {
@@ -183,8 +180,6 @@ class AdminController extends CI_Controller
 
     }
     // =================ACCOUNT VERIFICATION=================
-
-
     public function dashboard()
     {
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
@@ -545,5 +540,71 @@ class AdminController extends CI_Controller
         // print_r($data['course_detail']);
         // die();
         $this->load->view('admin/trainers/detail', $data);
+    }
+    public function dashboard_about()
+    {
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $data['get_about'] = $this->CoursesModel->get_about();
+        $this->load->view('admin/about/about', $data);
+    }
+    public function about_edit($id)
+    {
+        $data['get_about'] = $this->CoursesModel->get_single_data_about($id);
+        $this->load->view('admin/about/edit', $data);
+    }
+    public function about_edit_act($id)
+    {
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        if (!empty($title) && !empty($description)) {
+            $config['upload_path'] = './uploads/about/';
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            if (preg_match('~^\p{Lu}~u', $title)) {
+                if ($this->upload->do_upload('about_img')) {
+                    $file_name = $this->upload->data('file_name');
+                    $file_ext = $this->upload->data('file_ext');
+                    $data = [
+                        'b_title' => $title,
+                        'b_description' => $description,
+                        'b_img' => $file_name,
+                        'b_img_ext' => $file_ext,
+                        'b_editor_id' => $_SESSION['admin_login_id'],
+                        'b_edit_date' => date("Y-m-d H:i:s"),
+                    ];
+
+                    $this->CoursesModel->update_about($id, $data);
+                    $this->session->set_flashdata('success', 'Məlumat uğurla yeniləndi.');
+                    redirect(base_url('dashboard_about'));
+
+                } else {
+                    $data = [
+                        'b_title' => $title,
+                        'b_description' => $description,
+                    ];
+                    $this->CoursesModel->update_about($id, $data);
+                    $this->session->set_flashdata('success', 'Məlumat uğurla yeniləndi.');
+                    redirect(base_url('dashboard_about'));
+                }
+            } else {
+                $this->session->set_flashdata('err', 'Başlıq böyük hərflə başlamalıdır.');
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+        } else {
+            $this->session->set_flashdata('err', 'Bütün sahələri doldurun.');
+            redirect($_SERVER['HTTP_REFERER']);
+
+        }
+    }
+    public function about_detail($id)
+    {
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $data['about_detail'] = $this->CoursesModel->get_single_about($id);
+        // print_r('<pre>');
+        // print_r($data['course_detail']);
+        // die();
+        $this->load->view('admin/about/detail', $data);
     }
 }

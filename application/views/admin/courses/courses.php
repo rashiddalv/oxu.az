@@ -92,8 +92,13 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                         <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                                             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
                                                 class="avatar avatar-lg pull-up" title="<?php echo $item['a_name']; ?>">
-                                                <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/'. $item['a_img']) ?>" alt="<?php echo $item['c_trainer']; ?>"
-                                                    class="rounded-circle" />
+                                                <!-- <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/'. $item['a_img']) ?>" alt="<?php echo $item['c_trainer']; ?>"
+                                                    class="rounded-circle" /> -->
+                                                    <?php if($item['a_img']){ ?>
+                                                    <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/'. $item['a_img']) ?>" alt="<?php echo $item['c_trainer']; ?>" class="rounded-circle" />
+                                                    <?php }else{ ?>
+                                                    <img class="rounded-circle" style="object-fit: cover;" src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg" alt="No image">
+                                                    <?php } ?>
                                                 <!-- <p style="display: inline;"><?php echo $item['a_name']; ?></p> -->
                                             </li>
                                         </ul>

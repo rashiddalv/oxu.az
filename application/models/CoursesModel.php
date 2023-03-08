@@ -15,6 +15,10 @@ class CoursesModel extends CI_Model
     {
         return $this->db->where('t_id', $id)->get('trainers')->row_array();
     }
+    public function get_single_data_about($id)
+    {
+        return $this->db->where('b_id', $id)->get('about')->row_array();
+    }
     public function register_insert($data)
     {
         $this->db->insert('admin', $data);
@@ -30,6 +34,17 @@ class CoursesModel extends CI_Model
             ->join('admin', 'admin.a_id = courses.c_creator_id')
             ->join('trainers', 'trainers.t_name = courses.c_trainer')
             ->get('courses')->result_array();
+    }
+    public function get_about()
+    {
+        return $this->db
+        ->get('about')->result_array();
+    }
+    public function get_single_about($id)
+    {
+        return $this->db
+        ->where('b_id', $id)
+        ->get('about')->row_array();
     }
     // public function get_all_trainers()
     // {
@@ -58,6 +73,10 @@ class CoursesModel extends CI_Model
     public function update_trainer($id, $data){
         $this->db->where('t_id', $id)
         ->update('trainers', $data);
+    }   
+    public function update_about($id, $data){
+        $this->db->where('b_id', $id)
+        ->update('about', $data);
     }   
     public function insert_trainer($data)
     {

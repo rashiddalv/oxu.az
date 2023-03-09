@@ -30,7 +30,7 @@ $admin = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->ro
             <div class="avatar avatar-online">
               <?php if ($admin['a_img']) { ?>
                 <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/' . $admin['a_img']) ?>"
-                  alt="user-avatar" class="d-block rounded-circle" height="100" width="100" id="uploadedAvatar" />
+                  alt="" class="d-block rounded-circle" height="100" width="100" id="uploadedAvatar" />
               <?php } else { ?>
                 <img style="object-fit:cover;"
                   src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg"

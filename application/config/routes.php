@@ -111,6 +111,15 @@ $route['trainer_edit_act/(.*)']                            = 'AdminController/tr
 
 
 
+$route['dashboard_contact']                                = 'AdminController/dashboard_contact';
+$route['contact_send_act']                                 = 'AdminController/contact_send_act';
+$route['contact_detail/(.*)']                              = 'AdminController/contact_detail/$1';
+$route['contact_detail_viewed/(.*)']                       = 'AdminController/contact_detail_viewed/$1';
+$route['contact_detail_not_viewed/(.*)']                   = 'AdminController/contact_detail_not_viewed/$1';
+$route['contact_detail_delete/(.*)']                       = 'AdminController/contact_detail_delete/$1';
+
+
+
 
 $route['dashboard_about']                                  = 'AdminController/dashboard_about';
 $route['about_edit/(.*)']                                  = 'AdminController/about_edit/$1';

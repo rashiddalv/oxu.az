@@ -607,4 +607,69 @@ class AdminController extends CI_Controller
         // die();
         $this->load->view('admin/about/detail', $data);
     }
+    public function dashboard_contact()
+    {
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $data['get_all_contact'] = $this->CoursesModel->get_all_contact();
+        $this->load->view('admin/contact/contact', $data);
+    }
+    public function contact_send_act()
+    {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $subject = $_POST['subject'];
+        $message = $_POST['message'];
+
+        if (!empty($name) && !empty($email) && !empty($subject) && !empty($message)) {
+            if (preg_match('~^\p{Lu}~u', $name)) {
+                $data = [
+                    'contact_name' => $name,
+                    'contact_email' => $email,
+                    'contact_subject' => $subject,
+                    'contact_message' => $message,
+                    'contact_status' => 'Müraciət cavablandırılmayıb',
+                    'contact_date' => date("Y-m-d H:i:s"),
+                ];
+                $this->CoursesModel->send_message($data);
+                $this->session->set_flashdata('success', 'Sorğunuz uğurla göndərildi.');
+                redirect($_SERVER['HTTP_REFERER']);
+            } else {
+                $this->session->set_flashdata('err', 'Ad böyük hərflə başlamalıdır.');
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+        } else {
+            $this->session->set_flashdata('err', 'Bütün sahələr doldurulmalıdır.');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+    }
+    public function contact_detail($id){
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $data['contact_detail'] = $this->CoursesModel->get_single_contact($id);
+        // print_r('<pre>');
+        // print_r($data['course_detail']);
+        // die();
+        $this->load->view('admin/contact/detail', $data);
+    }
+    public function contact_detail_viewed($id){
+        $data = [
+            'contact_status' => 'Müraciət cavablandırılıb',
+        ];
+        $this->CoursesModel->contact_detail_viewed($id, $data);
+        $this->session->set_flashdata('success', 'Müraciət cavablandırılıb.');
+        redirect(base_url('dashboard_contact'));
+    }
+    public function contact_detail_not_viewed($id){
+        $data = [
+            'contact_status' => 'Müraciət cavablandırılmayıb',
+        ];
+        $this->CoursesModel->contact_detail_viewed($id, $data);
+        $this->session->set_flashdata('err', 'Müraciət cavablandırılmayıb.');
+        redirect(base_url('dashboard_contact'));
+    }
+    
+    public function contact_detail_delete($id){
+        $this->CoursesModel->contact_detail_delete($id);
+        $this->session->set_flashdata('success', 'Müraciət uğurla silindi.');
+        redirect(base_url('dashboard_contact'));
+    }
 }

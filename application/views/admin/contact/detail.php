@@ -10,6 +10,9 @@ $this->load->view('admin/includes/headerStyle'); ?>
         display: flex;
         justify-content: space-between;
     }
+    .swal2-container {
+    z-index: 6000;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content -->
@@ -20,7 +23,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
         <div class="card">
 
             <h5 class="card-header spaceB">Təfərrüat
-                <a href="<?php echo base_url('dashboard_about') ?>">
+                <a href="<?php echo base_url('dashboard_contact') ?>">
                     <button type="button" class="btn  btn-sm btn-danger">Geri</button>
                 </a>
             </h5>
@@ -29,53 +32,44 @@ $this->load->view('admin/includes/headerStyle'); ?>
 
 
 
-                <label for="title"><b>Başlıq</b></label>
+                <label for="title"><b>Ad, Soyad, Ata adı</b></label>
                 <br>
                 <p>
-                    <?php echo $about_detail['b_title']; ?>
+                    <?php echo $contact_detail['contact_name']; ?>
                 </p>
-                <br>
-
-                <label for="descr"><b>Təsvir</b></label>
+                <label for="descr"><b>E-poçt</b></label>
                 <p>
-                    <?php echo $about_detail['b_description']; ?>
+                    <?php echo $contact_detail['contact_email']; ?>
+                </p>
+                <label for="descr"><b>Başlıq</b></label>
+                <p>
+                    <?php echo $contact_detail['contact_subject']; ?>
+                </p>
+                <label for="descr"><b>Müraciət</b></label>
+                <p>
+                    <?php echo $contact_detail['contact_message']; ?>
+                </p>
+                <label for="descr"><b>Müraciət tarixi</b></label>
+                <p>
+                    <?php $orgDate = $contact_detail['contact_date'];
+                    $newDate = date("d.m.Y, H:i:s", strtotime($orgDate));
+                    echo $newDate;   ?>
+                </p>
+                <label for="descr"><b>Status</b></label>
+                <p>
+                    <?php echo $contact_detail['contact_status']; ?>
                 </p>
 
-
-
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float: left; margin:0px">
-                    <label for="img"><b>Şəkil</b></label>
-                    <br>
-                    <br>
-                    <?php if ($about_detail['b_img']) { ?>
-                        <img data-enlargable width="300px" height="auto" style="object-fit: cover; cursor: pointer;"
-                            src="<?php echo base_url('uploads/about/' . $about_detail['b_img']); ?>" alt="">
-                    <?php } else { ?>
-                        <img width="300px" height="auto" style="object-fit: cover;"
-                            src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg" alt="">
-                    <?php } ?>
-                </div>
 
 
                 <?php if ($admin['a_status'] == "Verified user") { ?>
-                    <a href="<?php echo base_url('about_edit/' . $about_detail['b_id']); ?>"
-                        style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-warning">
-                        <s style="text-decoration:none;" class="tf-icons bx bx-edit"></s>&nbsp; Redaktə et
-                    </a>
+                    <button 
+                        data-url="<?php echo base_url('contact_detail_delete/'.$contact_detail['contact_id']) ?>"
+                        style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-danger button_remove">
+                        <s style="text-decoration:none;" class="tf-icons bx bx-trash"></s>&nbsp; Sil
+                    </button>
                 <?php } else { ?>
                 <?php } ?>
-
-
-
-                <?php if ($about_detail['b_img']) { ?>
-                    <a href="<?php echo base_url('uploads/about/' . $about_detail['b_img']); ?>"
-                        download="<?php echo $about_detail['b_img'] ?>"
-                        style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-primary">
-                        <s style="text-decoration:none;" class="tf-icons bx bx-download"></s>&nbsp; Şəkli yüklə
-                    </a>
-                <?php } ?>
-
-
 
 
                 <script>
@@ -100,36 +94,45 @@ $this->load->view('admin/includes/headerStyle'); ?>
             </div>
 
 
-            <!-- ======================SWEERALERT====================== -->
-            <!-- <script src="<?php echo base_url('assets/admin'); ?>/assets/js/sweet_alert_2.js"></script>
+                 <!-- ======================SWEERALERT====================== -->
+        <script src="<?php echo base_url('assets/admin'); ?>/assets/js/sweet_alert_2.js"></script>
         <script>
-            $(document).ready(function(){
-                $(".button_remove").click(function(e){
-                e.preventDefault(); 
-                $url = $(this).data("url");
+           $(document).ready(function(){
 
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = $url;
-                            Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
-                            )
-                        }
-                    })
-                })
-            })
-        </script> -->
-            <!-- ======================SWEERALERT====================== -->
+$(".button_remove").click(function(){
+    // e.preventDefault();    // href-e getmemesi ucun.
+    $data_url = $(this).data("url");
+    Swal.fire({
+        title: 'Silmək istədiyinizə əminsiniz?',
+        text: "Siləcəyiniz məlumatı bərpa edə bilməyəcəksiniz.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Bəli, sil',
+        cancelButtonText: 'Xeyr, silmə',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = $data_url;
+        }
+    })
+})
+
+
+// Swal.fire({
+//     title: 'Error!',
+//     text: 'Do you want to continue',
+//     icon: 'error',
+//     confirmButtonText: 'Cool'
+// })
+
+
+
+
+
+})
+        </script>
+        <!-- ======================SWEERALERT====================== -->
 
             <!-- ===========================FLASHDATA=========================== -->
             <?php if ($this->session->flashdata('err')) { ?>

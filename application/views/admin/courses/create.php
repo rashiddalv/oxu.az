@@ -77,7 +77,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float: left;">
                             <br>
                             <button type="submit" class="btn btn-success"
-                                style="float: right; margin-bottom: 20px;">Yarad</button>
+                                style="float: right; margin-bottom: 20px;">Yarat</button>
                         </div>
 
 

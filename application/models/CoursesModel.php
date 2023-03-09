@@ -66,10 +66,24 @@ class CoursesModel extends CI_Model
         ->join('admin', 'admin.a_id = trainers.t_creator_id', 'left')
         ->get('trainers')->row_array();
     }
+    public function get_single_contact($id){
+        return $this->db
+        ->where('contact_id', $id)
+        ->get('contact')->row_array();
+    }
     public function update_course($id, $data){
         $this->db->where('c_id', $id)
         ->update('courses', $data);
     }   
+    public function contact_detail_viewed($id, $data){
+        $this->db->where('contact_id', $id)
+        ->update('contact', $data);
+    }   
+    public function contact_detail_not_viewed($id, $data){
+        $this->db->where('contact_id', $id)
+        ->update('contact', $data);
+    }   
+
     public function update_trainer($id, $data){
         $this->db->where('t_id', $id)
         ->update('trainers', $data);
@@ -82,6 +96,17 @@ class CoursesModel extends CI_Model
     {
         $this->db->insert('trainers', $data);
     }
+    public function send_message($data)
+    {
+        $this->db->insert('contact', $data);
+    }
+    public function get_all_contact()
+    {
+        return $this->db
+        ->order_by('contact_id', 'DESC')
+        ->get('contact')->result_array();
+    }
+
     public function get_all_trainers(){
         return $this->db
         ->order_by('t_id', 'DESC')
@@ -94,5 +119,8 @@ class CoursesModel extends CI_Model
     }
     public function delete_trainer($id){
         $this->db->where('t_id', $id)->delete('trainers');
+    }
+    public function contact_detail_delete($id){
+        $this->db->where('contact_id', $id)->delete('contact');
     }
 }

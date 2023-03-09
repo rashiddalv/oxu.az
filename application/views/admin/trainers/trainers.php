@@ -10,6 +10,9 @@ $this->load->view('admin/includes/headerStyle'); ?>
         display: flex;
         justify-content: space-between;
     }
+    .swal2-container {
+    z-index: 6000;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content -->
@@ -87,10 +90,10 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                                 <!-- <a style="color: #FFAB00;" class="dropdown-item" href="<?php echo base_url('trainer_edit/'.$item['t_id']);?>"><i
                                                         class="bx bx-edit-alt me-1"></i> Edit</a> -->
                                                         <?php if($admin['a_status'] == "Verified user"){ ?>
-                                                            <a style="color: #FFAB00;" class="dropdown-item button_remove" href="<?php echo base_url('trainer_edit/'.$item['t_id']);?>"><i
+                                                            <a style="color: #FFAB00;" class="dropdown-item" href="<?php echo base_url('trainer_edit/'.$item['t_id']);?>"><i
                                                         class="bx bx-edit-alt me-1"></i> Redaktə et</a>
                                                         <?php }else{ ?>
-                                                            <a style="color: #8592A3; cursor:not-allowed;" class="dropdown-item button_remove"><i
+                                                            <a style="color: #8592A3; cursor:not-allowed;" class="dropdown-item"><i
                                                         class="bx bx-edit-alt me-1" disabled></i> Redaktə et</a>
                                                         <?php } ?>
 
@@ -100,10 +103,10 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                                 <!-- <a style="color: red;" onclick="return confirm('Are you sure?')" class="dropdown-item button_remove" href="<?php echo base_url('trainer_delete/'.$item['t_id']);?>"><i
                                                         class="bx bx-trash me-1"></i> Delete</a> -->
                                                         <?php if($admin['a_status'] == "Verified user"){ ?>
-                                                            <a style="color: red;" onclick="return confirm('Are you sure?')" class="dropdown-item button_remove" href="<?php echo base_url('trainer_delete/'.$item['t_id']);?>"><i
-                                                        class="bx bx-trash me-1"></i> Sil</a>
+                                                            <button style="color: red;" class="dropdown-item button_remove" data-url="<?php echo base_url('trainer_delete/'.$item['t_id']);?>"><i
+                                                        class="bx bx-trash me-1"></i> Sil</button>
                                                         <?php }else{ ?>
-                                                            <a style="color: #8592A3; cursor:not-allowed;" class="dropdown-item button_remove"><i
+                                                            <a style="color: #8592A3; cursor:not-allowed;" class="dropdown-item "><i
                                                         class="bx bx-trash me-1" disabled></i> Sil</a>
                                                         <?php } ?>
 
@@ -137,36 +140,45 @@ $this->load->view('admin/includes/headerStyle'); ?>
                     </table>
                 </div>
             </div>
-            <!-- ======================SWEERALERT====================== -->
-            <!-- <script src="<?php echo base_url('assets/admin'); ?>/assets/js/sweet_alert_2.js"></script>
+         <!-- ======================SWEERALERT====================== -->
+         <script src="<?php echo base_url('assets/admin'); ?>/assets/js/sweet_alert_2.js"></script>
         <script>
-            $(document).ready(function(){
-                $(".button_remove").click(function(e){
-                e.preventDefault(); 
-                $url = $(this).data("url");
+           $(document).ready(function(){
 
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = $url;
-                            Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
-                            )
-                        }
-                    })
-                })
-            })
-        </script> -->
-            <!-- ======================SWEERALERT====================== -->
+$(".button_remove").click(function(){
+    // e.preventDefault();    // href-e getmemesi ucun.
+    $data_url = $(this).data("url");
+    Swal.fire({
+        title: 'Silmək istədiyinizə əminsiniz?',
+        text: "Siləcəyiniz məlumatı bərpa edə bilməyəcəksiniz.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Bəli, sil',
+        cancelButtonText: 'Xeyr, silmə',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = $data_url;
+        }
+    })
+})
+
+
+// Swal.fire({
+//     title: 'Error!',
+//     text: 'Do you want to continue',
+//     icon: 'error',
+//     confirmButtonText: 'Cool'
+// })
+
+
+
+
+
+})
+        </script>
+        <!-- ======================SWEERALERT====================== -->
 
             <!-- ===========================FLASHDATA=========================== -->
             <?php if ($this->session->flashdata('err')) { ?>

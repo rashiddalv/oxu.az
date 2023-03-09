@@ -19,9 +19,9 @@
         <!-- Basic Bootstrap Table -->
         <div class="card">
 
-            <h5 class="card-header spaceB">Edit Trainer
+            <h5 class="card-header spaceB">Təlimçini redaktə edin
                 <a href="<?php echo base_url('dashboard_trainers') ?>">
-                    <button type="button" class="btn  btn-sm btn-danger">Back</button>
+                    <button type="button" class="btn  btn-sm btn-danger">Geri</button>
                 </a>
             </h5>
 
@@ -29,12 +29,12 @@
                 <div class="card-body">
                     <form action="<?php echo base_url('trainer_edit_act/' . $get_single_data_trainers['t_id']); ?>" method="post"
                         enctype="multipart/form-data">
-                        <label for="title">Trainers name and surname</label>
+                        <label for="title">Ad, Soyad</label>
                         <input type="text" id="title" name="title" class="form-control"
                             value="<?php echo $get_single_data_trainers['t_name']; ?>">
                         <br>
 
-                        <label for="description">BIO</label>
+                        <label for="description">BİO</label>
                         <!-- <div id="textarea-edit"></div>
                         <script>
                             CKEDITOR.config.contentsCss = 'contents_b.css'; 
@@ -52,7 +52,7 @@
 
 
                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="float: left; margin:0px">
-                            <label for="img">Image</label>
+                            <label for="img">Şəkil</label>
                             <br>
                             <?php if ($get_single_data_trainers['t_img']) { ?>
                                 <img class="rounded" data-enlargable width="auto" height="300px"
@@ -75,7 +75,7 @@
                             <br>
                             <button type="submit" class="btn btn-success" style="float: right; margin-bottom: 20px;"><s
                                     style="text-decoration: none; color: white;" class="tf-icons bx bx-edit"></s>&nbsp;
-                                Save</button>
+                                Yadda saxla</button>
                         </div>
 
 

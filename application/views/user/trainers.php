@@ -6,8 +6,7 @@
   <!-- ======= Breadcrumbs ======= -->
   <div class="breadcrumbs">
     <div class="container">
-      <h2>Trainers</h2>
-      <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+      <h2 style="font-size: 50px; font-weight: 900;">Müəllimlərimiz</h2>
     </div>
   </div><!-- End Breadcrumbs -->
 
@@ -16,62 +15,33 @@
     <div class="container" data-aos="fade-up">
 
       <div class="row" data-aos="zoom-in" data-aos-delay="100">
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="member">
-            <img src="<?php echo base_url('assets/user/'); ?>assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
-            <div class="member-content">
-              <h4>Walter White</h4>
-              <span>Web Development</span>
-              <p>
-                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
-              </p>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="member">
-            <img src="<?php echo base_url('assets/user/'); ?>assets/img/trainers/trainer-2.jpg" class="img-fluid" alt="">
-            <div class="member-content">
-              <h4>Sarah Jhinson</h4>
-              <span>Marketing</span>
-              <p>
-                Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
-              </p>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php foreach ($get_all_trainers as $item) { ?>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <!-- <img src="<?php echo base_url('uploads/trainers/' . $item['t_img']) ?>" class="img-fluid" alt=""> -->
 
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="member">
-            <img src="<?php echo base_url('assets/user/'); ?>assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
-            <div class="member-content">
-              <h4>William Anderson</h4>
-              <span>Content</span>
-              <p>
-                Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum toro des clara
-              </p>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
+              <?php if ($item['t_img']) { ?>
+                <img style="object-fit: cover;" height="290px" width="416px"
+                  src="<?php echo base_url('uploads/trainers/' . $item['t_img']) ?>" class="img-fluid" alt="...">
+              <?php } else { ?>
+                <img height="290px" width="416px" style="object-fit: cover;"
+                  src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg" class="img-fluid" alt="...">
+              <?php } ?>
+
+              <div class="member-content">
+                <h4><?php echo $item['t_name']; ?></h4>
+                <span>Müəllim</span>
+                <p>
+                <?php
+                  $description = mb_strimwidth($item['t_about'], 0, 100, "...");
+                  echo $description; ?>
+                </p>
               </div>
             </div>
           </div>
-        </div>
+        <?php } ?>
+
 
       </div>
 

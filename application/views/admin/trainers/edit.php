@@ -6,7 +6,9 @@
         display: flex;
         justify-content: space-between;
     }
-
+    .swal2-container {
+    z-index: 6000;
+    }
     .ck-editor__editable_inline {
         min-height: 200px;
     }
@@ -55,11 +57,11 @@
                             <label for="img">Şəkil</label>
                             <br>
                             <?php if ($get_single_data_trainers['t_img']) { ?>
-                                <img class="rounded" data-enlargable width="auto" height="300px"
+                                <img width="250px" height="250px" class="rounded" data-enlargable width="auto" height="300px"
                                     style="object-fit: cover; margin-bottom: 20px;"
                                     src="<?php echo base_url('uploads/trainers/' . $get_single_data_trainers['t_img']); ?>" alt="">
                             <?php } else { ?>
-                                <img width="120px" height="70px" style="object-fit: cover; margin-bottom: 20px;"
+                                <img width="120px" height="120px" style="object-fit: cover; margin-bottom: 20px;"
                                     src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg" alt="">
                             <?php } ?>
                         </div>
@@ -76,6 +78,11 @@
                             <button type="submit" class="btn btn-success" style="float: right; margin-bottom: 20px;"><s
                                     style="text-decoration: none; color: white;" class="tf-icons bx bx-edit"></s>&nbsp;
                                 Yadda saxla</button>
+                                <?php if ($get_single_data_trainers['t_img']) { ?>
+                                    <button data-url="<?php echo base_url('trainer_img_delete/'. $get_single_data_trainers['t_id']); ?>" type="submit" class="btn btn-danger button_remove" style="color: white;float: right; margin-bottom: 20px; margin-right: 10px"><s
+                                    style="text-decoration: none; color: white;" class="tf-icons bx bx-trash"></s>&nbsp;
+                                    Şəkli sil</button>
+                                <?php } ?>
                         </div>
 
 
@@ -83,6 +90,45 @@
                 </div>
             </div>
         </div>
+         <!-- ======================SWEERALERT====================== -->
+         <script src="<?php echo base_url('assets/admin'); ?>/assets/js/sweet_alert_2.js"></script>
+        <script>
+           $(document).ready(function(){
+
+$(".button_remove").click(function(e){
+    e.preventDefault();    // href-e getmemesi ucun.
+    $data_url = $(this).data("url");
+    Swal.fire({
+        title: 'Silmək istədiyinizə əminsiniz?',
+        text: "Siləcəyiniz məlumatı bərpa edə bilməyəcəksiniz.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Bəli, sil',
+        cancelButtonText: 'Xeyr, silmə',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = $data_url;
+        }
+    })
+})
+
+
+// Swal.fire({
+//     title: 'Error!',
+//     text: 'Do you want to continue',
+//     icon: 'error',
+//     confirmButtonText: 'Cool'
+// })
+
+
+
+
+
+})
+        </script>
+        <!-- ======================SWEERALERT====================== -->
         <!-- ===========================FLASHDATA=========================== -->
         <?php if ($this->session->flashdata('err')) { ?>
             <div class="bs-toast toast toast-placement-ex m-2 fade bg-danger bottom-0 end-0 show" role="alert"

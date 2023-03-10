@@ -59,6 +59,7 @@ $route['about']                                            = 'UserController/abo
 $route['courses']                                          = 'UserController/courses';
 $route['trainers']                                         = 'UserController/trainers';
 $route['contact']                                          = 'UserController/contact';
+$route['course_details/(.*)']                              = 'UserController/course_details/$1';
 
 // ========================USER SIDE========================
 
@@ -108,6 +109,7 @@ $route['trainer_detail/(.*)']                              = 'AdminController/tr
 $route['delete_trainers_detail/(.*)']                      = 'AdminController/delete_trainers_detail/$1';
 $route['trainer_edit/(.*)']                                = 'AdminController/trainer_edit/$1';
 $route['trainer_edit_act/(.*)']                            = 'AdminController/trainer_edit_act/$1';
+$route['trainer_img_delete/(.*)']                          = 'AdminController/trainer_img_delete/$1';
 
 
 

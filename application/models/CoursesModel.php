@@ -81,6 +81,7 @@ class CoursesModel extends CI_Model
     }   
     public function contact_detail_not_viewed($id, $data){
         $this->db->where('contact_id', $id)
+        ->join('admin', 'admin.a_id = contact.contact_viewed_id', 'left')
         ->update('contact', $data);
     }   
 

@@ -6,18 +6,17 @@
   <!-- ======= Breadcrumbs ======= -->
   <div class="breadcrumbs" data-aos="fade-in">
     <div class="container">
-      <h2>Contact Us</h2>
-      <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit
-        quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+      <h2 style="font-size: 50px; font-weight: 900;">Bizimlə əlaqə saxlayın</h2>
     </div>
   </div><!-- End Breadcrumbs -->
 
   <!-- ======= Contact Section ======= -->
   <section id="contact" class="contact">
     <div data-aos="fade-up">
-      <iframe style="border:0; width: 100%; height: 350px;"
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
-        frameborder="0" allowfullscreen></iframe>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d957.2470203764116!2d49.82888864314344!3d40.385143461986594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d9bdc74118b%3A0xc8377414faa8f86b!2sSTIMUL%20Education%20%26%20Consulting!5e0!3m2!1sru!2saz!4v1678382311983!5m2!1sru!2saz"
+        width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <div class="container" data-aos="fade-up">
@@ -28,20 +27,22 @@
           <div class="info">
             <div class="address">
               <i class="bi bi-geo-alt"></i>
-              <h4>Location:</h4>
-              <p>A108 Adam Street, New York, NY 535022</p>
+              <h4>Məkan:</h4>
+              <p>Bakı şəhəri
+                AZ1065, Cəfər Cabbarlı 44
+                Caspian Plaza, korpus 3, mərtəbə 10,</p>
             </div>
 
             <div class="email">
               <i class="bi bi-envelope"></i>
-              <h4>Email:</h4>
-              <p>info@example.com</p>
+              <h4>E-poçt:</h4>
+              <p>office@stimul.az</p>
             </div>
 
             <div class="phone">
               <i class="bi bi-phone"></i>
-              <h4>Call:</h4>
-              <p>+1 5589 55488 55s</p>
+              <h4>Zəng:</h4>
+              <p>+994 (50) 661 01 17</p>
             </div>
 
           </div>
@@ -49,46 +50,45 @@
         </div>
 
         <div class="col-lg-8 mt-5 mt-lg-0">
-        <!-- ===========================FLASHDATA=========================== -->
-        <?php if ($this->session->flashdata('err')) { ?>
+          <!-- ===========================FLASHDATA=========================== -->
+          <?php if ($this->session->flashdata('err')) { ?>
             <div class="bs-toast toast toast-placement-ex m-2 fade bg-danger bottom-0 end-0 show" role="alert"
-                aria-live="assertive" aria-atomic="true" data-delay="2000">
-                <div style="color: white" class="toast-body"><i class="bx bx-bell me-2"></i>
-                    <?php echo $this->session->flashdata('err'); ?>
-                </div>
+              aria-live="assertive" aria-atomic="true" data-delay="2000">
+              <div style="color: white" class="toast-body"><i class="bx bx-bell me-2"></i>
+                <?php echo $this->session->flashdata('err'); ?>
+              </div>
             </div>
-        <?php } ?>
-        <?php if ($this->session->flashdata('success')) { ?>
+          <?php } ?>
+          <?php if ($this->session->flashdata('success')) { ?>
             <div class="bs-toast toast toast-placement-ex m-2 fade bg-success bottom-0 end-0 show" role="alert"
-                aria-live="assertive" aria-atomic="true" data-delay="2000">
-                <div style="color: white" class="toast-body"><i class="bx bx-bell me-2"></i>
-                    <?php echo $this->session->flashdata('success'); ?>
-                </div>
+              aria-live="assertive" aria-atomic="true" data-delay="2000">
+              <div style="color: white" class="toast-body"><i class="bx bx-bell me-2"></i>
+                <?php echo $this->session->flashdata('success'); ?>
+              </div>
             </div>
-        <?php } ?>
-        <!-- ===========================FLASHDATA=========================== -->
-          <form action="<?php echo base_url('contact_send_act'); ?>" method="post" 
-            enctype="multipart/form-data">
+          <?php } ?>
+          <!-- ===========================FLASHDATA=========================== -->
+          <form action="<?php echo base_url('contact_send_act'); ?>" method="post" enctype="multipart/form-data">
             <div class="row">
               <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Full Name" required>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Ad və soyad" required>
               </div>
               <div class="col-md-6 form-group mt-3 mt-md-0">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                <input type="email" class="form-control" name="email" id="email" placeholder="E-poçtunuz" required>
               </div>
             </div>
             <div class="form-group mt-3">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Mövzu" required>
             </div>
             <div class="form-group mt-3">
-              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+              <textarea class="form-control" name="message" rows="5" placeholder="Müraciət" required></textarea>
             </div>
             <div class="my-3">
               <!-- <div class="loading">Loading</div>
               <div class="error-message"></div>
               <div class="sent-message">Your message has been sent. Thank you!</div> -->
             </div>
-            <button class="btn btn-success" type="submit">Send Message</button>
+            <button class="btn btn-success" type="submit">Göndər</button>
           </form>
 
         </div>

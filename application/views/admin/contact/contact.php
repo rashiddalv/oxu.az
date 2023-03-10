@@ -26,7 +26,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
             </h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
-                    <table class="table">
+                    <table id="example" class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -133,6 +133,15 @@ $this->load->view('admin/includes/headerStyle'); ?>
             </table>
         </div>
     </div>
+                <!-- <script>
+                    $(document).ready(function () {
+                     $('#example').DataTable({
+                         order: [[3, 'acs']],
+                     });
+                    });
+                </script>
+  <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script> -->
+            
         <!-- ======================SWEERALERT====================== -->
         <script src="<?php echo base_url('assets/admin'); ?>/assets/js/sweet_alert_2.js"></script>
         <script>

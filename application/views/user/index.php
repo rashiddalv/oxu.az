@@ -1,15 +1,20 @@
 <?php $this->load->view('user/includes/headerStyle'); ?>
 <?php $this->load->view('user/includes/header'); ?>
 
-
+<style>
+  .img-fluid {
+    max-width: 100%;
+    height: 290px;
+  }
+</style>
 
 
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex justify-content-center align-items-center">
   <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
-    <h1>Learning Today,<br>Leading Tomorrow</h1>
-    <h2>We are team of talented designers making websites with Bootstrap</h2>
-    <a href="courses.html" class="btn-get-started">Get Started</a>
+    <h1> «<span style="color: #8789FF;">Technest</span>» Təqaüd <br> proqramına start verildi</h1>
+    <h2>Son qeydiyyat tarixi: 10.02.23</h2> <br>
+    <a href="https://technest.idda.az/" target="_blank" class="btn-get-started">Ətraflı</a>
   </div>
 </section><!-- End Hero -->
 
@@ -20,60 +25,28 @@
     <div class="container" data-aos="fade-up">
 
       <div class="row">
-        <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-          <img src="<?php echo base_url('assets/user/'); ?><?php echo base_url(''); ?>assets/img/about.jpg" class="img-fluid" alt="">
-        </div>
         <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-          <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+          <h3 style="font-size: 46px">Platforma haqqında.</h3>
           <p class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
+            Oxu.az-ın missiyası hazırda hər kəsin aktual və axtarılan mütəxəssis olmasını təmin etməkdir. Yaşından və
+            coğrafiyasından asılı olmayaraq. Peşəkar və şəxsi inkişaf üçün geniş kurslar təklif edirik.
+            Məşhur sahələrdə 64 kurs. Sizin üçün uyğun olanı tapın.
           </p>
           <ul>
-            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-            <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+            <li><i class="bi bi-check-circle"></i> 64 kurs.</li>
+            <li><i class="bi bi-check-circle"></i> 15 təlimçi.</li>
+            <li><i class="bi bi-check-circle"></i> 641 696 istifadəçi.
+            </li>
           </ul>
-          <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-          </p>
 
         </div>
+        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+        <img width="600px" src="https://248006.selcdn.ru/main/iblock/c83/c83c05208e60b854a8a98ea6cf7b81d0/0acef8cc77fbbca00f551f3749b58e86.jpg" alt="">
+        </div>
       </div>
-
     </div>
   </section><!-- End About Section -->
 
-  <!-- ======= Counts Section ======= -->
-  <section id="counts" class="counts section-bg">
-    <div class="container">
-
-      <div class="row counters">
-
-        <div class="col-lg-3 col-6 text-center">
-          <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Students</p>
-        </div>
-
-        <div class="col-lg-3 col-6 text-center">
-          <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Courses</p>
-        </div>
-
-        <div class="col-lg-3 col-6 text-center">
-          <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Events</p>
-        </div>
-
-        <div class="col-lg-3 col-6 text-center">
-          <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Trainers</p>
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Counts Section -->
 
   <!-- ======= Why Us Section ======= -->
   <section id="why-us" class="why-us">
@@ -82,13 +55,16 @@
       <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
           <div class="content">
-            <h3>Why Choose Mentor?</h3>
+            <h3>Niyə Oxu.az təhsil platformasını seçməlisiniz?</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-              Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+              İsrail Azərbaycan Təlim Mərkəzi istiqamətini IT sahəsi üzrə dəyişmək istəyən gənclər və universitet
+              tələbələri üçün ödənişsiz təlimlər həyata keçirir. Tədris Mərkəzində Full Stack, UI/UX, QA, Mobile
+              Development, Data Science, DevOps, CCNA, Big Data və s. istiqamətdə təlimlər tədris olunur. Təlimlər
+              istiqamətlərdən asılı...
             </p>
             <div class="text-center">
-              <a href="about.html" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+              <a href="<?php echo base_url('about') ?>" class="more-btn">Daha ətraflı <i
+                  class="bx bx-chevron-right"></i></a>
             </div>
           </div>
         </div>
@@ -98,22 +74,22 @@
               <div class="col-xl-4 d-flex align-items-stretch">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-receipt"></i>
-                  <h4>Corporis voluptates sit</h4>
-                  <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                  <h4>№1</h4>
+                  <p>Smart Ranking-ə görə təhsilin keyfiyyətinə görə</p>
                 </div>
               </div>
               <div class="col-xl-4 d-flex align-items-stretch">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-cube-alt"></i>
-                  <h4>Ullamco laboris ladore pan</h4>
-                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                  <h4>24/7</h4>
+                  <p>Dünyanın istənilən yerindən istənilən cədvəllə təhsil alın</p>
                 </div>
               </div>
               <div class="col-xl-4 d-flex align-items-stretch">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-images"></i>
-                  <h4>Labore consequatur</h4>
-                  <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                  <h4>93%</h4>
+                  <p>Kurs məzunları deyir ki, Skillbox onlara məqsədlərinə çatmağa kömək edib</p>
                 </div>
               </div>
             </div>
@@ -125,7 +101,7 @@
   </section><!-- End Why Us Section -->
 
   <!-- ======= Features Section ======= -->
-  <section id="features" class="features">
+  <!-- <section id="features" class="features">
     <div class="container" data-aos="fade-up">
 
       <div class="row" data-aos="zoom-in" data-aos-delay="100">
@@ -204,168 +180,69 @@
       </div>
 
     </div>
-  </section><!-- End Features Section -->
+  </section> -->
+  <!-- End Features Section -->
 
   <!-- ======= Popular Courses Section ======= -->
   <section id="popular-courses" class="courses">
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>Courses</h2>
-        <p>Popular Courses</p>
+        <h2>Kurslar</h2>
+        <p>Məşhur Kurslarımız</p>
       </div>
 
       <div class="row" data-aos="zoom-in" data-aos-delay="100">
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="course-item">
-            <img src="<?php echo base_url('assets/user/'); ?>assets/img/course-1.jpg" class="img-fluid" alt="...">
-            <div class="course-content">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4>Web Development</h4>
-                <p class="price">$169</p>
-              </div>
-
-              <h3><a href="course-details.html">Website Design</a></h3>
-              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
-              <div class="trainer d-flex justify-content-between align-items-center">
-                <div class="trainer-profile d-flex align-items-center">
-                  <img src="<?php echo base_url('assets/user/'); ?>assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
-                  <span>Antonio</span>
+        <?php foreach ($get_3_courses as $item) { ?>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="course-item">
+              <?php if ($item['c_img']) { ?>
+                <img style="object-fit: cover;" height="290px" width="416px"
+                  src="<?php echo base_url('uploads/courses/' . $item['c_img']) ?>" class="img-fluid" alt="...">
+              <?php } else { ?>
+                <img height="290px" width="416px" style="object-fit: cover;"
+                  src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" class="img-fluid" alt="...">
+              <?php } ?>
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>
+                    <?php echo $item['c_category']; ?>
+                  </h4>
+                  <p class="price">
+                    <?php echo $item['c_price'] . '$'; ?>
+                  </p>
                 </div>
-                <div class="trainer-rank d-flex align-items-center">
-                  <i class="bx bx-user"></i>&nbsp;50
-                  &nbsp;&nbsp;
-                  <i class="bx bx-heart"></i>&nbsp;65
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> <!-- End Course Item-->
 
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-          <div class="course-item">
-            <img src="<?php echo base_url('assets/user/'); ?>assets/img/course-2.jpg" class="img-fluid" alt="...">
-            <div class="course-content">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4>Marketing</h4>
-                <p class="price">$250</p>
-              </div>
-
-              <h3><a href="course-details.html">Search Engine Optimization</a></h3>
-              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
-              <div class="trainer d-flex justify-content-between align-items-center">
-                <div class="trainer-profile d-flex align-items-center">
-                  <img src="<?php echo base_url('assets/user/'); ?>assets/img/trainers/trainer-2.jpg" class="img-fluid" alt="">
-                  <span>Lana</span>
-                </div>
-                <div class="trainer-rank d-flex align-items-center">
-                  <i class="bx bx-user"></i>&nbsp;35
-                  &nbsp;&nbsp;
-                  <i class="bx bx-heart"></i>&nbsp;42
+                <h3><a href="course-details.html">
+                    <?php echo $item['c_title']; ?>
+                  </a></h3>
+                <p>
+                  <?php
+                  $description = mb_strimwidth($item['c_description'], 0, 100, "...");
+                  echo $description; ?>
+                </p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="<?php echo base_url('uploads/trainers/' . $item['t_img']) ?>" class="" alt="">
+                    <span>
+                      <?php echo $item['c_trainer']; ?>
+                    </span>
+                  </div>
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;50
+                    &nbsp;&nbsp;
+                    <i class="bx bx-heart"></i>&nbsp;65
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div> <!-- End Course Item-->
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-          <div class="course-item">
-            <img src="<?php echo base_url('assets/user/'); ?>assets/img/course-3.jpg" class="img-fluid" alt="...">
-            <div class="course-content">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4>Content</h4>
-                <p class="price">$180</p>
-              </div>
-
-              <h3><a href="course-details.html">Copywriting</a></h3>
-              <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
-              <div class="trainer d-flex justify-content-between align-items-center">
-                <div class="trainer-profile d-flex align-items-center">
-                  <img src="<?php echo base_url('assets/user/'); ?>assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
-                  <span>Brandon</span>
-                </div>
-                <div class="trainer-rank d-flex align-items-center">
-                  <i class="bx bx-user"></i>&nbsp;20
-                  &nbsp;&nbsp;
-                  <i class="bx bx-heart"></i>&nbsp;85
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> <!-- End Course Item-->
-
+          </div> <!-- End Course Item-->
+        <?php } ?>
       </div>
 
     </div>
   </section><!-- End Popular Courses Section -->
 
-  <!-- ======= Trainers Section ======= -->
-  <section id="trainers" class="trainers">
-    <div class="container" data-aos="fade-up">
-
-      <div class="row" data-aos="zoom-in" data-aos-delay="100">
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="member">
-            <img src="<?php echo base_url('assets/user/'); ?>assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
-            <div class="member-content">
-              <h4>Walter White</h4>
-              <span>Web Development</span>
-              <p>
-                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
-              </p>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="member">
-            <img src="<?php echo base_url('assets/user/'); ?>assets/img/trainers/trainer-2.jpg" class="img-fluid" alt="">
-            <div class="member-content">
-              <h4>Sarah Jhinson</h4>
-              <span>Marketing</span>
-              <p>
-                Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
-              </p>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="member">
-            <img src="<?php echo base_url('assets/user/'); ?>assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
-            <div class="member-content">
-              <h4>William Anderson</h4>
-              <span>Content</span>
-              <p>
-                Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum toro des clara
-              </p>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Trainers Section -->
 
 </main><!-- End #main -->
 

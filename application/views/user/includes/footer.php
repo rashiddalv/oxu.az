@@ -1,53 +1,40 @@
 <!-- ======= Footer ======= -->
 <footer id="footer">
 
-<div class="footer-top">
-  <div class="container">
-    <div class="row">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
 
-      <div class="col-lg-3 col-md-6 footer-contact">
-        <h3>Mentor</h3>
-        <p>
-          A108 Adam Street <br>
-          New York, NY 535022<br>
-          United States <br><br>
-          <strong>Phone:</strong> +1 5589 55488 55<br>
-          <strong>Email:</strong> info@example.com<br>
-        </p>
+        <div class="col-lg-4 col-md-6 footer-contact">
+          <h3>oxu.az</h3>
+          <p>
+            Bakı şəhəri AZ1065, Cəfər Cabbarlı 44 Caspian Plaza, korpus 3, mərtəbə 10, <br><br>
+            <strong>Telefon:</strong> +994 (50) 661 01 17<br>
+            <strong>E-poçt:</strong> office@stimul.az<br>
+          </p>
+        </div>
+
+        <div class="col-lg-2 col-md-6 footer-links">
+          <h4>Faydalı Linklər</h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="<?php echo base_url('index'); ?>">Ana səhifə</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="<?php echo base_url('about'); ?>">Haqqımızda</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="<?php echo base_url('courses'); ?>">Kurslar</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="<?php echo base_url('trainers'); ?>">Müəllimlərimiz</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="<?php echo base_url('contact'); ?>">Əlaqə</a></li>
+          </ul>
+        </div>
+
+      
+        <div class="col-lg-6   col-md-6 footer-newsletter">
+          <h4>Bülletenimizə Qoşulun</h4>
+          <form action="" method="post">
+            <input type="email" name="email"><input type="submit" value="Abunə ol">
+          </form>
+        </div>
+
       </div>
-
-      <div class="col-lg-2 col-md-6 footer-links">
-        <h4>Useful Links</h4>
-        <ul>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-        </ul>
-      </div>
-
-      <div class="col-lg-3 col-md-6 footer-links">
-        <h4>Our Services</h4>
-        <ul>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-        </ul>
-      </div>
-
-      <div class="col-lg-4 col-md-6 footer-newsletter">
-        <h4>Join Our Newsletter</h4>
-        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-        <form action="" method="post">
-          <input type="email" name="email"><input type="submit" value="Subscribe">
-        </form>
-      </div>
-
     </div>
   </div>
-</div>
 
 </footer><!-- End Footer -->

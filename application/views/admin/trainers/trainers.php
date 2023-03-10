@@ -145,42 +145,29 @@ $this->load->view('admin/includes/headerStyle'); ?>
         <script>
            $(document).ready(function(){
 
-$(".button_remove").click(function(){
-    // e.preventDefault();    // href-e getmemesi ucun.
-    $data_url = $(this).data("url");
-    Swal.fire({
-        title: 'Silmək istədiyinizə əminsiniz?',
-        text: "Siləcəyiniz məlumatı bərpa edə bilməyəcəksiniz.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Bəli, sil',
-        cancelButtonText: 'Xeyr, silmə',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = $data_url;
-        }
-    })
-})
-
-
-// Swal.fire({
-//     title: 'Error!',
-//     text: 'Do you want to continue',
-//     icon: 'error',
-//     confirmButtonText: 'Cool'
-// })
-
-
-
-
-
-})
+            $(".button_remove").click(function(){
+                // e.preventDefault();    // href-e getmemesi ucun.
+                $data_url = $(this).data("url");
+                Swal.fire({
+                    title: 'Silmək istədiyinizə əminsiniz?',
+                    text: "Siləcəyiniz məlumatı bərpa edə bilməyəcəksiniz.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Bəli, sil',
+                    cancelButtonText: 'Xeyr, silmə',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                        window.location.href = $data_url;
+                        }
+                    })
+                })
+            })
         </script>
         <!-- ======================SWEERALERT====================== -->
 
-            <!-- ===========================FLASHDATA=========================== -->
+        <!-- ===========================FLASHDATA=========================== -->
             <?php if ($this->session->flashdata('err')) { ?>
                 <div class="bs-toast toast toast-placement-ex m-2 fade bg-danger bottom-0 end-0 show" role="alert"
                     aria-live="assertive" aria-atomic="true" data-delay="2000">
@@ -203,6 +190,6 @@ $(".button_remove").click(function(){
                     </div>
                 </div>
             <?php } ?>
-            <!-- ===========================FLASHDATA=========================== -->
+        <!-- ===========================FLASHDATA=========================== -->
 
-            <?php $this->load->view('admin/includes/footerStyle'); ?>
+<?php $this->load->view('admin/includes/footerStyle'); ?>

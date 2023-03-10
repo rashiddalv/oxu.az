@@ -174,7 +174,7 @@ class AdminController extends CI_Controller
         // }
 
 
-        $this->session->set_flashdata('success', 'Account verification email has been sent.');
+        $this->session->set_flashdata('success', 'Hesabınızı təsdiqləmək üçün link e-poçtunuza göndərilib.');
         redirect($_SERVER['HTTP_REFERER']);
 
 
@@ -204,8 +204,9 @@ class AdminController extends CI_Controller
         $category = $_POST['category'];
         $trainer = $_POST['trainer'];
         $price = $_POST['price'];
+        $duration = $_POST['duration'];
 
-        if (!empty($title) && !empty($description) && !empty($trainer) && !empty($category) && !empty($price)) {
+        if (!empty($title) && !empty($description) && !empty($trainer) && !empty($category) && !empty($price) && !empty($duration)) {
             $config['upload_path'] = './uploads/courses/';
             $config['allowed_types'] = 'jpg|png|jpeg';
             $config['encrypt_name'] = TRUE;
@@ -226,6 +227,7 @@ class AdminController extends CI_Controller
                             'c_file_ext' => $file_ext,
                             'c_creator_id' => $_SESSION['admin_login_id'],
                             'c_created_date' => date("Y-m-d H:i:s"),
+                            'c_duration' => $duration,
                         ];
 
                         $this->CoursesModel->insert($data);
@@ -248,6 +250,7 @@ class AdminController extends CI_Controller
                     'c_price' => $price,
                     'c_creator_id' => $_SESSION['admin_login_id'],
                     'c_created_date' => date("Y-m-d H:i:s"),
+                    'c_duration' => $duration,
                 ];
                 $this->CoursesModel->insert($data);
                 $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
@@ -281,28 +284,25 @@ class AdminController extends CI_Controller
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
         $new_name = $_POST['new_name'];
-        $new_mail = $_POST['new_mail'];
 
-        if (!empty($new_name && !empty($new_mail))) {
+        if (!empty($new_name)) {
             if ($this->upload->do_upload('profile_pic')) {
                 $file_name = $this->upload->data('file_name');
                 $data = [
                     'a_img' => $file_name,
                     'a_name' => trim($new_name),
-                    'a_mail' => trim($new_mail),
                 ];
                 $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
-                $this->session->set_flashdata('success', 'Profile settings saved successfully.');
+                $this->session->set_flashdata('success', 'Profil parametrləri uğurla yadda saxlanıldı.');
                 redirect($_SERVER['HTTP_REFERER']);
             } else {
                 $new_name = $_POST['new_name'];
                 $new_mail = $_POST['new_mail'];
                 $data = [
                     'a_name' => trim($new_name),
-                    'a_mail' => trim($new_mail),
                 ];
                 $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
-                $this->session->set_flashdata('success', 'Profile settings saved successfully.');
+                $this->session->set_flashdata('success', 'Profil parametrləri uğurla yadda saxlanıldı.');
                 redirect($_SERVER['HTTP_REFERER']);
             }
         } else {
@@ -344,7 +344,8 @@ class AdminController extends CI_Controller
         $category = $_POST['category'];
         $trainer = $_POST['trainer'];
         $price = $_POST['price'];
-        if (!empty($title) && !empty($description) && !empty($trainer) && !empty($category) && !empty($price)) {
+        $duration = $_POST['duration'];
+        if (!empty($title) && !empty($description) && !empty($trainer) && !empty($category) && !empty($price) && !empty($duration)) {
             $config['upload_path'] = './uploads/courses/';
             $config['allowed_types'] = 'jpg|png|jpeg';
             $config['encrypt_name'] = TRUE;
@@ -365,6 +366,8 @@ class AdminController extends CI_Controller
                             'c_file_ext' => $file_ext,
                             'c_updater_id' => $_SESSION['admin_login_id'],
                             'c_update_date' => date("Y-m-d H:i:s"),
+                            'c_duration' => $duration,
+
                         ];
 
                         $this->CoursesModel->update_course($id, $data);
@@ -387,6 +390,7 @@ class AdminController extends CI_Controller
                     'c_price' => $price,
                     'c_updater_id' => $_SESSION['admin_login_id'],
                     'c_update_date' => date("Y-m-d H:i:s"),
+                    'c_duration' => $duration,
                 ];
                 $this->CoursesModel->update_course($id, $data);
                 $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
@@ -541,6 +545,16 @@ class AdminController extends CI_Controller
         // die();
         $this->load->view('admin/trainers/detail', $data);
     }
+    public function trainer_img_delete($id)
+    {
+        $data = [
+            't_img' => '',
+            't_img_ext' => '',
+        ];
+        $this->CoursesModel->update_trainer($id, $data);
+        $this->session->set_flashdata('success', 'Şəkil uğurla silindi.');
+        redirect($_SERVER['HTTP_REFERER']);
+    }
     public function dashboard_about()
     {
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
@@ -642,7 +656,8 @@ class AdminController extends CI_Controller
             redirect($_SERVER['HTTP_REFERER']);
         }
     }
-    public function contact_detail($id){
+    public function contact_detail($id)
+    {
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $data['contact_detail'] = $this->CoursesModel->get_single_contact($id);
         // print_r('<pre>');
@@ -650,24 +665,31 @@ class AdminController extends CI_Controller
         // die();
         $this->load->view('admin/contact/detail', $data);
     }
-    public function contact_detail_viewed($id){
+    public function contact_detail_viewed($id)
+    {
+        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $data = [
             'contact_status' => 'Müraciət cavablandırılıb',
+            'contact_viewed_date' => date("Y-m-d H:i:s"),
+            'contact_viewer_id' => $_SESSION['admin_login_id'],
         ];
         $this->CoursesModel->contact_detail_viewed($id, $data);
         $this->session->set_flashdata('success', 'Müraciət cavablandırılıb.');
         redirect(base_url('dashboard_contact'));
     }
-    public function contact_detail_not_viewed($id){
+    public function contact_detail_not_viewed($id)
+    {
         $data = [
             'contact_status' => 'Müraciət cavablandırılmayıb',
+            'contact_viewed_date' => '—',
+            'contact_viewer_id' => "",
         ];
-        $this->CoursesModel->contact_detail_viewed($id, $data);
+        $this->CoursesModel->contact_detail_not_viewed($id, $data);
         $this->session->set_flashdata('err', 'Müraciət cavablandırılmayıb.');
         redirect(base_url('dashboard_contact'));
     }
-    
-    public function contact_detail_delete($id){
+    public function contact_detail_delete($id)
+    {
         $this->CoursesModel->contact_detail_delete($id);
         $this->session->set_flashdata('success', 'Müraciət uğurla silindi.');
         redirect(base_url('dashboard_contact'));

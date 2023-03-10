@@ -37,12 +37,13 @@ $this->load->view('admin/includes/headerStyle'); ?>
                     <input value="<?php echo base_url('uploads/admin/' . $admin['a_img']) ?>" name="profile_pic"
                       type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
                   </label>
-                  <?php if($admin['a_img']){?>
-                  <a href="<?php echo base_url('account_img_delete/'. $admin['a_id']) ?>" type="button" class="btn btn-danger account-image-reset mb-4">
-                  <i class="bx bx-reset d-block d-sm-none"></i>
-                  <span class="d-none d-sm-block">Şəkli sil</span></a>
-                  <?php } else{ ?>
-                  <?php }?>
+                  <?php if ($admin['a_img']) { ?>
+                    <a href="<?php echo base_url('account_img_delete/' . $admin['a_id']) ?>" type="button"
+                      class="btn btn-danger account-image-reset mb-4">
+                      <i class="bx bx-reset d-block d-sm-none"></i>
+                      <span class="d-none d-sm-block">Şəkli sil</span></a>
+                  <?php } else { ?>
+                  <?php } ?>
                   <p class="text-muted mb-0">İcazə verilir JPG, GIF və ya PNG. Maksimum ölçü 800K</p>
                 </div>
               </div>
@@ -57,7 +58,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="email" class="form-label">E-poçt</label>
-                  <input class="form-control" type="text" id="email" name="new_mail"
+                  <input disabled class="form-control" type="text" id="email" name="new_mail"
                     placeholder="<?php echo $admin['a_mail']; ?>" value="<?php echo $admin['a_mail'] ?>" />
 
                 </div>
@@ -65,17 +66,16 @@ $this->load->view('admin/includes/headerStyle'); ?>
                   <button type="submit" class="btn btn-primary me-2">Yadda saxla</button>
                 </div>
                 <div class="mt-2">
-
                   <?php if ($admin['a_status'] == "Verified user") { ?>
-                    <button disabled class="btn btn-success" ><s
-                        style="text-decoration: none; color: white;"
+                    <button disabled class="btn btn-success"><s style="text-decoration: none; color: white;"
                         class="tf-icons bx bx-check-double"></s>&nbsp;Verified</button>
                   <?php } else { ?>
                     <a href="<?php echo base_url('verify_account/'); ?>" type="submit"
                       class="btn btn-warning me-2">Verify</a>
                   <?php } ?>
-
                 </div>
+              </div>
+            </div>
           </form>
         </div>
         <!-- /Account -->

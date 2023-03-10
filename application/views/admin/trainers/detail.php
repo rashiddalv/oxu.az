@@ -29,12 +29,12 @@ $this->load->view('admin/includes/headerStyle'); ?>
 
 
 
-                <label for="title"><b>v</b></label>
+                <label for="title"><b>Ad, Soyad</b></label>
                 <br>
-                <h5>
+                <p>
                     <?php echo $trainer_detail['t_name']; ?>
-                </h5>
-                <br>
+                </p>
+                
 
                 <label for="descr"><b>BİO</b></label>
                 <p>

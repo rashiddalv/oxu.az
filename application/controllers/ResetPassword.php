@@ -97,9 +97,8 @@ class ResetPassword extends CI_Controller
         $this->form_validation->set_rules('password_confirm', 'Confirm Password', 'required|matches[password]');
 
         if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('err', 'Your password has been updated.');
-            $this->load->view('admin/reset_password_token_form', ['token' => $this->input->post('token')]);
-
+            $this->session->set_flashdata('err', 'Parollar eyni olmalıdır.');
+            redirect($_SERVER['HTTP_REFERER']);
         } else {
             $password_reset = $this->db->get_where('reset-pass', ['token' => $this->input->post('token')])->row();
 

@@ -98,6 +98,10 @@
                                 <span class="input-group-text">.00</span>
                             </div>
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
+                            <label for="duration">Kursun müddəti</label>
+                            <input type="text" id="duration" name="duration" class="form-control" placeholder="5 Ay/1 Saat" value="<?php echo $get_single_data['c_duration']; ?>">
+                        </div>
 
                         <br>
                         <br>

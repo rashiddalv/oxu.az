@@ -1,14 +1,107 @@
 <?php $this->load->view('user/includes/headerStyle'); ?>
 <?php $this->load->view('user/includes/header'); ?>
+<style>
+  .page__title-overlay::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 3, 32, 0.6);
+  }
 
+  .page__title-overlay {
+    position: relative;
+  }
+
+  .page__title-height {
+    min-height: 450px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .align-items-center {
+    align-items: center !important;
+  }
+
+  .d-flex {
+    display: flex !important;
+  }
+
+  .page__title-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  .mt-110 {
+    margin-top: 110px;
+  }
+
+  .page__title {
+    font-size: 70px;
+    color: #ffffff;
+    line-height: 62px;
+    margin-bottom: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0;
+    margin-bottom: 1rem;
+    list-style: none;
+  }
+
+  .page__title-wrapper .breadcrumb {
+    margin-bottom: 0;
+  }
+
+  .page__title-wrapper .breadcrumb .breadcrumb-item a {
+    font-size: 15px;
+    font-weight: 400;
+    color: #ffffff;
+  }
+
+  @media screen and (max-width: 414px) {
+    .page__title {
+      font-size: 53px;
+    }
+  }
+</style>
 <main id="main">
 
+
+
+  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
+    data-background="https://img1.teletype.in/files/45/78/4578beaa-4779-425d-871c-85db435de3b9.jpeg"
+    style="background-image: url(https://img1.teletype.in/files/45/78/4578beaa-4779-425d-871c-85db435de3b9.jpeg)">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-12">
+          <div class="page__title-wrapper mt-110">
+            <h3 class="page__title">Bizimlə əlaqə saxlayın</h3>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo base_url('index') ?>">Ana səhifə</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Əlaqə</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <!-- ======= Breadcrumbs ======= -->
-  <div class="breadcrumbs" data-aos="fade-in">
+  <!-- <div class="breadcrumbs" data-aos="fade-in">
     <div class="container">
       <h2 style="font-size: 50px; font-weight: 900;">Bizimlə əlaqə saxlayın</h2>
     </div>
-  </div><!-- End Breadcrumbs -->
+  </div> -->
+  <!-- End Breadcrumbs -->
 
   <!-- ======= Contact Section ======= -->
   <section id="contact" class="contact">

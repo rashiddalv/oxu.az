@@ -23,6 +23,7 @@ class AdminController extends CI_Controller
             // print_r('<pre>');
             // print_r($data);
             // die();
+            $data = $this->security->xss_clean($data);
             $check_admin = $this->db->where($data)->get('admin')->row_array();
             if ($check_admin) {
                 $_SESSION['admin_login_id'] = $check_admin['a_id'];
@@ -82,6 +83,7 @@ class AdminController extends CI_Controller
                                 'a_token' => $verification_token,
 
                             ];
+                            $data = $this->security->xss_clean($data);
                             $this->CoursesModel->register_insert($data);
                             $this->session->set_flashdata('success', 'Hesab uğurla yaradıldı.');
                             redirect('login_dashboard');
@@ -117,10 +119,15 @@ class AdminController extends CI_Controller
     // =================ACCOUNT VERIFICATION=================
     public function verify_acc_token($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $data = [
             'a_token' => md5(uniqid()),
             'a_status' => 'Verified user',
         ];
+        $data = $this->security->xss_clean($data);
         $this->db->where('a_token', $id);
         $this->db->update('admin', $data);
         if ($this->db->affected_rows() == 1) {
@@ -182,7 +189,7 @@ class AdminController extends CI_Controller
     // =================ACCOUNT VERIFICATION=================
     public function dashboard()
     {
-        $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+        $data['admin'] = $this->CoursesModel->dashboard();
         $this->load->view('admin/dashboard', $data);
     }
     public function dashboard_courses()
@@ -229,7 +236,7 @@ class AdminController extends CI_Controller
                             'c_created_date' => date("Y-m-d H:i:s"),
                             'c_duration' => $duration,
                         ];
-
+                        $data = $this->security->xss_clean($data);
                         $this->CoursesModel->insert($data);
                         $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
                         redirect(base_url('dashboard_courses'));
@@ -252,6 +259,7 @@ class AdminController extends CI_Controller
                     'c_created_date' => date("Y-m-d H:i:s"),
                     'c_duration' => $duration,
                 ];
+                $data = $this->security->xss_clean($data);
                 $this->CoursesModel->insert($data);
                 $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
                 redirect(base_url('dashboard_courses'));
@@ -292,6 +300,7 @@ class AdminController extends CI_Controller
                     'a_img' => $file_name,
                     'a_name' => trim($new_name),
                 ];
+                $data = $this->security->xss_clean($data);
                 $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
                 $this->session->set_flashdata('success', 'Profil parametrləri uğurla yadda saxlanıldı.');
                 redirect($_SERVER['HTTP_REFERER']);
@@ -301,6 +310,7 @@ class AdminController extends CI_Controller
                 $data = [
                     'a_name' => trim($new_name),
                 ];
+                $data = $this->security->xss_clean($data);
                 $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
                 $this->session->set_flashdata('success', 'Profil parametrləri uğurla yadda saxlanıldı.');
                 redirect($_SERVER['HTTP_REFERER']);
@@ -312,30 +322,57 @@ class AdminController extends CI_Controller
     }
     public function course_detail($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $data['course_detail'] = $this->CoursesModel->get_single_course($id);
         // print_r('<pre>');
         // print_r($data['course_detail']);
         // die();
-        $this->load->view('admin/courses/detail', $data);
+        // $this->load->view('admin/courses/detail', $data);
+        if ($data['course_detail']) {
+            $this->load->view('admin/courses/detail', $data);
+        } else {
+            redirect(base_url('dashboard'));
+        }
     }
     public function delete_course_detail($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $this->CoursesModel->delete_course($id);
         $this->session->set_flashdata('success', 'Kurs uğurla silindi.');
         redirect(base_url('dashboard_courses'));
     }
     public function delete_trainers_detail($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $this->CoursesModel->delete_trainer($id);
         $this->session->set_flashdata('success', 'Təlimçi uğurla silindi.');
         redirect(base_url('dashboard_trainers'));
     }
     public function course_edit($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $data['get_all_trainers'] = $this->CoursesModel->get_all_trainers();
         $data['get_single_data'] = $this->CoursesModel->get_single_data($id);
-        $this->load->view('admin/courses/edit', $data);
+        // $this->load->view('admin/courses/edit', $data);
+        if ($data['get_single_data']) {
+            $this->load->view('admin/courses/edit', $data);
+        } else {
+            redirect(base_url('dashboard'));
+        }
+
     }
     public function course_edit_act($id)
     {
@@ -369,7 +406,7 @@ class AdminController extends CI_Controller
                             'c_duration' => $duration,
 
                         ];
-
+                        $data = $this->security->xss_clean($data);
                         $this->CoursesModel->update_course($id, $data);
                         $this->session->set_flashdata('success', 'Kurs uğurla yeniləndi.');
                         redirect(base_url('dashboard_courses'));
@@ -392,6 +429,7 @@ class AdminController extends CI_Controller
                     'c_update_date' => date("Y-m-d H:i:s"),
                     'c_duration' => $duration,
                 ];
+                $data = $this->security->xss_clean($data);
                 $this->CoursesModel->update_course($id, $data);
                 $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
                 redirect(base_url('dashboard_courses'));
@@ -408,6 +446,7 @@ class AdminController extends CI_Controller
             'c_img' => '',
             'c_file_ext' => '',
         ];
+        $data = $this->security->xss_clean($data);
         $this->CoursesModel->update_course($id, $data);
         $this->session->set_flashdata('success', 'Şəkil uğurla silindi.');
         redirect($_SERVER['HTTP_REFERER']);
@@ -417,6 +456,7 @@ class AdminController extends CI_Controller
         $data = [
             'a_img' => '',
         ];
+        $data = $this->security->xss_clean($data);
         $this->db->where('a_id', $_SESSION['admin_login_id'])->update('admin', $data);
         $this->session->set_flashdata('success', 'Şəkil uğurla silindi.');
         redirect($_SERVER['HTTP_REFERER']);
@@ -454,7 +494,7 @@ class AdminController extends CI_Controller
                         't_creator_id' => $_SESSION['admin_login_id'],
                         't_created_date' => date("Y-m-d H:i:s"),
                     ];
-
+                    $data = $this->security->xss_clean($data);
                     $this->CoursesModel->insert_trainer($data);
                     $this->session->set_flashdata('success', 'Müəllim uğurla əlavə edildi.');
                     redirect(base_url('dashboard_trainers'));
@@ -465,7 +505,7 @@ class AdminController extends CI_Controller
                         't_creator_id' => $_SESSION['admin_login_id'],
                         't_created_date' => date("Y-m-d H:i:s"),
                     ];
-
+                    $data = $this->security->xss_clean($data);
                     $this->CoursesModel->insert_trainer($data);
                     $this->session->set_flashdata('success', 'Müəllim uğurla əlavə edildi.');
                     redirect(base_url('dashboard_trainers'));
@@ -489,8 +529,17 @@ class AdminController extends CI_Controller
     }
     public function trainer_edit($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $data['get_single_data_trainers'] = $this->CoursesModel->get_single_data_trainers($id);
-        $this->load->view('admin/trainers/edit', $data);
+        // $this->load->view('admin/trainers/edit', $data);
+        if ($data['get_single_data_trainers']) {
+            $this->load->view('admin/trainers/edit', $data);
+        } else {
+            redirect(base_url('dashboard'));
+        }
     }
     public function trainer_edit_act($id)
     {
@@ -512,7 +561,7 @@ class AdminController extends CI_Controller
                         't_img' => $file_name,
                         't_img_ext' => $file_ext,
                     ];
-
+                    $data = $this->security->xss_clean($data);
                     $this->CoursesModel->update_trainer($id, $data);
                     $this->session->set_flashdata('success', 'Təlimçi uğurla yeniləndi.');
                     redirect(base_url('dashboard_trainers'));
@@ -522,6 +571,7 @@ class AdminController extends CI_Controller
                         't_name' => $title,
                         't_about' => $description,
                     ];
+                    $data = $this->security->xss_clean($data);
                     $this->CoursesModel->update_trainer($id, $data);
                     $this->session->set_flashdata('success', 'Təlimçi uğurla yeniləndi.');
                     redirect(base_url('dashboard_trainers'));
@@ -538,12 +588,21 @@ class AdminController extends CI_Controller
     }
     public function trainer_detail($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $data['trainer_detail'] = $this->CoursesModel->get_single_trainer($id);
         // print_r('<pre>');
         // print_r($data['course_detail']);
         // die();
-        $this->load->view('admin/trainers/detail', $data);
+        // $this->load->view('admin/trainers/detail', $data);
+        if ($data['trainer_detail']) {
+            $this->load->view('admin/trainers/detail', $data);
+        } else {
+            redirect(base_url('dashboard'));
+        }
     }
     public function trainer_img_delete($id)
     {
@@ -551,6 +610,7 @@ class AdminController extends CI_Controller
             't_img' => '',
             't_img_ext' => '',
         ];
+        $data = $this->security->xss_clean($data);
         $this->CoursesModel->update_trainer($id, $data);
         $this->session->set_flashdata('success', 'Şəkil uğurla silindi.');
         redirect($_SERVER['HTTP_REFERER']);
@@ -563,8 +623,17 @@ class AdminController extends CI_Controller
     }
     public function about_edit($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $data['get_about'] = $this->CoursesModel->get_single_data_about($id);
-        $this->load->view('admin/about/edit', $data);
+        // $this->load->view('admin/about/edit', $data);
+        if ($data['get_about']) {
+            $this->load->view('admin/about/edit', $data);
+        } else {
+            redirect(base_url('dashboard'));
+        }
     }
     public function about_edit_act($id)
     {
@@ -588,7 +657,7 @@ class AdminController extends CI_Controller
                         'b_editor_id' => $_SESSION['admin_login_id'],
                         'b_edit_date' => date("Y-m-d H:i:s"),
                     ];
-
+                    $data = $this->security->xss_clean($data);
                     $this->CoursesModel->update_about($id, $data);
                     $this->session->set_flashdata('success', 'Məlumat uğurla yeniləndi.');
                     redirect(base_url('dashboard_about'));
@@ -598,6 +667,7 @@ class AdminController extends CI_Controller
                         'b_title' => $title,
                         'b_description' => $description,
                     ];
+                    $data = $this->security->xss_clean($data);
                     $this->CoursesModel->update_about($id, $data);
                     $this->session->set_flashdata('success', 'Məlumat uğurla yeniləndi.');
                     redirect(base_url('dashboard_about'));
@@ -614,12 +684,21 @@ class AdminController extends CI_Controller
     }
     public function about_detail($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $data['about_detail'] = $this->CoursesModel->get_single_about($id);
         // print_r('<pre>');
         // print_r($data['course_detail']);
         // die();
-        $this->load->view('admin/about/detail', $data);
+        // $this->load->view('admin/about/detail', $data);
+        if ($data['about_detail']) {
+            $this->load->view('admin/about/detail', $data);
+        } else {
+            redirect(base_url('dashboard'));
+        }
     }
     public function dashboard_contact()
     {
@@ -644,6 +723,7 @@ class AdminController extends CI_Controller
                     'contact_status' => 'Müraciət cavablandırılmayıb',
                     'contact_date' => date("Y-m-d H:i:s"),
                 ];
+                $data = $this->security->xss_clean($data);
                 $this->CoursesModel->send_message($data);
                 $this->session->set_flashdata('success', 'Sorğunuz uğurla göndərildi.');
                 redirect($_SERVER['HTTP_REFERER']);
@@ -658,38 +738,61 @@ class AdminController extends CI_Controller
     }
     public function contact_detail($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $data['contact_detail'] = $this->CoursesModel->get_single_contact($id);
         // print_r('<pre>');
         // print_r($data['course_detail']);
         // die();
-        $this->load->view('admin/contact/detail', $data);
+        // $this->load->view('admin/contact/detail', $data);
+        if ($data['contact_detail']) {
+            $this->load->view('admin/contact/detail', $data);
+        } else {
+            redirect(base_url('dashboard'));
+        }
     }
     public function contact_detail_viewed($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $data = [
             'contact_status' => 'Müraciət cavablandırılıb',
             'contact_viewed_date' => date("Y-m-d H:i:s"),
             'contact_viewer_id' => $_SESSION['admin_login_id'],
         ];
+        $data = $this->security->xss_clean($data);
         $this->CoursesModel->contact_detail_viewed($id, $data);
         $this->session->set_flashdata('success', 'Müraciət cavablandırılıb.');
         redirect(base_url('dashboard_contact'));
     }
     public function contact_detail_not_viewed($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $data = [
             'contact_status' => 'Müraciət cavablandırılmayıb',
             'contact_viewed_date' => '—',
             'contact_viewer_id' => "",
         ];
+        $data = $this->security->xss_clean($data);
         $this->CoursesModel->contact_detail_not_viewed($id, $data);
         $this->session->set_flashdata('err', 'Müraciət cavablandırılmayıb.');
         redirect(base_url('dashboard_contact'));
     }
     public function contact_detail_delete($id)
     {
+        $product_id = $this->uri->segment(2);
+        if (!is_numeric($product_id)) {
+            redirect(base_url('dashboard'));
+        }
         $this->CoursesModel->contact_detail_delete($id);
         $this->session->set_flashdata('success', 'Müraciət uğurla silindi.');
         redirect(base_url('dashboard_contact'));

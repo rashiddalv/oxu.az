@@ -6,6 +6,32 @@
     max-width: 100%;
     height: 290px;
   }
+
+  .why-us .content {
+    padding: 30px;
+    background: #696CFF;
+    border-radius: 4px;
+    color: #fff;
+    background: rgb(105, 108, 255);
+    background: linear-gradient(135deg, rgba(105, 108, 255, 1) 0%, rgba(50, 54, 255, 1) 100%);
+  }
+
+  .rounded {
+    border-radius: 20px !important;
+  }
+
+  .rounded-card {
+    border-top-right-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+    transition: all 0.3s ease-out 0s;
+  }
+
+  .rounded-card:hover {
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  }
+
 </style>
 
 
@@ -41,7 +67,9 @@
 
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-        <img width="600px" src="https://248006.selcdn.ru/main/iblock/c83/c83c05208e60b854a8a98ea6cf7b81d0/0acef8cc77fbbca00f551f3749b58e86.jpg" alt="">
+          <img width="100%"
+            src="https://248006.selcdn.ru/main/iblock/c83/c83c05208e60b854a8a98ea6cf7b81d0/0acef8cc77fbbca00f551f3749b58e86.jpg"
+            alt="">
         </div>
       </div>
     </div>
@@ -54,7 +82,7 @@
 
       <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
-          <div class="content">
+          <div class="content rounded">
             <h3>Niyə Oxu.az təhsil platformasını seçməlisiniz?</h3>
             <p>
               İsrail Azərbaycan Təlim Mərkəzi istiqamətini IT sahəsi üzrə dəyişmək istəyən gənclər və universitet
@@ -72,21 +100,21 @@
           <div class="icon-boxes d-flex flex-column justify-content-center">
             <div class="row">
               <div class="col-xl-4 d-flex align-items-stretch">
-                <div class="icon-box mt-4 mt-xl-0">
+                <div class="icon-box mt-4 mt-xl-0 rounded">
                   <i class="bx bx-receipt"></i>
                   <h4>№1</h4>
                   <p>Smart Ranking-ə görə təhsilin keyfiyyətinə görə</p>
                 </div>
               </div>
               <div class="col-xl-4 d-flex align-items-stretch">
-                <div class="icon-box mt-4 mt-xl-0">
+                <div class="icon-box mt-4 mt-xl-0 rounded">
                   <i class="bx bx-cube-alt"></i>
                   <h4>24/7</h4>
                   <p>Dünyanın istənilən yerindən istənilən cədvəllə təhsil alın</p>
                 </div>
               </div>
               <div class="col-xl-4 d-flex align-items-stretch">
-                <div class="icon-box mt-4 mt-xl-0">
+                <div class="icon-box mt-4 mt-xl-0 rounded">
                   <i class="bx bx-images"></i>
                   <h4>93%</h4>
                   <p>Kurs məzunları deyir ki, Skillbox onlara məqsədlərinə çatmağa kömək edib</p>
@@ -195,26 +223,31 @@
       <div class="row" data-aos="zoom-in" data-aos-delay="100">
         <?php foreach ($get_3_courses as $item) { ?>
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="course-item">
+            <div class="course-item rounded-card">
               <?php if ($item['c_img']) { ?>
-                <img style="object-fit: cover;" height="290px" width="416px"
-                  src="<?php echo base_url('uploads/courses/' . $item['c_img']) ?>" class="img-fluid" alt="...">
+                <a href="<?php echo base_url('course_details/' . $item['c_id']) ?>">
+                  <img class="rounded" style="object-fit: cover;" height="290px" width="416px"
+                    src="<?php echo base_url('uploads/courses/' . $item['c_img']) ?>" class="img-fluid" alt="..."></a>
               <?php } else { ?>
-                <img height="290px" width="416px" style="object-fit: cover;"
-                  src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" class="img-fluid" alt="...">
+                <a href="<?php echo base_url('course_details/' . $item['c_id']) ?>">
+                  <img class="rounded" height="290px" width="416px" style="object-fit: cover;"
+                    src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" class="img-fluid"
+                    alt="..."></a>
               <?php } ?>
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h4>
                     <?php echo $item['c_category']; ?>
                   </h4>
-                  <p class="price">
-                    <?php echo $item['c_price'] . '$'; ?>
-                  </p>
+                  <span>
+                    <?php echo $item['c_duration']; ?>
+                  </span>
                 </div>
 
-                <h3><a href="course-details.html">
-                    <?php echo $item['c_title']; ?>
+                <h3><a href="<?php echo base_url('course_details/' . $item['c_id']) ?>">
+                <?php
+                  $title = mb_strimwidth($item['c_title'], 0, 35, "...");
+                  echo $title; ?>
                   </a></h3>
                 <p>
                   <?php
@@ -229,9 +262,9 @@
                     </span>
                   </div>
                   <div class="trainer-rank d-flex align-items-center">
-                    <i class="bx bx-user"></i>&nbsp;50
-                    &nbsp;&nbsp;
-                    <i class="bx bx-heart"></i>&nbsp;65
+                    <p style="font-size: 24px" class="price">
+                      <?php echo '$' . $item['c_price']; ?>
+                    </p>
                   </div>
                 </div>
               </div>

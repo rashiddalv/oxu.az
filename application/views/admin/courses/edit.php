@@ -6,9 +6,11 @@
         display: flex;
         justify-content: space-between;
     }
+
     .swal2-container {
-    z-index: 6000;
+        z-index: 6000;
     }
+
     .ck-editor__editable_inline {
         min-height: 200px;
     }
@@ -57,21 +59,10 @@
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
                             <label for="category">Kateqoriya</label>
                             <select name="category" id="category" class="form-control">
-                                <option <?php if ($get_single_data['c_category'] = "") {
-                                    echo "SELECTED";
-                                } ?> value="">
-                                    -SELECT-</option>
-                                <option <?php if ($get_single_data['c_category'] = "Programming") {
-                                    echo "SELECTED";
-                                } ?>
-                                    value="Programming">Programming</option>
-                                <option <?php if ($get_single_data['c_category'] = "Languages") {
-                                    echo "SELECTED";
-                                } ?>
-                                    value="Languages">Languages</option>
-                                <option <?php if ($get_single_data['c_category'] = "Office programs") {
-                                    echo "SELECTED";
-                                } ?> value="Office programs">Office programs</option>
+                                <option <?php if ($get_single_data['c_category'] == "") { echo "SELECTED";} ?> value="">-SELECT-</option>
+                                <option <?php if ($get_single_data['c_category'] == "Programming") { echo "SELECTED";} ?> value="Programming">Programming</option>
+                                <option <?php if ($get_single_data['c_category'] == "Languages") { echo "SELECTED";} ?> value="Languages">Languages</option>
+                                <option <?php if ($get_single_data['c_category'] == "Office programs") { echo "SELECTED";} ?> value="Office programs">Office programs</option>
                             </select>
                         </div>
 
@@ -100,7 +91,8 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
                             <label for="duration">Kursun müddəti</label>
-                            <input type="text" id="duration" name="duration" class="form-control" placeholder="5 Ay/1 Saat" value="<?php echo $get_single_data['c_duration']; ?>">
+                            <input type="text" id="duration" name="duration" class="form-control"
+                                placeholder="5 Ay/1 Saat" value="<?php echo $get_single_data['c_duration']; ?>">
                         </div>
 
                         <br>
@@ -131,11 +123,13 @@
                             <button type="submit" class="btn btn-success" style="float: right; margin-bottom: 20px;"><s
                                     style="text-decoration: none; color: white;" class="tf-icons bx bx-edit"></s>&nbsp;
                                 Yadda saxla</button>
-                                <?php if ($get_single_data['c_img']) { ?>
-                            <button data-url="<?php echo base_url('course_img_delete/'. $get_single_data['c_id']); ?>" type="submit" class="btn btn-danger button_remove" style="color: white;float: right; margin-bottom: 20px; margin-right: 10px"><s
-                                    style="text-decoration: none; color: white;" class="tf-icons bx bx-trash"></s>&nbsp;
-                                Şəkli sil</button>
-                                <?php } ?>
+                            <?php if ($get_single_data['c_img']) { ?>
+                                <button data-url="<?php echo base_url('course_img_delete/' . $get_single_data['c_id']); ?>"
+                                    type="submit" class="btn btn-danger button_remove"
+                                    style="color: white;float: right; margin-bottom: 20px; margin-right: 10px"><s
+                                        style="text-decoration: none; color: white;" class="tf-icons bx bx-trash"></s>&nbsp;
+                                    Şəkli sil</button>
+                            <?php } ?>
                         </div>
 
 
@@ -146,40 +140,40 @@
         <!-- ======================SWEERALERT====================== -->
         <script src="<?php echo base_url('assets/admin'); ?>/assets/js/sweet_alert_2.js"></script>
         <script>
-           $(document).ready(function(){
+            $(document).ready(function () {
 
-$(".button_remove").click(function(e){
-    e.preventDefault();    // href-e getmemesi ucun.
-    $data_url = $(this).data("url");
-    Swal.fire({
-        title: 'Silmək istədiyinizə əminsiniz?',
-        text: "Siləcəyiniz məlumatı bərpa edə bilməyəcəksiniz.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Bəli, sil',
-        cancelButtonText: 'Xeyr, silmə',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = $data_url;
-        }
-    })
-})
-
-
-// Swal.fire({
-//     title: 'Error!',
-//     text: 'Do you want to continue',
-//     icon: 'error',
-//     confirmButtonText: 'Cool'
-// })
+                $(".button_remove").click(function (e) {
+                    e.preventDefault();    // href-e getmemesi ucun.
+                    $data_url = $(this).data("url");
+                    Swal.fire({
+                        title: 'Silmək istədiyinizə əminsiniz?',
+                        text: "Siləcəyiniz məlumatı bərpa edə bilməyəcəksiniz.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Bəli, sil',
+                        cancelButtonText: 'Xeyr, silmə',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = $data_url;
+                        }
+                    })
+                })
 
 
+                // Swal.fire({
+                //     title: 'Error!',
+                //     text: 'Do you want to continue',
+                //     icon: 'error',
+                //     confirmButtonText: 'Cool'
+                // })
 
 
 
-})
+
+
+            })
         </script>
         <!-- ======================SWEERALERT====================== -->
         <!-- ===========================FLASHDATA=========================== -->

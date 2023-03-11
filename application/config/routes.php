@@ -60,6 +60,7 @@ $route['courses']                                          = 'UserController/cou
 $route['trainers']                                         = 'UserController/trainers';
 $route['contact']                                          = 'UserController/contact';
 $route['course_details/(.*)']                              = 'UserController/course_details/$1';
+$route['trainer_details/(.*)']                             = 'UserController/trainer_details/$1';
 
 // ========================USER SIDE========================
 

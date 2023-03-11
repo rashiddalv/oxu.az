@@ -38,21 +38,14 @@ class CoursesModel extends CI_Model
     public function get_about()
     {
         return $this->db
-        ->get('about')->result_array();
+            ->get('about')->result_array();
     }
     public function get_single_about($id)
     {
         return $this->db
-        ->where('b_id', $id)
-        ->get('about')->row_array();
+            ->where('b_id', $id)
+            ->get('about')->row_array();
     }
-    // public function get_all_trainers()
-    // {
-    //     return $this->db
-    //         ->order_by('t_id', 'DESC')
-    //         ->join('admin', 'admin.a_id = trainers.t_creator_id')
-    //         ->get('trainers')->result_array();
-    // }
     public function get_single_course($id)
     {
         return $this->db
@@ -60,39 +53,50 @@ class CoursesModel extends CI_Model
             ->join('admin', 'admin.a_id = courses.c_creator_id', 'left')
             ->get('courses')->row_array();
     }
-    public function get_single_trainer($id){
+    public function get_single_trainer($id)
+    {
         return $this->db
-        ->where('t_id', $id)
-        ->join('admin', 'admin.a_id = trainers.t_creator_id', 'left')
-        ->get('trainers')->row_array();
+            ->where('t_id', $id)
+            ->join('admin', 'admin.a_id = trainers.t_creator_id', 'left')
+            ->get('trainers')->row_array();
     }
-    public function get_single_contact($id){
+    public function dashboard()
+    {
+        return $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
+    }
+    public function get_single_contact($id)
+    {
         return $this->db
-        ->where('contact_id', $id)
-        ->get('contact')->row_array();
+            ->where('contact_id', $id)
+            ->get('contact')->row_array();
     }
-    public function update_course($id, $data){
+    public function update_course($id, $data)
+    {
         $this->db->where('c_id', $id)
-        ->update('courses', $data);
-    }   
-    public function contact_detail_viewed($id, $data){
+            ->update('courses', $data);
+    }
+    public function contact_detail_viewed($id, $data)
+    {
         $this->db->where('contact_id', $id)
-        ->update('contact', $data);
-    }   
-    public function contact_detail_not_viewed($id, $data){
+            ->update('contact', $data);
+    }
+    public function contact_detail_not_viewed($id, $data)
+    {
         $this->db->where('contact_id', $id)
-        ->join('admin', 'admin.a_id = contact.contact_viewed_id', 'left')
-        ->update('contact', $data);
-    }   
+            ->join('admin', 'admin.a_id = contact.contact_viewed_id', 'left')
+            ->update('contact', $data);
+    }
 
-    public function update_trainer($id, $data){
+    public function update_trainer($id, $data)
+    {
         $this->db->where('t_id', $id)
-        ->update('trainers', $data);
-    }   
-    public function update_about($id, $data){
+            ->update('trainers', $data);
+    }
+    public function update_about($id, $data)
+    {
         $this->db->where('b_id', $id)
-        ->update('about', $data);
-    }   
+            ->update('about', $data);
+    }
     public function insert_trainer($data)
     {
         $this->db->insert('trainers', $data);
@@ -104,24 +108,28 @@ class CoursesModel extends CI_Model
     public function get_all_contact()
     {
         return $this->db
-        ->order_by('contact_id', 'DESC')
-        ->get('contact')->result_array();
+            ->order_by('contact_id', 'DESC')
+            ->get('contact')->result_array();
     }
 
-    public function get_all_trainers(){
+    public function get_all_trainers()
+    {
         return $this->db
-        ->order_by('t_id', 'DESC')
-        ->get('trainers')->result_array();
+            ->order_by('t_id', 'DESC')
+            ->get('trainers')->result_array();
     }
-    public function get_all_categories(){
+    public function get_all_categories()
+    {
         return $this->db
-        ->order_by('category_id', 'DESC')
-        ->get('category')->result_array();
+            ->order_by('category_id', 'DESC')
+            ->get('category')->result_array();
     }
-    public function delete_trainer($id){
+    public function delete_trainer($id)
+    {
         $this->db->where('t_id', $id)->delete('trainers');
     }
-    public function contact_detail_delete($id){
+    public function contact_detail_delete($id)
+    {
         $this->db->where('contact_id', $id)->delete('contact');
     }
 }

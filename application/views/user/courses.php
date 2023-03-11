@@ -58,26 +58,131 @@
     max-width: 100%;
     height: 290px;
   }
+
+  .page__title-overlay::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 3, 32, 0.6);
+  }
+
+  .page__title-overlay {
+    position: relative;
+  }
+
+  .page__title-height {
+    min-height: 450px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .align-items-center {
+    align-items: center !important;
+  }
+
+  .d-flex {
+    display: flex !important;
+  }
+
+  .page__title-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  .mt-110 {
+    margin-top: 110px;
+  }
+
+  .page__title {
+    font-size: 70px;
+    color: #ffffff;
+    line-height: 62px;
+    margin-bottom: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0;
+    margin-bottom: 1rem;
+    list-style: none;
+  }
+
+  .page__title-wrapper .breadcrumb {
+    margin-bottom: 0;
+  }
+
+  .page__title-wrapper .breadcrumb .breadcrumb-item a {
+    font-size: 15px;
+    font-weight: 400;
+    color: #ffffff;
+  }
+
+  .rounded {
+    border-radius: 20px !important;
+  }
+
+  .rounded-card {
+    border-top-right-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+    transition: all 0.3s ease-out 0s;
+  }
+
+  .rounded-card:hover {
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  }
 </style>
 
 <main id="main" data-aos="fade-in">
 
+
+  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
+    data-background="https://code.edu.az/wp-content/uploads/2022/04/korporativ-heller-1024x637.jpg"
+    style="background-image: url(https://code.edu.az/wp-content/uploads/2022/04/korporativ-heller-1024x637.jpg)">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-12">
+          <div class="page__title-wrapper mt-110">
+            <h3 class="page__title">Kurslar</h3>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo base_url('index') ?>">Ana səhifə</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Kurslar</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
   <!-- ======= Breadcrumbs ======= -->
-  <div class="breadcrumbs">
+  <!-- <div class="breadcrumbs">
     <div class="container">
       <h2 style="font-size: 50px; font-weight: 900;">Kurslar</h2>
     </div>
-  </div><!-- End Breadcrumbs -->
+  </div> -->
+  <!-- End Breadcrumbs -->
   <br>
 
 
   <div class="col-xxl-12 col-xl-12 col-lg-12">
-    <div class="course__menu d-flex justify-content-lg-end mb-60"
+    <div class="course__menu d-flex justify-content-lg-end mb-60" data-aos="fade-up"
       style="display: flex!important; align-items: center!important;justify-content: center!important; text-align: center;">
       <div class="masonary-menu filter-button-group">
-        <button class="filterMenu_design" data-filter="*">Bütün kurslarımız</button>
-        <?php foreach ($get_all_categories as $category) { ?>
-          <button onclick="filterObjects('all')" class="filterMenu_design" data-filter="">
+        <button class="filterMenu_design categories active">Bütün kurslarımız</button>
+        <?php $num = 0;
+        foreach ($get_all_categories as $category) {
+          $num++ ?>
+          <button class="filterMenu_design categories">
             <?php echo $category['category_name']; ?>
           </button>
         <?php } ?>
@@ -109,29 +214,31 @@
   <section id="courses" class="courses">
     <div class="container" data-aos="fade-up">
 
-      <div class="row" data-aos="zoom-in" data-aos-delay="100">
+      <div id="cont" class="row" data-aos="zoom-in" data-aos-delay="100">
         <?php foreach ($get_all_courses as $item) { ?>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="course-item">
+          <div data-category="<?php echo $item['c_category']; ?>" style="display: flex;"
+            class="col-lg-4 col-md-6 align-items-stretch">
+            <div class="course-item rounded-card">
               <?php if ($item['c_img']) { ?>
-                <img style="object-fit: cover;" height="290px" width="416px"
-                  src="<?php echo base_url('uploads/courses/' . $item['c_img']) ?>" class="img-fluid" alt="...">
+                <img class="rounded" style="object-fit: cover;" height="290px" width="100%"
+                  src="<?php echo base_url('uploads/courses/' . $item['c_img']) ?>" class="" alt="...">
               <?php } else { ?>
-                <img height="290px" width="416px" style="object-fit: cover;"
-                  src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" class="img-fluid" alt="...">
+                <img class="rounded" height="290px" width="100%" style="object-fit: cover;"
+                  src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" class="" alt="...">
               <?php } ?>
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h4>
                     <?php echo $item['c_category']; ?>
                   </h4>
-                  <p class="price">
-                    <?php echo $item['c_price'] . '$'; ?>
-                  </p>
+                  <span>
+                    <?php echo $item['c_duration']; ?>
+                  </span>
                 </div>
 
-                <h3><a href="<?php echo base_url('course_details/'.$item['c_id']) ?>">
-                    <?php echo $item['c_title']; ?>
+                <h3><a href="<?php echo base_url('course_details/' . $item['c_id']) ?>">
+                    <?php $title = mb_strimwidth($item['c_title'], 0, 35, "...");
+                    echo $title; ?>
                   </a></h3>
                 <p>
                   <?php
@@ -146,65 +253,57 @@
                     </span>
                   </div>
                   <div class="trainer-rank d-flex align-items-center">
-                    <i class="bx bx-user"></i>&nbsp;50
-                    &nbsp;&nbsp;
-                    <i class="bx bx-heart"></i>&nbsp;65
+                    <p style="font-size: 24px" class="price">
+                      <?php echo '$' . $item['c_price']; ?>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-          </div> <!-- End Course Item-->
-
+          </div>
+          <!-- End Course Item-->
         <?php } ?>
-        <script>
-          function(event) {
-            $(this).siblings('.active').removeClass('active');
-            $(this).addClass('active');
-            event.preventDefault();
-          }
-        </script>
-        <!-- ===============FILTER=============== -->
-        <!-- <script>
-  filterObjects("all");
-  function filterObjects(c){
-    var x, i;
-    x = document.getElementsByClassName("box");
-    if (c == 'all') c = "";
-    for (i = 0; i < x.length; i++){
-      removeClass(x[i], 'show');
-      if(x[i].className.indexOf(c) > -1) addClass(x[i], 'show')
-    }
-  }
-  function addClass(element, name){
-    var i, arr1, arr2;
-    arr1 = element.className.split('');
-    arr2 = name.split('');
-    for (i = 0; i < arr2.length; i++){
-      if (arr1.indexOf(arr2[i]) == -1){
-        element.className += " " + arr2[i]
-      }
-    }
-  }
-  function removeClass(element, name){
-    var i, arr1, arr2;
-    arr1 = element.className.split('');
-    arr2 = name.split('');
-    for (i = 0; i < arr2.length; i++){
-      while (arr1.indexOf(arr2[i]) > -1){
-        arr1.splice(arr1.indexOf(arr2[i]), 1);
-      }
-    }
-    element.className = arr1.join(" ");
-  }
-</script> -->
-        <!-- ===============FILTER=============== -->
-
+                
       </div>
-
     </div>
-  </section><!-- End Courses Section -->
+  </section>
+  <!-- End Courses Section -->
+</main>
+<!-- End #main -->
+<script>
 
-</main><!-- End #main -->
+  let x = document.querySelector('#cont')
+  document.querySelectorAll('.categories').forEach(function (e) {
+    e.addEventListener('click', function () {
+      // console.log(e.textContent)
+      document.querySelectorAll('.categories').forEach(function (b) {
+        b.classList.remove('active')
+      })
+      e.classList.add('active')
+
+      for (let y of x.children) {
+        if (e.textContent.trim() == 'Bütün kurslarımız') {
+          $(y).show(300)
+          continue
+        }
+        if (y.dataset.category != e.textContent.trim()) {
+          $(y).hide(300)
+        } else {
+          $(y).show(300)
+
+        }
+      }
+    })
+  })
+
+  // document.querySelector("#allcourses").addEventListener('click', function () {
+  //   for (let y of x.children) {
+  //     $(y).show(300)
+  //   }
+  // })
+
+
+</script>
 
 <?php $this->load->view('user/includes/footer'); ?>
 <?php $this->load->view('user/includes/footerStyle'); ?>

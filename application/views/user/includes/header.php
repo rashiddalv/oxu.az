@@ -1,4 +1,45 @@
 <!-- ======= Header ======= -->
+<style>
+  #header {
+    background: linear-gradient(90deg, rgba(2, 0, 36, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
+    transition: all 0.5s;
+    z-index: 997;
+    padding: 15px 0;
+    box-shadow: 0px 0 18px rgba(55, 66, 59, 0.08);
+  }
+
+  .navbar a,
+  .navbar a:focus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 10px 30px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    white-space: nowrap;
+    transition: 0.3s;
+  }
+
+  .mobile-nav-toggle {
+    color: #fff;
+  }
+
+  .navbar-mobile ul {
+    display: block;
+    position: absolute;
+    top: 55px;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    padding: 10px 0;
+    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.83) 0%, rgba(0, 0, 0, 0.83) 100%);
+    overflow-y: auto;
+    transition: 0.3s;
+  }
+</style>
 <header id="header" class="fixed-top">
   <div class="container d-flex align-items-center">
     <span class="app-brand-logo demo">
@@ -45,7 +86,8 @@
         </g>
       </svg>
     </span>
-    <span class="logo me-auto"><a href="<?php echo base_url('index') ?>">oxu.az</a></span>
+    <span class="logo me-auto"><a href="<?php echo base_url('index') ?>">oxu<span
+          style="color: white;">.</span>az</a></span>
     <!-- Uncomment below if you prefer to use an image logo -->
     <!-- <a href="index.html" class="logo me-auto"><img src="<?php echo base_url('assets/user/'); ?>assets/img/logo.png" alt="" class="img-fluid"></a>-->
 

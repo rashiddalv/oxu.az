@@ -81,7 +81,6 @@
 
 <main id="main">
 
-
   <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
     data-background="https://code.edu.az/wp-content/uploads/2021/10/talant-merkezi.jpeg"
     style="background-position: bottom ;background-image: url(https://code.edu.az/wp-content/uploads/2021/10/talant-merkezi.jpeg)">
@@ -89,11 +88,12 @@
       <div class="row">
         <div class="col-xxl-12">
           <div class="page__title-wrapper mt-110">
-            <h3 class="page__title">Kursun təfərrüatları</h3>
+            <h3 class="page__title">Müəllimin təfərrüatları</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?php echo base_url('index') ?>">Ana səhifə</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Kursun təfərrüatları</li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url('index') ?>">Ana səhifə</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Müəllimin təfərrüatları</li>
               </ol>
             </nav>
           </div>
@@ -116,56 +116,32 @@
     <div class="container" data-aos="fade-up">
 
       <div class="row">
-        <div class="col-lg-8">
-          <?php if ($course_detail['c_img']) { ?>
-            <img style="object-fit: cover;" height="370px" width="100%"
-              src="<?php echo base_url('uploads/courses/' . $course_detail['c_img']) ?>" class="img-fluid" alt="...">
-          <?php } else { ?>
-            <img height="370px" width="100%" style="object-fit: cover;"
-              src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" class="img-fluid" alt="...">
-          <?php } ?>
-  <br>
-  <br>
-  <br>
+        <div class="col-lg-1">
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-5">
+          <?php if ($trainer_details['t_img']) { ?>
+            <img class="rounded" style="object-fit: cover;" height="416px" width="416px"
+              src="<?php echo base_url('uploads/trainers/' . $trainer_details['t_img']) ?>" class="img-fluid" alt="...">
+          <?php } else { ?>
+            <img class="rounded" height="416px" width="416px" style="object-fit: cover;"
+              src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg" class="img-fluid"
+              alt="...">
+          <?php } ?>
+
+        </div>
+
+        <div class="col-lg-5">
 
           <h3>
-            <?php echo $course_detail['c_title'] ?>
+            <?php echo $trainer_details['t_name'] ?>
           </h3>
           <p>
-            <?php echo $course_detail['c_description'] ?>
+            <?php echo $trainer_details['t_about'] ?>
           </p>
 
-          <div class="course-info d-flex justify-content-between align-items-center">
-            <h5>Müəllim</h5>
-            <p><a href="#">
-                <?php echo $course_detail['c_trainer'] ?>
-              </a></p>
-          </div>
 
-          <div class="course-info d-flex justify-content-between align-items-center">
-            <h5>Kurs haqqı</h5>
-            <p>
-              <?php echo '$' . $course_detail['c_price'] ?>
-            </p>
-          </div>
-          <div class="course-info d-flex justify-content-between align-items-center">
-            <h5>Kursun müddəti</h5>
-            <p>
-              <?php echo $course_detail['c_duration'] ?>
-            </p>
-          </div>
-
-          <div class="course-info d-flex justify-content-between align-items-center">
-            <h5>Kateqoriya</h5>
-            <p>
-              <?php echo $course_detail['c_category'] ?>
-            </p>
-          </div>
-
-
-
+        </div>
+        <div class="col-lg-1">
         </div>
       </div>
 

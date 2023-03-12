@@ -741,6 +741,7 @@ class AdminController extends CI_Controller
         }
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $data['contact_detail'] = $this->CoursesModel->get_single_contact($id);
+  
         // print_r('<pre>');
         // print_r($data['course_detail']);
         // die();

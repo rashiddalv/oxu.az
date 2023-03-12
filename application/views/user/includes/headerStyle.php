@@ -241,14 +241,6 @@
       --bs-btn-disabled-border-color: #696CFF;
     }
 
-    #hero {
-      width: 100%;
-      height: 80vh;
-      background: url("<?php echo base_url('assets/user/assets') ?>/img/hero_bg.jpg") top center;
-      background-size: cover;
-      position: relative;
-      background-repeat: no-repeat;
-    }
 
     .cource-details-tabs .nav-link.active {
       color: #696CFF;

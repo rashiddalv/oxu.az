@@ -66,9 +66,9 @@ $this->load->view('admin/includes/headerStyle'); ?>
                 <label for="descr"><b>Müraciəti təsdiq edən</b></label>
                 <p>
                     <?php if ($contact_detail['contact_viewer_id'] == 0) { ?>
-                                                    <?php echo '—';
+                                                        <?php echo '—';
                     } else { ?>
-                                                    <?php echo $admin['a_name'];
+                                                        <?php echo $admin['a_name'];
                     } ?>
                 </p>
  -->
@@ -118,24 +118,24 @@ $this->load->view('admin/includes/headerStyle'); ?>
                             <?php if ($contact_detail['contact_viewer_id'] == 0) { ?>
                                 <?php echo '—';
                             } else { ?>
-                                <?php echo $admin['a_name'];
+                                <?php echo $contact_detail['a_name'];
                             } ?>
                         </p>
                     </div>
                 </div>
                 <?php if ($admin['a_status'] == "Verified user") { ?>
-                <button data-url="<?php echo base_url('contact_detail_delete/' . $contact_detail['contact_id']) ?>"
-                    style="text-decoration: none; color: white; margin-top:20px" type="button"
-                    class="btn btn-danger button_remove">
-                    <s style="text-decoration:none;" class="tf-icons bx bx-trash"></s>&nbsp; Sil
-                </button>
-            <?php } else { ?>
-            <?php } ?>
+                    <button data-url="<?php echo base_url('contact_detail_delete/' . $contact_detail['contact_id']) ?>"
+                        style="text-decoration: none; color: white; margin-top:20px" type="button"
+                        class="btn btn-danger button_remove">
+                        <s style="text-decoration:none;" class="tf-icons bx bx-trash"></s>&nbsp; Sil
+                    </button>
+                <?php } else { ?>
+                <?php } ?>
             </div>
 
 
 
-            
+
 
 
             <script>

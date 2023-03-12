@@ -32,6 +32,21 @@
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   }
 
+  #hero {
+    width: 100%;
+    height: 80vh;
+    background: url("<?php echo base_url('assets/user/assets') ?>/img/hero_bg.jpg") top center;
+    position: relative;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+  }
+
+  /* @media (min-width: 1024px) { */
+    #hero {
+      background-attachment: fixed;
+    }
+  /* } */
 </style>
 
 
@@ -245,9 +260,9 @@
                 </div>
 
                 <h3><a href="<?php echo base_url('course_details/' . $item['c_id']) ?>">
-                <?php
-                  $title = mb_strimwidth($item['c_title'], 0, 35, "...");
-                  echo $title; ?>
+                    <?php
+                    $title = mb_strimwidth($item['c_title'], 0, 35, "...");
+                    echo $title; ?>
                   </a></h3>
                 <p>
                   <?php

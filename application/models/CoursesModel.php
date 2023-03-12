@@ -64,16 +64,17 @@ class CoursesModel extends CI_Model
     {
         return $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
     }
-    public function get_single_contact($id)
-    {
-        return $this->db
-            ->where('contact_id', $id)
-            ->get('contact')->row_array();
-    }
     public function update_course($id, $data)
     {
         $this->db->where('c_id', $id)
             ->update('courses', $data);
+    }
+    public function get_single_contact($id)
+    {
+        return $this->db
+            ->where('contact_id', $id)
+            ->join('admin', 'admin.a_id = contact.contact_viewer_id', 'left')
+            ->get('contact')->row_array();
     }
     public function contact_detail_viewed($id, $data)
     {
@@ -83,7 +84,6 @@ class CoursesModel extends CI_Model
     public function contact_detail_not_viewed($id, $data)
     {
         $this->db->where('contact_id', $id)
-            ->join('admin', 'admin.a_id = contact.contact_viewed_id', 'left')
             ->update('contact', $data);
     }
 

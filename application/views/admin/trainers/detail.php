@@ -20,7 +20,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
         <div class="card">
 
             <h5 class="card-header spaceB">Təlimçi
-                <a href="<?php echo base_url('dashboard_courses') ?>">
+                <a href="<?php echo base_url('dashboard_trainers') ?>">
                     <button type="button" class="btn  btn-sm btn-danger">Geri</button>
                 </a>
             </h5>

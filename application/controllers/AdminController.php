@@ -119,10 +119,6 @@ class AdminController extends CI_Controller
     // =================ACCOUNT VERIFICATION=================
     public function verify_acc_token($id)
     {
-        $product_id = $this->uri->segment(2);
-        if (!is_numeric($product_id)) {
-            redirect(base_url('dashboard'));
-        }
         $data = [
             'a_token' => md5(uniqid()),
             'a_status' => 'Verified user',
@@ -284,7 +280,7 @@ class AdminController extends CI_Controller
     public function account_settings_act()
     {
         $config['upload_path'] = './uploads/admin/';
-        $config['allowed_types'] = 'jpg|png|jpeg';
+        $config['allowed_types'] = 'gif|jpg|png';
         $config['encrypt_name'] = TRUE;
         // $config['max_size']          = 100;
         // $config['max_width']         = 1024;
@@ -366,6 +362,7 @@ class AdminController extends CI_Controller
         }
         $data['get_all_trainers'] = $this->CoursesModel->get_all_trainers();
         $data['get_single_data'] = $this->CoursesModel->get_single_data($id);
+
         // $this->load->view('admin/courses/edit', $data);
         if ($data['get_single_data']) {
             $this->load->view('admin/courses/edit', $data);

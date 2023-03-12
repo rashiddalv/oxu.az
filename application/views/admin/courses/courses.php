@@ -62,7 +62,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
                              $news_amount++ ?>
                                 <tr>
                                     <td><?php echo $news_amount; ?></td>
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><?php 
+                                    <td><strong><?php 
                                     $title = mb_strimwidth($item['c_title'], 0, 20, '...');
                                     echo $title ?></strong>
                                     </td>
@@ -98,7 +98,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
                                                 <!-- <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/'. $item['a_img']) ?>" alt="<?php echo $item['c_trainer']; ?>"
                                                     class="rounded-circle" /> -->
                                                     <?php if($item['a_img']){ ?>
-                                                    <img style="object-fit:cover;" src="<?php echo base_url('uploads/admin/'. $item['a_img']) ?>" alt="" class="rounded-circle" />
+                                                    <img pause style="object-fit:cover;" src="<?php echo base_url('uploads/admin/'. $item['a_img']) ?>" alt="" class="rounded-circle" />
                                                     <?php }else { ?>
                                                     <img class="rounded-circle" style="object-fit: cover;" src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg" alt="No image">
                                                     <?php } ?>

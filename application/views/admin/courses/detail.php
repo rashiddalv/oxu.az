@@ -50,42 +50,28 @@ $this->load->view('admin/includes/headerStyle'); ?>
                 </p>
 
 
-                <div class="col-xs-12 col-sm-2 col-md-3 col-lg-3" style="float: left;">
-                    <label for="date"><b>Kateqoriya</b></label>
-                    <p>
-                        <?php echo $course_detail['c_category']; ?>
-                    </p>
-                </div>
+                <label for="date"><b>Kateqoriya</b></label>
+                <p>
+                    <?php echo $course_detail['c_category']; ?>
+                </p>
 
 
 
-                <div class="col-xs-12 col-sm-2 col-md-3 col-lg-3" style="float: left; margin:0px 10px">
-                    <label for="cate"><b>Təlimçinin adı və soyadı</b></label>
-                    <p>
-                        <?php echo $course_detail['c_trainer']; ?>
-                    </p>
-                </div>
+                <label for="cate"><b>Təlimçinin adı və soyadı</b></label>
+                <p>
+                    <?php echo $course_detail['c_trainer']; ?>
+                </p>
 
 
-                <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="float: left; margin:0px 10px">
-                    <label for="status"><b>Qiymət</b></label>
-                    <p>
-                        <?php echo "$" . $course_detail['c_price']; ?>
-                    </p>
-                </div>
+                <label for="status"><b>Qiymət</b></label>
+                <p>
+                    <?php echo "$" . $course_detail['c_price']; ?>
+                </p>
 
-                <!-- <div class="col-xs-12 col-sm-2 col-md-3 col-lg-2" style="float: left; margin:0px 10px">
-                    <label for="status"><b>Kursun müddəti</b></label>
-                    <p>
-                        <?php echo $course_detail['c_duration']; ?>
-                    </p>
-                </div> -->
-                <div class="col-xs-12 col-sm-2 col-md-3 col-lg-3" style="float: left; margin:0px 10px">
-                    <label for="status"><b>Yaradıcı</b></label>
-                    <p>
-                        <?php echo $course_detail['a_name']; ?>
-                    </p>
-                </div>
+                <label for="status"><b>Yaradıcı</b></label>
+                <p>
+                    <?php echo $course_detail['a_name']; ?>
+                </p>
 
 
 
@@ -94,11 +80,45 @@ $this->load->view('admin/includes/headerStyle'); ?>
                     <br>
                     <br>
                     <?php if ($course_detail['c_img']) { ?>
-                        <img data-enlargable width="586px" height="330px" style="object-fit: cover;"
+                        <img data-enlargable width="90%" height="auto" style="object-fit: cover;"
                             src="<?php echo base_url('uploads/courses/' . $course_detail['c_img']); ?>" alt="">
                     <?php } else { ?>
-                        <img width="120px" height="70px" style="object-fit: cover;"
+                        <img width="90%" height="auto" style="object-fit: cover;"
                             src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" alt="">
+                    <?php } ?>
+
+                    <?php if ($admin['a_status'] == "Verified user") { ?>
+                        <a href="<?php echo base_url('course_edit/' . $course_detail['c_id']); ?>"
+                            style="text-decoration: none; color: white; margin-top:20px" type="button"
+                            class="btn btn-warning">
+                            <s style="text-decoration:none;" class="tf-icons bx bx-edit"></s>&nbsp; Redaktə et
+                        </a>
+                    <?php } else { ?>
+                    <?php } ?>
+
+
+
+                    <?php if ($course_detail['c_img']) { ?>
+                        <a href="<?php echo base_url('uploads/courses/' . $course_detail['c_img']); ?>"
+                            download="<?php echo $course_detail['c_img'] ?>"
+                            style="text-decoration: none; color: white; margin-top:20px" type="button"
+                            class="btn btn-primary">
+                            <s style="text-decoration:none;" class="tf-icons bx bx-download"></s>&nbsp; Şəkli yüklə
+                        </a>
+                    <?php } ?>
+                    <!-- <a onclick="return confirm('Are you sure?')" href="<?php echo base_url('delete_course_detail/' . $course_detail['c_id']); ?>"
+                    style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-danger">
+                    <s style="text-decoration:none;" class="tf-icons bx bx-trash"></s>&nbsp; Delete
+                </a> -->
+
+                    <?php if ($admin['a_status'] == "Verified user") { ?>
+                        <button data-url="<?php echo base_url('delete_course_detail/' . $course_detail['c_id']); ?>"
+                            style="text-decoration: none; color: white; margin-top:20px" type="button"
+                            class="btn btn-danger button_remove">
+                            <s style="text-decoration:none;" class="tf-icons bx bx-trash"></s>&nbsp; Sil
+                        </button>
+
+                    <?php } else { ?>
                     <?php } ?>
                 </div>
                 <!-- <a href="<?php echo base_url('course_edit/' . $course_detail['c_id']); ?>"
@@ -107,37 +127,7 @@ $this->load->view('admin/includes/headerStyle'); ?>
                 </a> -->
 
 
-                <?php if ($admin['a_status'] == "Verified user") { ?>
-                    <a href="<?php echo base_url('course_edit/' . $course_detail['c_id']); ?>"
-                        style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-warning">
-                        <s style="text-decoration:none;" class="tf-icons bx bx-edit"></s>&nbsp; Redaktə et
-                    </a>
-                <?php } else { ?>
-                <?php } ?>
 
-
-
-                <?php if ($course_detail['c_img']) { ?>
-                    <a href="<?php echo base_url('uploads/courses/' . $course_detail['c_img']); ?>"
-                        download="<?php echo $course_detail['c_img'] ?>"
-                        style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-primary">
-                        <s style="text-decoration:none;" class="tf-icons bx bx-download"></s>&nbsp; Şəkli yüklə
-                    </a>
-                <?php } ?>
-                <!-- <a onclick="return confirm('Are you sure?')" href="<?php echo base_url('delete_course_detail/' . $course_detail['c_id']); ?>"
-                    style="text-decoration: none; color: white; margin-top:20px" type="button" class="btn btn-danger">
-                    <s style="text-decoration:none;" class="tf-icons bx bx-trash"></s>&nbsp; Delete
-                </a> -->
-
-                <?php if ($admin['a_status'] == "Verified user") { ?>
-                    <button data-url="<?php echo base_url('delete_course_detail/' . $course_detail['c_id']); ?>"
-                        style="text-decoration: none; color: white; margin-top:20px" type="button"
-                        class="btn btn-danger button_remove">
-                        <s style="text-decoration:none;" class="tf-icons bx bx-trash"></s>&nbsp; Sil
-                    </button>
-
-                <?php } else { ?>
-                <?php } ?>
 
 
                 <!-- <script>

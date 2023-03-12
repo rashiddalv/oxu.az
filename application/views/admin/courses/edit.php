@@ -56,18 +56,44 @@
 
 
 
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"
+                            style="float: left; margin-right: 10px; margin-bottom: 15px;">
                             <label for="category">Kateqoriya</label>
                             <select name="category" id="category" class="form-control">
-                                <option <?php if ($get_single_data['c_category'] == "") { echo "SELECTED";} ?> value="">-SELECT-</option>
-                                <option <?php if ($get_single_data['c_category'] == "Programming") { echo "SELECTED";} ?> value="Programming">Programming</option>
-                                <option <?php if ($get_single_data['c_category'] == "Languages") { echo "SELECTED";} ?> value="Languages">Languages</option>
-                                <option <?php if ($get_single_data['c_category'] == "Office programs") { echo "SELECTED";} ?> value="Office programs">Office programs</option>
+                                <option <?php if ($get_single_data['c_category'] == "") {
+                                    echo "SELECTED";
+                                } ?> value="">
+                                    -SELECT-</option>
+                                <option <?php if ($get_single_data['c_category'] == "Programming") {
+                                    echo "SELECTED";
+                                } ?>
+                                    value="Programming">Programming</option>
+                                <option <?php if ($get_single_data['c_category'] == "Languages") {
+                                    echo "SELECTED";
+                                } ?>
+                                    value="Languages">Languages</option>
+                                <option <?php if ($get_single_data['c_category'] == "Office programs") {
+                                    echo "SELECTED";
+                                } ?> value="Office programs">Office programs</option>
+
+                                <option <?php if ($get_single_data['c_category'] == "Sales & Marketing") {
+                                    echo "SELECTED";
+                                } ?> value="Sales & Marketing">Sales & Marketing</option>
+
+                                <option <?php if ($get_single_data['c_category'] == "Call Center Training") {
+                                    echo "SELECTED";
+                                } ?> value="Call Center Training">Call Center Training</option>
+
+                                <option <?php if ($get_single_data['c_category'] == "Retail Training") {
+                                    echo "SELECTED";
+                                } ?> value="Retail Training">Retail Training</option>
+
                             </select>
                         </div>
 
 
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"
+                            style="float: left; margin-right: 10px; margin-bottom: 15px;">
                             <label for="status">Təlimçi</label>
                             <select name="trainer" id="status" class="form-control">
                                 <?php foreach ($get_all_trainers as $item) { ?>
@@ -79,7 +105,8 @@
                         </div>
 
 
-                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="float: left; margin-right: 10px;">
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"
+                            style="float: left; margin-right: 10px;margin-bottom: 15px;">
                             <label for="price">Qiymət</label>
                             <div class="input-group input-group-merge">
                                 <span class="input-group-text">$</span>
@@ -89,7 +116,8 @@
                                 <span class="input-group-text">.00</span>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="float: left; margin-right: 10px;">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"
+                            style="float: left; margin-right: 10px;margin-bottom: 15px;">
                             <label for="duration">Kursun müddəti</label>
                             <input type="text" id="duration" name="duration" class="form-control"
                                 placeholder="5 Ay/1 Saat" value="<?php echo $get_single_data['c_duration']; ?>">
@@ -102,11 +130,11 @@
                             <label for="img">Şəkil</label>
                             <br>
                             <?php if ($get_single_data['c_img']) { ?>
-                                <img data-enlargable width="586px" height="330px"
+                                <img data-enlargable width="80%" height="auto"
                                     style="object-fit: cover; margin-bottom: 20px;"
                                     src="<?php echo base_url('uploads/courses/' . $get_single_data['c_img']); ?>" alt="">
                             <?php } else { ?>
-                                <img width="120px" height="70px" style="object-fit: cover; margin-bottom: 20px;"
+                                <img width="80%" height="auto" style="object-fit: cover; margin-bottom: 20px;"
                                     src="<?php echo base_url('assets/admin/assets/img/elements/no-img.jpg'); ?>" alt="">
                             <?php } ?>
                         </div>

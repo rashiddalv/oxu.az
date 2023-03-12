@@ -28,8 +28,9 @@
       
         <div class="col-lg-6   col-md-6 footer-newsletter">
           <h4>Bülletenimizə Qoşulun</h4>
-          <form action="" method="post">
-            <input type="email" name="email"><input type="submit" value="Abunə ol">
+          <form action="<?php echo base_url('emails') ?>" method="post">
+            <input type="email" name="email">
+            <input type="submit" value="Abunə ol">
           </form>
         </div>
 

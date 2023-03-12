@@ -132,4 +132,8 @@ class CoursesModel extends CI_Model
     {
         $this->db->where('contact_id', $id)->delete('contact');
     }
+    public function emails($data)
+    {
+        $this->db->insert('emails', $data);
+    }
 }

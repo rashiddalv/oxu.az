@@ -209,61 +209,78 @@ class AdminController extends CI_Controller
         $price = $_POST['price'];
         $duration = $_POST['duration'];
 
-        if (!empty($title) && !empty($description) && !empty($trainer) && !empty($category) && !empty($price) && !empty($duration)) {
-            $config['upload_path'] = './uploads/courses/';
-            $config['allowed_types'] = 'jpg|png|jpeg';
-            $config['encrypt_name'] = TRUE;
-            $this->load->library('upload', $config);
-            $this->upload->initialize($config);
-            if ($this->upload->do_upload('course_img')) {
-                $file_name = $this->upload->data('file_name');
-                $file_ext = $this->upload->data('file_ext');
-                if (preg_match('~^\p{Lu}~u', $title) && preg_match('~^\p{Lu}~u', $description)) {
-                    if (is_numeric($price)) {
-                        $data = [
-                            'c_title' => $title,
-                            'c_description' => $description,
-                            'c_category' => $category,
-                            'c_trainer' => $trainer,
-                            'c_price' => $price,
-                            'c_img' => $file_name,
-                            'c_file_ext' => $file_ext,
-                            'c_creator_id' => $_SESSION['admin_login_id'],
-                            'c_created_date' => date("Y-m-d H:i:s"),
-                            'c_duration' => $duration,
-                        ];
-                        $data = $this->security->xss_clean($data);
-                        $this->CoursesModel->insert($data);
-                        $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
-                        redirect(base_url('dashboard_courses'));
+        if (!empty($title) && !empty($description) && !empty($trainer) && !empty($category) && !empty($price) && !empty($duration) && preg_match('~^\p{Lu}~u', $title) && preg_match('~^\p{Lu}~u', $description)) {
+            $check_teacher = $this->db->where('t_name', $trainer)->get('trainers')->row_array();
+            if ($check_teacher) {
+                $check_category = $this->db->where('category_name', $category)->get('category')->row_array();
+                if ($check_category) {
+                    if (is_numeric($price) && is_numeric($duration)) {
+
+                        $config['upload_path'] = './uploads/courses/';
+                        $config['allowed_types'] = 'jpg|png|jpeg';
+                        $config['encrypt_name'] = TRUE;
+                        $this->load->library('upload', $config);
+                        $this->upload->initialize($config);
+                        if ($this->upload->do_upload('course_img')) {
+                            $file_name = $this->upload->data('file_name');
+                            $file_ext = $this->upload->data('file_ext');
+
+
+
+
+                            $data = [
+                                'c_title' => $title,
+                                'c_description' => $description,
+                                'c_category' => $category,
+                                'c_trainer' => $trainer,
+                                'c_price' => $price,
+                                'c_img' => $file_name,
+                                'c_file_ext' => $file_ext,
+                                'c_creator_id' => $_SESSION['admin_login_id'],
+                                'c_created_date' => date("Y-m-d H:i:s"),
+                                'c_duration' => $duration,
+                            ];
+                            $data = $this->security->xss_clean($data);
+                            $this->CoursesModel->insert($data);
+                            $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
+                            redirect(base_url('dashboard_courses'));
+                        } else {
+                            $data = [
+                                'c_title' => $title,
+                                'c_description' => $description,
+                                'c_category' => $category,
+                                'c_trainer' => $trainer,
+                                'c_price' => $price,
+                                'c_creator_id' => $_SESSION['admin_login_id'],
+                                'c_created_date' => date("Y-m-d H:i:s"),
+                                'c_duration' => $duration,
+                            ];
+                            $data = $this->security->xss_clean($data);
+                            $this->CoursesModel->insert($data);
+                            $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
+                            redirect(base_url('dashboard_courses'));
+                        }
+
                     } else {
-                        $this->session->set_flashdata('err', 'Qiymət sahəsində hərflər və ya xüsusi simvollar olmamalıdır.');
+                        $this->session->set_flashdata('err', 'Qiymət və kurs müddəti sahələrində hərflər və ya xüsusi simvollar olmamalıdır.');
                         redirect($_SERVER['HTTP_REFERER']);
                     }
                 } else {
-                    $this->session->set_flashdata('err', 'Kursun adı və təsviri böyük hərflə başlamalıdır.');
+                    $this->session->set_flashdata('err', 'Bu kateqoriya yoxdur.');
                     redirect($_SERVER['HTTP_REFERER']);
                 }
             } else {
-                $data = [
-                    'c_title' => $title,
-                    'c_description' => $description,
-                    'c_category' => $category,
-                    'c_trainer' => $trainer,
-                    'c_price' => $price,
-                    'c_creator_id' => $_SESSION['admin_login_id'],
-                    'c_created_date' => date("Y-m-d H:i:s"),
-                    'c_duration' => $duration,
-                ];
-                $data = $this->security->xss_clean($data);
-                $this->CoursesModel->insert($data);
-                $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
-                redirect(base_url('dashboard_courses'));
+                $this->session->set_flashdata('err', 'Bu müəllim yoxdur.');
+                redirect($_SERVER['HTTP_REFERER']);
             }
-        } else {
-            $this->session->set_flashdata('err', 'Bütün sahələri doldurun.');
-            redirect($_SERVER['HTTP_REFERER']);
 
+            // } else {
+            //     $this->session->set_flashdata('err', 'Bu kateqoriya/müəllim yoxdur.');
+            //     redirect($_SERVER['HTTP_REFERER']);
+            // }
+        } else {
+            $this->session->set_flashdata('err', 'Bütün sahələri doldurun. Kursun adı və təsviri böyük hərflə yazılmalıdır.');
+            redirect($_SERVER['HTTP_REFERER']);
         }
     }
     public function course_delete($id)
@@ -380,56 +397,68 @@ class AdminController extends CI_Controller
         $price = $_POST['price'];
         $duration = $_POST['duration'];
         if (!empty($title) && !empty($description) && !empty($trainer) && !empty($category) && !empty($price) && !empty($duration)) {
-            $config['upload_path'] = './uploads/courses/';
-            $config['allowed_types'] = 'jpg|png|jpeg';
-            $config['encrypt_name'] = TRUE;
-            $this->load->library('upload', $config);
-            $this->upload->initialize($config);
-            if ($this->upload->do_upload('course_img')) {
-                $file_name = $this->upload->data('file_name');
-                $file_ext = $this->upload->data('file_ext');
-                if (preg_match('~^\p{Lu}~u', $title) && preg_match('~^\p{Lu}~u', $description)) {
-                    if (is_numeric($price)) {
+            $check_teacher = $this->db->where('t_name', $trainer)->get('trainers')->row_array();
+            if ($check_teacher) {
+                $check_category = $this->db->where('category_name', $category)->get('category')->row_array();
+                if ($check_category) {
+                    $config['upload_path'] = './uploads/courses/';
+                    $config['allowed_types'] = 'jpg|png|jpeg';
+                    $config['encrypt_name'] = TRUE;
+                    $this->load->library('upload', $config);
+                    $this->upload->initialize($config);
+                    if ($this->upload->do_upload('course_img')) {
+                        $file_name = $this->upload->data('file_name');
+                        $file_ext = $this->upload->data('file_ext');
+                        if (preg_match('~^\p{Lu}~u', $title) && preg_match('~^\p{Lu}~u', $description)) {
+                            if (is_numeric($price)) {
+                                $data = [
+                                    'c_title' => $title,
+                                    'c_description' => $description,
+                                    'c_category' => $category,
+                                    'c_trainer' => $trainer,
+                                    'c_price' => $price,
+                                    'c_img' => $file_name,
+                                    'c_file_ext' => $file_ext,
+                                    'c_updater_id' => $_SESSION['admin_login_id'],
+                                    'c_update_date' => date("Y-m-d H:i:s"),
+                                    'c_duration' => $duration,
+
+                                ];
+                                $data = $this->security->xss_clean($data);
+                                $this->CoursesModel->update_course($id, $data);
+                                $this->session->set_flashdata('success', 'Kurs uğurla yeniləndi.');
+                                redirect(base_url('dashboard_courses'));
+                            } else {
+                                $this->session->set_flashdata('err', 'Qiymət sahəsində hərflər və ya xüsusi simvollar olmamalıdır.');
+                                redirect($_SERVER['HTTP_REFERER']);
+                            }
+                        } else {
+                            $this->session->set_flashdata('err', 'Kursun adı və təsviri böyük hərflə başlamalıdır.');
+                            redirect($_SERVER['HTTP_REFERER']);
+                        }
+                    } else {
                         $data = [
                             'c_title' => $title,
                             'c_description' => $description,
                             'c_category' => $category,
                             'c_trainer' => $trainer,
                             'c_price' => $price,
-                            'c_img' => $file_name,
-                            'c_file_ext' => $file_ext,
                             'c_updater_id' => $_SESSION['admin_login_id'],
                             'c_update_date' => date("Y-m-d H:i:s"),
                             'c_duration' => $duration,
-
                         ];
                         $data = $this->security->xss_clean($data);
                         $this->CoursesModel->update_course($id, $data);
-                        $this->session->set_flashdata('success', 'Kurs uğurla yeniləndi.');
+                        $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
                         redirect(base_url('dashboard_courses'));
-                    } else {
-                        $this->session->set_flashdata('err', 'Qiymət sahəsində hərflər və ya xüsusi simvollar olmamalıdır.');
-                        redirect($_SERVER['HTTP_REFERER']);
                     }
                 } else {
-                    $this->session->set_flashdata('err', 'Kursun adı və təsviri böyük hərflə başlamalıdır.');
+                    $this->session->set_flashdata('err', 'Bu kateqoriya yoxdur.');
                     redirect($_SERVER['HTTP_REFERER']);
                 }
             } else {
-                $data = [
-                    'c_title' => $title,
-                    'c_description' => $description,
-                    'c_category' => $category,
-                    'c_trainer' => $trainer,
-                    'c_price' => $price,
-                    'c_updater_id' => $_SESSION['admin_login_id'],
-                    'c_update_date' => date("Y-m-d H:i:s"),
-                    'c_duration' => $duration,
-                ];
-                $data = $this->security->xss_clean($data);
-                $this->CoursesModel->update_course($id, $data);
-                $this->session->set_flashdata('success', 'Kurs uğurla yaradıldı.');
-                redirect(base_url('dashboard_courses'));
+                $this->session->set_flashdata('err', 'Bu müəllim yoxdur.');
+                redirect($_SERVER['HTTP_REFERER']);
             }
         } else {
             $this->session->set_flashdata('err', 'Bütün sahələri doldurun.');
@@ -741,7 +770,7 @@ class AdminController extends CI_Controller
         }
         $data['admin'] = $this->db->where('a_id', $_SESSION['admin_login_id'])->get('admin')->row_array();
         $data['contact_detail'] = $this->CoursesModel->get_single_contact($id);
-  
+
         // print_r('<pre>');
         // print_r($data['course_detail']);
         // die();
@@ -794,5 +823,23 @@ class AdminController extends CI_Controller
         $this->CoursesModel->contact_detail_delete($id);
         $this->session->set_flashdata('success', 'Müraciət uğurla silindi.');
         redirect(base_url('dashboard_contact'));
+    }
+    public function emails()
+    {
+        $email = $_POST['email'];
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        if ($this->form_validation->run() == TRUE) {
+            $data = [
+                'email' => $email,
+            ];
+            $data = $this->security->xss_clean($data);
+            $this->CoursesModel->emails($data);
+            redirect($_SERVER['HTTP_REFERER']);
+
+        } else {
+            redirect(base_url('index'));
+        }
     }
 }

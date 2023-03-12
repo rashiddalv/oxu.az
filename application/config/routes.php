@@ -131,6 +131,10 @@ $route['about_detail/(.*)']                                = 'AdminController/ab
 
 
 
+$route['emails']                                           = 'AdminController/emails';
+
+
+
     
 
 

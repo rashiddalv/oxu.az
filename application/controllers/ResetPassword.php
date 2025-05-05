@@ -15,8 +15,8 @@ class ResetPassword extends CI_Controller
             // 'mail', 'sendmail', or 'smtp'
             'smtp_host' => 'smtp.gmail.com',
             'smtp_port' => 587,
-            'smtp_user' => 'rashiddvalorant@gmail.com',
-            'smtp_pass' => 'drbijagzswauwzyi',
+            'smtp_user' => getenv("EMAIL_USER"),
+            'smtp_pass' => getenv("EMAIL_PASS"),
             'smtp_crypto' => 'tls',
             'mailtype' => 'html',
             //plaintext 'text' mails or 'html'

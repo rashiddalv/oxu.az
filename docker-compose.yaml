@@ -2,13 +2,13 @@ services:
   php:
     build: .
     environment:
-      - DB_HOSTNAME
-      - DB_PORT
-      - DB_USERNAME
-      - DB_PASSWORD
-      - DB_DATABASE
-      - EMAIL_NAME
-      - EMAIL_PASS
-      - BASE_URL
+      - DB_HOSTNAME=${DB_HOSTNAME}
+      - DB_PORT=${DB_PORT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - EMAIL_NAME=${EMAIL_NAME}
+      - EMAIL_PASS=${EMAIL_PASS}
+      - BASE_URL=${BASE_URL}
     volumes:
       - ./:/var/www/html
